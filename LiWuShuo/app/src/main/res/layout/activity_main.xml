@@ -1,16 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.example.dllo.liwushuo.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/home_toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:background="@color/colorRadioButtonDeepPink">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/menology_toolbar_img"
+                android:layout_width="40dp"
+                android:layout_height="28dp"
+                android:layout_alignParentLeft="true"
+                android:src="@mipmap/home_bar_button" />
+
+            <TextView
+                android:id="@+id/liwushuo_toolbar_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="礼物说"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/hot_toolbar_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="热门"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/raiders_gift_toolbar_layout"
+                android:layout_width="98dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/raiders_gift_round"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageButton
+                    android:id="@+id/raiders_gift_toolbar_imgbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="@drawable/selector_raiders_gift" />
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/search_toolbar_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingEnd="15dp"
+                android:src="@mipmap/abc_ic_search" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/radio_fl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/home_radiobutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_home"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="指南"
+            android:textColor="@color/color_text_radiobutton"
+            android:textSize="11sp" />
+
+        <RadioButton
+            android:id="@+id/select_radiobutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_select"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="热门"
+            android:textColor="@color/color_text_radiobutton"
+            android:textSize="11sp" />
+
+        <RadioButton
+            android:id="@+id/category_radiobutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_category"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="分类"
+            android:textColor="@color/color_text_radiobutton"
+            android:textSize="11sp" />
+
+        <RadioButton
+            android:id="@+id/profile_radiobutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_profile"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="我的"
+            android:textColor="@color/color_text_radiobutton"
+            android:textSize="11sp" />
+    </RadioGroup>
+
+</LinearLayout>

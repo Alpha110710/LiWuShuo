@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/countdown_layout"
+    android:background="@mipmap/splash"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/countdown_tv"
+        android:layout_width="55dp"
+        android:layout_height="20dp"
+        android:layout_gravity="right|top"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/countdown_round"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:text="2s跳转" />
+</LinearLayout>
