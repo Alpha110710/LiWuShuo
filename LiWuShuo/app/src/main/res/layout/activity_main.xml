@@ -21,14 +21,14 @@
                 android:layout_width="40dp"
                 android:layout_height="28dp"
                 android:layout_alignParentLeft="true"
-                android:src="@mipmap/home_bar_button" />
+                android:src="@mipmap/btn_signin" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/liwushuo_toolbar_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="礼物说"
+                android:src="@mipmap/logo_title"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp" />
 

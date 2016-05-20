@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorRadioButtonDeepPink">#FF2D47</color>
-    <color name="colcorRadioButtonDeepgray">#9D9F9F</color>
+    <color name="colcorRadioButtonDeepgrey">#9D9F9F</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBackgroundLightgrey">#EEEEEE</color>
 </resources>

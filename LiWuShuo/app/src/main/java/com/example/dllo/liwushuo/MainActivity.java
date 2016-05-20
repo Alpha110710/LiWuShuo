@@ -21,8 +21,8 @@ import com.example.dllo.liwushuo.select.SelectFragment;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private Toolbar homeToolBar;
-    private ImageView menologyToolbarImg;
-    private TextView liwushuoToolbarTv, hotToolbarTv;
+    private ImageView menologyToolbarImg, liwushuoToolbarTv;
+    private TextView hotToolbarTv;
     private LinearLayout raidersGiftToolbarLayout;
     private ImageButton raidersGiftToolbarImgbtn;
     private ImageView searchToolbarImg;
@@ -101,6 +101,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 replaceFrameLayout(profileFragment);
                 break;
+        }
+    }
+
+    public void changeImgBtn(boolean flag){
+        if (flag) {
+            raidersGiftToolbarImgbtn.setEnabled(false);
+
+        } else {
+            raidersGiftToolbarImgbtn.setEnabled(true);
         }
     }
 }

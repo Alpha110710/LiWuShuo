@@ -8,9 +8,12 @@
         android:id="@+id/select_gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
         android:columnWidth="90dp"
-        android:horizontalSpacing="8dp"
         android:numColumns="2"
+        android:scrollbars="none"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="8dp" />
+        android:horizontalSpacing="6dp"
+        />
 </LinearLayout>
