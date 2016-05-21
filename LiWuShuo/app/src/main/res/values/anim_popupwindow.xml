@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="anim_popupwindow" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:windowEnterAnimation">@anim/home_popupwindow_show</item>
+        <item name="android:windowExitAnimation">@anim/home_popupwindow_hide</item>
+    </style>
+</resources>

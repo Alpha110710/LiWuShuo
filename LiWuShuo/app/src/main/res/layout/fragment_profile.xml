@@ -3,32 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@mipmap/bg_profile">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:src="@mipmap/icon_message" />
-
-        <ImageView
-            android:id="@+id/profile_scan_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="280dp"
-            android:layout_marginTop="15dp"
-            android:src="@mipmap/icon_scan" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="14dp"
-            android:layout_toRightOf="@id/profile_scan_iv"
-            android:src="@mipmap/me_settings" />
 
         <ImageView
             android:id="@+id/profile_me_avatar_boy"
@@ -63,105 +43,126 @@
             android:textSize="15sp" />
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorRadioButtonDeepPink"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:src="@mipmap/icon_message" />
+
+        <ImageView
+            android:id="@+id/profile_scan_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="240dp"
+            android:layout_marginTop="15dp"
+            android:src="@mipmap/icon_scan" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="14dp"
+            android:layout_toRightOf="@id/profile_scan_iv"
+            android:src="@mipmap/me_settings" />
+    </LinearLayout>
 
 
-        <FrameLayout
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="200dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="200dp">
-            
+            android:orientation="vertical">
+
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="60dp"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/icon_cart"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="购物车" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/icon_order"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="订单" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/icon_coupon"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="礼券" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/icon_service"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="客服" />
+
+            </LinearLayout>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/profile_tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/colorWhite"
+                android:layout_marginTop="10dp"/>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/profile_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@color/colorWhite"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:drawableTop="@mipmap/icon_cart"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:text="购物车" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:drawableTop="@mipmap/icon_order"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:text="订单" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:drawableTop="@mipmap/icon_coupon"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:text="礼券" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:drawableTop="@mipmap/icon_service"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:text="客服" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/colorWhite"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
-
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/profile_holder_favourite"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@mipmap/ic_holder_favourite"
                     android:layout_centerInParent="true"
-                    />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="喜欢的礼物摆在这里哦"
-                        android:layout_below="@id/profile_holder_favourite"
-                        android:gravity="center"
-                        android:layout_marginTop="25dp"
-                        android:textSize="18sp"
-                        />
-                </RelativeLayout>
-            </LinearLayout>
-        </FrameLayout>
+                    android:src="@mipmap/ic_holder_favourite" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_holder_favourite"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:text="喜欢的礼物摆在这里哦"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </FrameLayout>
 
 
 </RelativeLayout>
