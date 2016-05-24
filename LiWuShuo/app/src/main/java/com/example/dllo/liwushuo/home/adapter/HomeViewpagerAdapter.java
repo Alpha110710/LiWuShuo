@@ -1,8 +1,11 @@
-package com.example.dllo.liwushuo.home;
+package com.example.dllo.liwushuo.home.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
+
+import com.example.dllo.liwushuo.home.bean.RollChannelBean;
 
 import java.util.ArrayList;
 
@@ -11,11 +14,11 @@ import java.util.ArrayList;
  */
 public class HomeViewpagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> fragments;
-    private ArrayList<String> titles;
+    private ArrayList<RollChannelBean.DataBean.ChannelsBean> titles;
 
-    public void setTitles(ArrayList<String> titles) {
+    public void setTitles(ArrayList<RollChannelBean.DataBean.ChannelsBean> titles) {
         this.titles = titles;
-        notifyDataSetChanged();
+        Log.d("HomeViewpagerAdapter", titles.get(3).getName());
     }
 
     public void setFragments(ArrayList<Fragment> fragments) {
@@ -40,6 +43,6 @@ public class HomeViewpagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return titles.get(position);
+        return titles.get(position).getName();
     }
 }

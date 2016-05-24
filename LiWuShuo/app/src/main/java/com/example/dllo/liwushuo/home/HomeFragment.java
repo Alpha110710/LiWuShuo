@@ -1,26 +1,28 @@
 package com.example.dllo.liwushuo.home;
 
-import android.animation.ObjectAnimator;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.base.BaseFragment;
+import com.example.dllo.liwushuo.home.adapter.HomeViewpagerAdapter;
+import com.example.dllo.liwushuo.home.bean.RollChannelBean;
+import com.example.dllo.liwushuo.net.NetListener;
+import com.example.dllo.liwushuo.net.URLValues;
+import com.example.dllo.liwushuo.tool.NetTool;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +41,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private CheckBox homeTablayoutSelect;
     private PopupWindow homePopup;
     private TextView homeChangeTv;
+    private NetTool netTool;
+
 
     @Override
     public int setLayout() {
@@ -51,6 +55,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         homeViewpager = findView(R.id.home_viewpager);
         homeTablayoutSelect = findView(R.id.home_tablayout_select);
         homeChangeTv = findView(R.id.home_change_tv);
+
     }
 
     @Override
@@ -58,38 +63,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         adapter = new HomeViewpagerAdapter(getChildFragmentManager());
         featuredHomeFragment = new FeaturedHomeFragment();
 
-        //设置fragments和titles
-        initFragments();
+        //设置popupwindow
+        initHomePopup(anlysisTitles());
 
-
-        adapter.setFragments(fragments);
-        adapter.setTitles(titles);
-
-        adapter.setFragments(fragments);
 
         homeViewpager.setAdapter(adapter);
         homeTablayout.setupWithViewPager(homeViewpager);
         homeTablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         homeTablayoutSelect.setOnClickListener(this);
 
-        ArrayList<HashMap<String, Object>> lstitem = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            HashMap<String, Object> map = new HashMap<>();
-            map.put("text", "NO." + i);
-            lstitem.add(map);
-        }
 
-        //加循环使网格正好为4的倍数
-        for (int i = 0; i < 3; i++) {
-            if (lstitem.size() % 4 != 0) {
-                HashMap<String, Object> l = new HashMap<>();
-                l.put("text", "");
-                lstitem.add(l);
-            }
-        }
-
-
-        initHomePopup(lstitem);
         homeChangeTv.setVisibility(View.GONE);
         homeTablayout.setVisibility(View.VISIBLE);
 
@@ -97,24 +80,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
 
-    //fragment设置
-    private void initFragments() {
-        fragments = new ArrayList<>();
-        fragments.add(featuredHomeFragment);
-
-        for (int i = 0; i < 10; i++) {
-            fragments.add(NormalHomeFragment.createFragment("第" + i + "个界面"));
-
-        }
-        titles = new ArrayList<>();
-        for (int i = 0; i < 11; i++) {
-            titles.add(i + "");
-        }
-    }
-
-
     //设置popupwindow
     private void initHomePopup(ArrayList<HashMap<String, Object>> lstItem) {
+
         homePopup = new PopupWindow(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         View view = LayoutInflater.from(context).inflate(R.layout.item_home_select_popup, null);
         GridView gridView = (GridView) view.findViewById(R.id.home_popup_gridview_select);
@@ -162,4 +130,58 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
     }
+
+    //解析Tablauoyt标题
+    private ArrayList<HashMap<String, Object>> anlysisTitles() {
+        final ArrayList<HashMap<String, Object>> lstitem = new ArrayList<HashMap<String, Object>>();
+        netTool = new NetTool();
+        netTool.getAnalysis(URLValues.ROLL_CHANNEL, new NetListener() {
+            @Override
+            public void onSuccessed(String response) {
+                Gson gson = new Gson();
+                RollChannelBean rollChannelBean = gson.fromJson(response, RollChannelBean.class);
+
+                for (int i = 0; i < rollChannelBean.getData().getChannels().size(); i++) {
+                    HashMap<String, Object> map = new HashMap<String, Object>();
+                    map.put("text", rollChannelBean.getData().getChannels().get(i).getName());
+                    lstitem.add(map);
+                }
+
+                //加循环使网格正好为4的倍数 显示有黑边
+                for (int i = 0; i < 3; i++) {
+                    if (lstitem.size() % 4 != 0) {
+                        HashMap<String, Object> l = new HashMap<>();
+                        l.put("text", "");
+                        lstitem.add(l);
+                    }
+                }
+
+                //将实体类中的数据设置给title,tablauout的标题
+                adapter.setTitles((ArrayList<RollChannelBean.DataBean.ChannelsBean>) rollChannelBean.getData().getChannels());
+
+                //直接设置fragment数量
+                fragments = new ArrayList<>();
+                fragments.add(featuredHomeFragment);
+
+                //数量与title数量差1
+                for (int i = 0; i < rollChannelBean.getData().getChannels().size() - 1; i++) {
+                    fragments.add(NormalHomeFragment.createFragment("第" + i + "个界面"));
+
+                }
+                adapter.setFragments(fragments);
+
+
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+
+            }
+        });
+
+
+        return lstitem;
+    }
+
+
 }

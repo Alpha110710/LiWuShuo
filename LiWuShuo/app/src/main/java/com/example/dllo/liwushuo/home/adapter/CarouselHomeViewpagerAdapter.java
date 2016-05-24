@@ -1,14 +1,18 @@
-package com.example.dllo.liwushuo.home;
+package com.example.dllo.liwushuo.home.adapter;
 
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.dllo.liwushuo.R;
+import com.example.dllo.liwushuo.home.bean.CarouselBean;
+import com.example.dllo.liwushuo.tool.App;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -16,12 +20,13 @@ import java.util.ArrayList;
  * Created by dllo on 16/5/21.
  */
 public class CarouselHomeViewpagerAdapter extends PagerAdapter {
-    private ArrayList<Integer> imgIds;
+
     private Context context;
+    private CarouselBean carouselBean;
     private ImageView itemHomeCarouseImg;
 
-    public void setImgIds(ArrayList<Integer> imgIds) {
-        this.imgIds = imgIds;
+    public void setCarouselBean(CarouselBean carouselBean) {
+        this.carouselBean = carouselBean;
         notifyDataSetChanged();
     }
 
@@ -31,7 +36,7 @@ public class CarouselHomeViewpagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return imgIds == null ? 0 : Integer.MAX_VALUE;
+        return carouselBean == null ? 0 : Integer.MAX_VALUE;
     }
 
     @Override
@@ -44,10 +49,11 @@ public class CarouselHomeViewpagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_home_carouse, container, false);
         itemHomeCarouseImg = (ImageView) view.findViewById(R.id.item_home_carouse_img);
-        //TODO: 轮播图图片设置不对
-        itemHomeCarouseImg.setImageResource(R.mipmap.ic_about);
+        Picasso.with(App.context).load(carouselBean.getData().getBanners().get(position % 4).getImage_url()).fit()
+                .into(itemHomeCarouseImg);
+
         container.addView(view);
-        return  view;
+        return view;
     }
 
     @Override

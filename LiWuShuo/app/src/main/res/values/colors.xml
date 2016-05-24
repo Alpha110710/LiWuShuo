@@ -7,4 +7,5 @@
     <color name="colcorRadioButtonDeepgrey">#9D9F9F</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBackgroundLightgrey">#EEEEEE</color>
+    <color name="colorBlack">#000000</color>
 </resources>

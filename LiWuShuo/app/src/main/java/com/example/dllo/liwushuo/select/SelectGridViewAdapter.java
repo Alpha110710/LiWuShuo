@@ -57,8 +57,6 @@ public class SelectGridViewAdapter extends BaseAdapter {
         viewHolder.itemSelectGridviewSupportTv.setText(selectBeans.get(position).getFavorites_count());
         viewHolder.itemSelectGridviewPriceTv.setText(selectBeans.get(position).getPrice());
 
-        //TODO:解析图片没有适配好
-//         String url = selectBeans.get(position).getCover_webp_url();
 
         viewHolder.itemSelectGridviewImg.setImageResource(R.mipmap.ic_about);
 

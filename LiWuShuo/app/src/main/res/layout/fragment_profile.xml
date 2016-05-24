@@ -1,88 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@mipmap/bg_profile">
-
-
-        <ImageView
-            android:id="@+id/profile_me_avatar_boy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/me_avatar_boy" />
-
-        <ImageView
-            android:id="@+id/profile_me_avatar_girl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/me_avatar_girl" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/profile_me_avatar_boy"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
-            android:src="@mipmap/bg_feed_favourite" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/profile_me_avatar_girl"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="6dp"
-            android:text="未登录"
-            android:textColor="@color/colorWhite"
-            android:textSize="15sp" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorRadioButtonDeepPink"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:src="@mipmap/icon_message" />
-
-        <ImageView
-            android:id="@+id/profile_scan_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="240dp"
-            android:layout_marginTop="15dp"
-            android:src="@mipmap/icon_scan" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="14dp"
-            android:layout_toRightOf="@id/profile_scan_iv"
-            android:src="@mipmap/me_settings" />
-    </LinearLayout>
-
-
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="200dp">
+        android:focusable="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@mipmap/bg_profile">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:src="@mipmap/icon_message" />
+
+
+                <ImageView
+                    android:id="@+id/profile_sweep_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@mipmap/me_settings" />
+
+                <ImageView
+                    android:id="@+id/profile_scan_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toLeftOf="@id/profile_sweep_iv"
+                    android:src="@mipmap/icon_scan" />
+
+
+                <ImageView
+                    android:id="@+id/profile_me_avatar_boy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/me_avatar_boy" />
+
+                <ImageView
+                    android:id="@+id/profile_me_avatar_girl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/me_avatar_girl" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_me_avatar_girl"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="未登录"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_me_avatar_boy"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:src="@mipmap/bg_feed_favourite" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -132,37 +127,16 @@
                 android:id="@+id/profile_tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@color/colorWhite"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWhite" />
+
+
             <android.support.v4.view.ViewPager
                 android:id="@+id/profile_viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="500dp" />
 
 
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/profile_holder_favourite"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_centerInParent="true"
-                    android:src="@mipmap/ic_holder_favourite" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/profile_holder_favourite"
-                    android:layout_marginTop="25dp"
-                    android:gravity="center"
-                    android:text="喜欢的礼物摆在这里哦"
-                    android:textSize="18sp" />
-            </RelativeLayout>
         </LinearLayout>
-    </FrameLayout>
-
-
-</RelativeLayout>
+    </ScrollView>
+</LinearLayout>
