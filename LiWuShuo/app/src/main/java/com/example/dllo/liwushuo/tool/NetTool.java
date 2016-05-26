@@ -1,5 +1,7 @@
 package com.example.dllo.liwushuo.tool;
 
+import android.util.Log;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -11,7 +13,13 @@ import com.example.dllo.liwushuo.home.bean.CarouselBean;
 import com.example.dllo.liwushuo.home.bean.RecyclerviewBean;
 import com.example.dllo.liwushuo.net.NetListener;
 import com.example.dllo.liwushuo.net.URLValues;
+import com.example.dllo.liwushuo.select.SelectBean;
 import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by dllo on 16/5/23.
@@ -70,6 +78,35 @@ public class NetTool {
                 Gson gson = new Gson();
                 RecyclerviewBean recyclerviewBean = gson.fromJson(response, RecyclerviewBean.class);
                 adapter.setRecyclerviewBean(recyclerviewBean);
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+
+            }
+        });
+    }
+
+    public static String formatData(String dataFormat, long timeStamp) {
+        if (timeStamp == 0) {
+            return "";
+        }
+        timeStamp = timeStamp * 1000;
+        String result = "";
+        SimpleDateFormat format = new SimpleDateFormat(dataFormat);
+        result = format.format(new Date(timeStamp));
+        return result;
+    }
+
+    //解析SelectFragment页面
+    public void anlysisSelectFragment(){
+        getAnalysis(URLValues.SELECT, new NetListener() {
+            @Override
+            public void onSuccessed(String response) {
+                Gson gson = new Gson();
+                SelectBean selectBean = gson.fromJson(response, SelectBean.class);
+                EventBus eventBus = EventBus.getDefault();
+                eventBus.post(selectBean);
             }
 
             @Override

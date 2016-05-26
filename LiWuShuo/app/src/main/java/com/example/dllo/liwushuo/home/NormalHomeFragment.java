@@ -3,16 +3,20 @@ package com.example.dllo.liwushuo.home;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.base.BaseFragment;
+import com.example.dllo.liwushuo.home.adapter.ListviewNormalHomeAdapter;
 
 /**
  * Created by dllo on 16/5/21.
  */
 public class NormalHomeFragment extends BaseFragment {
-        private TextView textView;
+
+    private ListView normalHomeListview;
+    private ListviewNormalHomeAdapter adapter;
 
     public static Fragment createFragment(String data){
         Fragment fragment = new NormalHomeFragment();
@@ -29,7 +33,10 @@ public class NormalHomeFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
-        textView = findView(R.id.tv);
+        normalHomeListview = findView(R.id.normal_home_listview);
+        adapter = new ListviewNormalHomeAdapter(context);
+        normalHomeListview.setAdapter(adapter);
+
 
     }
 
@@ -37,7 +44,7 @@ public class NormalHomeFragment extends BaseFragment {
     public void initData() {
         Bundle bundle = getArguments();
         String str = bundle.getString("data");
-        textView.setText(str);
+
 
     }
 }

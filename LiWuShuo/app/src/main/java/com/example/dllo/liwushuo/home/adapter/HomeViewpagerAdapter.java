@@ -18,7 +18,7 @@ public class HomeViewpagerAdapter extends FragmentPagerAdapter {
 
     public void setTitles(ArrayList<RollChannelBean.DataBean.ChannelsBean> titles) {
         this.titles = titles;
-        Log.d("HomeViewpagerAdapter", titles.get(3).getName());
+
     }
 
     public void setFragments(ArrayList<Fragment> fragments) {

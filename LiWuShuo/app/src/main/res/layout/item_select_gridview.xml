@@ -1,64 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/item_gridview_round"
-        android:orientation="vertical">
+        android:layout_marginTop="8dp"
+        android:elevation="1dp"
+        app:cardCornerRadius="6dp">
 
-    <ImageView
-        android:id="@+id/item_select_gridview_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:src="@mipmap/ic_about" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/item_select_gridview_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="12dp"
-        android:text="520必备味蕾之诗.最萌吃货进口零食礼盒" />
+            <ImageView
+                android:id="@+id/item_select_gridview_img"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@mipmap/ic_about" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/item_select_gridview_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="12dp"
+                android:lines="2"
+                android:text="520必备味蕾之诗.最萌吃货进口零食礼盒" />
 
-        <TextView
-            android:id="@+id/item_select_gridview_price_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:text="89.00"
-            android:textSize="15sp"
-            android:textColor="@color/colorRadioButtonDeepPink" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="6dp">
 
-        <TextView
-            android:id="@+id/item_select_gridview_support_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:text="13606"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/item_select_gridview_price_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:text="89.00"
+                    android:textColor="@color/colorRadioButtonDeepPink"
+                    android:textSize="15sp" />
 
-        <ImageView
-            android:id="@+id/item_select_gridview_heart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_toLeftOf="@id/item_select_gridview_support_tv"
-            android:src="@mipmap/ic_small_heart_normal" />
+                <TextView
+                    android:id="@+id/item_select_gridview_support_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:text="13606"
+                    android:textSize="15sp" />
 
-    </RelativeLayout>
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/item_select_gridview_heart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toLeftOf="@id/item_select_gridview_support_tv"
+                    android:src="@mipmap/ic_small_heart_normal" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

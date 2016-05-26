@@ -9,6 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
+import com.squareup.picasso.Picasso;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -16,25 +21,32 @@ import java.util.ArrayList;
  * Created by dllo on 16/5/20.
  */
 public class SelectGridViewAdapter extends BaseAdapter {
-    private ArrayList<SelectBean> selectBeans;
+    private SelectBean selectBean;
     private Context context;
 
     public SelectGridViewAdapter(Context context) {
         this.context = context;
+        EventBus.getDefault().register(this);
     }
 
-    public void setSelectBeans(ArrayList<SelectBean> selectBeans) {
-        this.selectBeans = selectBeans;
+    public void unRegisterBus(){
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getAnlysisSelect(SelectBean selectBean){
+        this.selectBean = selectBean;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return selectBeans != null && selectBeans.size() > 0 ? selectBeans.size() : 0;
+        return selectBean == null ? 0 : selectBean.getData().getItems().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return selectBeans != null && selectBeans.size() > 0 ? selectBeans.get(position) : null;
+        return null;
     }
 
     @Override
@@ -53,12 +65,12 @@ public class SelectGridViewAdapter extends BaseAdapter {
             viewHolder = (SelectGridViewViewHolder) convertView.getTag();
         }
 
-        viewHolder.itemSelectGridviewNameTv.setText(selectBeans.get(position).getName());
-        viewHolder.itemSelectGridviewSupportTv.setText(selectBeans.get(position).getFavorites_count());
-        viewHolder.itemSelectGridviewPriceTv.setText(selectBeans.get(position).getPrice());
+        viewHolder.itemSelectGridviewPriceTv.setText(selectBean.getData().getItems().get(position).getData().getPrice());
+        viewHolder.itemSelectGridviewSupportTv.setText(String.valueOf(selectBean.getData().getItems().get(position).getData().getFavorites_count()));
+        viewHolder.itemSelectGridviewNameTv.setText(selectBean.getData().getItems().get(position).getData().getName());
+        Picasso.with(context).load(selectBean.getData().getItems().get(position).getData().getCover_image_url()).placeholder(R.mipmap.ic_about)
+        .centerCrop().fit().into(viewHolder.itemSelectGridviewImg);
 
-
-        viewHolder.itemSelectGridviewImg.setImageResource(R.mipmap.ic_about);
 
         return convertView;
     }

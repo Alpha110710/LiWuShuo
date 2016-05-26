@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorRadioButtonDeepPink">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:src="@mipmap/ic_action_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="宝贝详情"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp" />
+
+
+        <ImageView
+            android:id="@+id/select_detail_share_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="12dp"
+            android:src="@mipmap/baichuan_btn_share" />
+
+        <ImageView
+            android:id="@+id/select_detail_comments_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="13dp"
+            android:layout_toLeftOf="@id/select_detail_share_img"
+            android:src="@mipmap/baichuan_btn_comments" />
+
+        <CheckBox
+            android:id="@+id/select_detail_favorites_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="13dp"
+            android:layout_toLeftOf="@id/select_detail_comments_img"
+            android:background="@mipmap/baichuan_btn_favorites"
+            android:button="@null" />
+    </RelativeLayout>
+</LinearLayout>
