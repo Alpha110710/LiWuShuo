@@ -3,6 +3,7 @@ package com.example.dllo.liwushuo.home;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.base.BaseFragment;
+import com.example.dllo.liwushuo.home.adapter.GridviewPopupFeatureAdapter;
 import com.example.dllo.liwushuo.home.adapter.HomeViewpagerAdapter;
 import com.example.dllo.liwushuo.home.bean.RollChannelBean;
 import com.example.dllo.liwushuo.net.NetListener;
@@ -37,11 +39,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private FeaturedHomeFragment featuredHomeFragment;
     private HomeViewpagerAdapter adapter;
     private ArrayList<Fragment> fragments;
-    private ArrayList<String> titles;
     private CheckBox homeTablayoutSelect;
     private PopupWindow homePopup;
     private TextView homeChangeTv;
     private NetTool netTool;
+    private GridviewPopupFeatureAdapter gridviewPopupFeatureAdapter;
+    private RollChannelBean rollChannelBean;
+
+
 
 
     @Override
@@ -51,7 +56,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void initView(View view) {
-        homeTablayout = findView(R.id.home_tablayout);
+        homeTablayout = (TabLayout) view.findViewById(R.id.home_tablayout);
         homeViewpager = findView(R.id.home_viewpager);
         homeTablayoutSelect = findView(R.id.home_tablayout_select);
         homeChangeTv = findView(R.id.home_change_tv);
@@ -60,12 +65,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void initData() {
+
+
+
         adapter = new HomeViewpagerAdapter(getChildFragmentManager());
         featuredHomeFragment = new FeaturedHomeFragment();
 
-        //设置popupwindow
-        initHomePopup(anlysisTitles());
-
+        //设置解析标题
+        anlysisTitles();
 
         homeViewpager.setAdapter(adapter);
         homeTablayout.setupWithViewPager(homeViewpager);
@@ -76,24 +83,37 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         homeChangeTv.setVisibility(View.GONE);
         homeTablayout.setVisibility(View.VISIBLE);
 
+        //设置popupwindow
+        initHomePopup();
+
+        homePopup.setOutsideTouchable(true);
+        homePopup.setFocusable(true);
+
 
     }
 
 
-    //设置popupwindow
-    private void initHomePopup(ArrayList<HashMap<String, Object>> lstItem) {
-
+    //    设置popupwindow
+    private void initHomePopup() {
+        gridviewPopupFeatureAdapter = new GridviewPopupFeatureAdapter(context);
         homePopup = new PopupWindow(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         View view = LayoutInflater.from(context).inflate(R.layout.item_home_select_popup, null);
         GridView gridView = (GridView) view.findViewById(R.id.home_popup_gridview_select);
-        SimpleAdapter adapter = new SimpleAdapter(context, lstItem, R.layout.item_home_popup_gridview, new String[]{"text"}, new int[]{R.id.item_home_popup_gridview_tv});
-        gridView.setAdapter(adapter);
+        gridView.setAdapter(gridviewPopupFeatureAdapter);
         homePopup.setContentView(view);
         homePopup.setAnimationStyle(R.style.anim_popupwindow);
         gridView.setOnItemClickListener(this);
+
+
+
     }
 
-    //
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("HomeFragment", "stop");
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -105,6 +125,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                     homeTablayout.setVisibility(View.VISIBLE);
 
                 } else {
+
                     homePopup.showAsDropDown(homeTablayout);
                     homeChangeTv.setVisibility(View.VISIBLE);
                     homeTablayout.setVisibility(View.GONE);
@@ -115,9 +136,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     }
 
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.d("HomeFragment", "onDestroy");
         if (homePopup.isShowing()) {
             homePopup.dismiss();
             homeChangeTv.setVisibility(View.GONE);
@@ -126,49 +150,39 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     //gridView监听事件
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
-    }
+
 
     //解析Tablauoyt标题
-    private ArrayList<HashMap<String, Object>> anlysisTitles() {
-        final ArrayList<HashMap<String, Object>> lstitem = new ArrayList<HashMap<String, Object>>();
+    private RollChannelBean anlysisTitles() {
+
         netTool = new NetTool();
         netTool.getAnalysis(URLValues.ROLL_CHANNEL, new NetListener() {
             @Override
             public void onSuccessed(String response) {
                 Gson gson = new Gson();
-                RollChannelBean rollChannelBean = gson.fromJson(response, RollChannelBean.class);
+                rollChannelBean = gson.fromJson(response, RollChannelBean.class);
 
-                for (int i = 0; i < rollChannelBean.getData().getChannels().size(); i++) {
-                    HashMap<String, Object> map = new HashMap<String, Object>();
-                    map.put("text", rollChannelBean.getData().getChannels().get(i).getName());
-                    lstitem.add(map);
-                }
+                //给网格布局适配器发值
+                gridviewPopupFeatureAdapter.setRollChannelBean(rollChannelBean);
 
-                //加循环使网格正好为4的倍数 显示有黑边
-                for (int i = 0; i < 3; i++) {
-                    if (lstitem.size() % 4 != 0) {
-                        HashMap<String, Object> l = new HashMap<>();
-                        l.put("text", "");
-                        lstitem.add(l);
-                    }
-                }
-
-                //将实体类中的数据设置给title,tablauout的标题
+                //将实体类中的数据设
+                // 置给title,tablauout的标题
                 adapter.setTitles((ArrayList<RollChannelBean.DataBean.ChannelsBean>) rollChannelBean.getData().getChannels());
 
-                //直接设置fragment数量
-                fragments = new ArrayList<>();
-                fragments.add(featuredHomeFragment);
-
-                //数量与title数量差1
-                for (int i = 0; i < rollChannelBean.getData().getChannels().size() - 1; i++) {
-                    fragments.add(NormalHomeFragment.createFragment("第" + i + "个界面"));
-
-                }
-                adapter.setFragments(fragments);
+//                //直接设置fragment数量
+//                fragments = new ArrayList<>();
+//                fragments.add(featuredHomeFragment);
+//                rollChannelBean.getData().getChannels().get(homeViewpager.getCurrentItem()) .setEditable(false);
+//
+//
+//                //数量与title数量差1
+//                for (int i = 1; i < rollChannelBean.getData().getChannels().size() ; i++) {
+//                    String url = URLValues.ITEM_BEFORE+ rollChannelBean.getData().getChannels().get(i).getId()+URLValues.ITEM_AFTER;
+//                    fragments.add(NormalHomeFragment.createFragment(url));
+//
+//                }
+//                adapter.setFragments(fragments);
+                adapter.setBean(rollChannelBean);
 
 
             }
@@ -179,8 +193,20 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             }
         });
 
+        return rollChannelBean;
 
-        return lstitem;
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        gridviewPopupFeatureAdapter.setRedLine(position);
+        homePopup.dismiss();
+        //设置对应频道的当前界面
+        homeViewpager.setCurrentItem(position);
+        homeChangeTv.setVisibility(View.GONE);
+        homeTablayout.setVisibility(View.VISIBLE);
+        homeTablayoutSelect.setChecked(false);
     }
 
 

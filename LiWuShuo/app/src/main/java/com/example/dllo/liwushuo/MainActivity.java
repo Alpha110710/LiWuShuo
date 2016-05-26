@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -55,20 +56,29 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         selectFragment = new SelectFragment();
         categoryFragment = new CategoryFragment();
         profileFragment = new ProfileFragment();
-
+        addAllFragment();
         replaceFrameLayout(homeFragment);
 
     }
 
-    private void replaceFrameLayout(Fragment fragment){
+    private void addAllFragment() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.radio_fl, fragment);
-        transaction.commit();
+        transaction.add(R.id.radio_fl, homeFragment).add(R.id.radio_fl, selectFragment, "select").add(R.id.radio_fl, categoryFragment, "category").add(R.id.radio_fl, profileFragment, "profileFragment")
+                .commit();
     }
+
+    private void replaceFrameLayout(Fragment fragment) {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.hide(homeFragment).hide(selectFragment).hide(categoryFragment).hide(profileFragment)
+                .show(fragment).commit();
+
+    }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.home_radiobutton:
                 homeToolBar.setVisibility(View.VISIBLE);
                 liwushuoToolbarTv.setVisibility(View.VISIBLE);
@@ -104,7 +114,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    public void changeImgBtn(boolean flag){
+    public void changeImgBtn(boolean flag) {
         if (flag) {
             raidersGiftToolbarImgbtn.setEnabled(false);
 

@@ -6,18 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.home.bean.ListviewBean;
 import com.example.dllo.liwushuo.tool.App;
 import com.example.dllo.liwushuo.tool.NetTool;
+import com.example.dllo.liwushuo.tool.RoundRectTool;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 /**
  * Created by dllo on 16/5/24.
@@ -47,7 +51,7 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         Myholder myholder = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(App.context).inflate(R.layout.item_home_featured_listview, parent, false);
@@ -77,11 +81,32 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
 
 
         myholder.itemHomeFeatureListviewLikeTv.setText(String.valueOf(listviewBean.getData().getItems().get(position).getLikes_count()));
-        Picasso.with(App.context).load(listviewBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ic_about).fit()
+        Picasso.with(App.context).load(listviewBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ic_about).
+                transform(new RoundRectTool(20)).fit()
                 .into(myholder.itemHomeFeatureListviewImg);
+
+
+        //设置new图片可见不可见
+        final Myholder finalMyholder = myholder;
+        myholder.itemHomeFeatureListviewRlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listviewBean.getData().getItems().get(position).setStatus(1);
+                finalMyholder.itemHomeFeatureFreshImg.setVisibility(View.GONE);
+            }
+        });
+
+        if (listviewBean.getData().getItems().get(position).getStatus() != 1) {
+            myholder.itemHomeFeatureFreshImg.setVisibility(View.VISIBLE);
+        }else {
+            myholder.itemHomeFeatureFreshImg.setVisibility(View.GONE);
+        }
+
 
         return convertView;
     }
+
+
 
 
     class Myholder {
@@ -91,6 +116,10 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
         private final TextView itemHomeFeatureDataTv;
         private final TextView itemHomeFeatureListviewTitleTv;
         private final LinearLayout itemHomeFeatureDataLayout;
+        private final ImageView itemHomeFeatureFreshImg;
+        private final RelativeLayout itemHomeFeatureListviewRlayout;
+        private CheckBox itemHomeFeatureListviewLikeCb;
+
 
         public Myholder(View view) {
             itemHomeFeatureListviewImg = (ImageView) view.findViewById(R.id.item_home_feature_listview_img);
@@ -98,6 +127,9 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
             itemHomeFeatureDataTv = (TextView) view.findViewById(R.id.item_home_feature_data_tv);
             itemHomeFeatureListviewTitleTv = (TextView) view.findViewById(R.id.item_home_feature_listview_title_tv);
             itemHomeFeatureDataLayout = (LinearLayout) view.findViewById(R.id.item_home_feature_data_layout);
+            itemHomeFeatureFreshImg = (ImageView) view.findViewById(R.id.item_home_feature_fresh_img);
+            itemHomeFeatureListviewRlayout = (RelativeLayout) view.findViewById(R.id.item_home_feature_listview_rlayout);
+            itemHomeFeatureListviewLikeCb = (CheckBox) view.findViewById(R.id.item_home_feature_listview_like_cb);
         }
     }
 }

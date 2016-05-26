@@ -2,13 +2,19 @@ package com.example.dllo.liwushuo.home;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.base.BaseFragment;
 import com.example.dllo.liwushuo.home.adapter.ListviewNormalHomeAdapter;
+import com.example.dllo.liwushuo.home.bean.NormalListviewBean;
+import com.example.dllo.liwushuo.net.NetListener;
+import com.example.dllo.liwushuo.tool.NetTool;
+import com.google.gson.Gson;
 
 /**
  * Created by dllo on 16/5/21.
@@ -17,11 +23,12 @@ public class NormalHomeFragment extends BaseFragment {
 
     private ListView normalHomeListview;
     private ListviewNormalHomeAdapter adapter;
+    private NetTool netTool = new NetTool();
 
-    public static Fragment createFragment(String data){
+    public static Fragment createFragment(String url){
         Fragment fragment = new NormalHomeFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("data", data);
+        bundle.putString("data", url);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -43,8 +50,27 @@ public class NormalHomeFragment extends BaseFragment {
     @Override
     public void initData() {
         Bundle bundle = getArguments();
-        String str = bundle.getString("data");
+        String url = bundle.getString("data");
+        netTool.getAnalysis(url, new NetListener() {
+            @Override
+            public void onSuccessed(String response) {
+                Gson gson = new Gson();
+                NormalListviewBean normalListviewBean = gson.fromJson(response, NormalListviewBean.class);
+                adapter.setNormalListviewBean(normalListviewBean);
+            }
 
+            @Override
+            public void onFailed(VolleyError error) {
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
     }
 }

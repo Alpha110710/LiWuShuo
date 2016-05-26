@@ -1,11 +1,12 @@
 package com.example.dllo.liwushuo.select;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by dllo on 16/5/20.
  */
-public class SelectBean {
+public class SelectBean implements Serializable{
 
     /**
      * code : 200
@@ -87,7 +88,7 @@ public class SelectBean {
             }
         }
 
-        public static class ItemsBean {
+        public static class ItemsBean implements Serializable{
             /**
              * ad_monitors : []
              * brand_id : null
@@ -137,7 +138,7 @@ public class SelectBean {
                 this.type = type;
             }
 
-            public static class DataBeanDetail {
+            public static class DataBeanDetail implements Serializable {
                 private Object brand_id;
                 private Object brand_order;
                 private Object category_id;

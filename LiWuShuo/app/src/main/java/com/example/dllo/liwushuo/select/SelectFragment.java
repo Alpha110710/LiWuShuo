@@ -1,6 +1,8 @@
 package com.example.dllo.liwushuo.select;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -19,6 +21,7 @@ public class SelectFragment extends BaseFragment implements AdapterView.OnItemCl
     private GridView selectGridview;
     private SelectGridViewAdapter adapter;
     private NetTool netTool = new NetTool();
+    private SelectBean selectBean;
 
     @Override
     public int setLayout() {
@@ -40,7 +43,6 @@ public class SelectFragment extends BaseFragment implements AdapterView.OnItemCl
         selectGridview.setOnItemClickListener(this);
 
 
-
     }
 
     @Override
@@ -52,7 +54,13 @@ public class SelectFragment extends BaseFragment implements AdapterView.OnItemCl
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(context, SelectDetailActivity.class );
+        selectBean = adapter.getSelectBean();
+        SelectBean.DataBean.ItemsBean itemsBean = selectBean.getData().getItems().get(position);
+        Intent intent = new Intent(context, SelectDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("selectDetailUrl", itemsBean);
+        intent.putExtras(bundle);
+        startActivity(intent);
 
     }
 }

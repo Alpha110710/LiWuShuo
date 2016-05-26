@@ -39,6 +39,10 @@ public class SelectGridViewAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public SelectBean getSelectBean() {
+        return selectBean;
+    }
+
     @Override
     public int getCount() {
         return selectBean == null ? 0 : selectBean.getData().getItems().size();

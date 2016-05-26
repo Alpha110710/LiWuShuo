@@ -10,13 +10,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
+import com.example.dllo.liwushuo.home.bean.NormalListviewBean;
 import com.example.dllo.liwushuo.tool.App;
+import com.example.dllo.liwushuo.tool.RoundRectTool;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by dllo on 16/5/25.
  */
 public class ListviewNormalHomeAdapter extends BaseAdapter {
     private Context context;
+    private NormalListviewBean normalListviewBean;
+
+    public void setNormalListviewBean(NormalListviewBean normalListviewBean) {
+        this.normalListviewBean = normalListviewBean;
+        notifyDataSetChanged();
+    }
 
     public ListviewNormalHomeAdapter(Context context) {
         this.context = context;
@@ -24,8 +33,8 @@ public class ListviewNormalHomeAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        //TODO:数据数量
-        return 10;
+
+        return normalListviewBean == null ? 0 : normalListviewBean.getData().getItems().size();
     }
 
     @Override
@@ -41,19 +50,22 @@ public class ListviewNormalHomeAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MyViewholder myViewholder = null;
-        if (convertView == null){
+        if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_home_normal_listview, parent, false);
             myViewholder = new MyViewholder(convertView);
             convertView.setTag(myViewholder);
         } else {
             myViewholder = (MyViewholder) convertView.getTag();
         }
-        //TODO:放图片
-        myViewholder.itemHomeNormalListviewImg.setImageResource(R.mipmap.ic_about);
+
+        Picasso.with(App.context).load(normalListviewBean.getData().getItems().get(position).getCover_image_url()).centerCrop()
+                .transform(new RoundRectTool(20)).fit().into(myViewholder.itemHomeNormalListviewImg);
+        myViewholder.itemHomeNormalListviewLikeTv.setText(String.valueOf(normalListviewBean.getData().getItems().get(position).getLikes_count()));
+        myViewholder.itemHomeNormalListviewTitleTv.setText(normalListviewBean.getData().getItems().get(position).getTitle());
         return convertView;
     }
 
-    class MyViewholder{
+    class MyViewholder {
 
         private final ImageView itemHomeNormalListviewImg;
         private final TextView itemHomeNormalListviewLikeTv;
