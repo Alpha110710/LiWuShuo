@@ -18,5 +18,11 @@ public final class URLValues {
     public static final String ITEM_BEFORE = "http://api.liwushuo.com/v2/channels/";
     public static final String ITEM_AFTER = "/items?";
 
+    //raidersCategoryfragment界面的上方平滑图片url
+    public static final String RAIDERS_TOPIC = "http://api.liwushuo.com/v2/collections?limit=10&offset=0";
+
+    //raidersCategoryfragment界面的下方的圆形图片所有内容url
+    public static final String RAIDERS_DOWN = "http://api.liwushuo.com/v2/channel_groups/all";
+
 
 }

@@ -15,18 +15,21 @@
         android:background="@drawable/item_gridview_round" />
 
 
-    <TextView
-        android:id="@+id/item_home_normal_listview_like_tv"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
+    <CheckBox
+        android:id="@+id/item_home_normal_listview_like_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="17dp"
         android:background="@drawable/article_like_count_bg"
-        android:drawableLeft="@mipmap/ic_feed_favourite_normal"
+        android:drawableLeft="@drawable/selector_home_like"
+        android:layout_alignParentRight="true"
         android:drawablePadding="5dp"
+        android:text="111"
+        android:textSize="10sp"
+        android:textColor="@color/colorBlack"
         android:gravity="center"
-        android:paddingLeft="10dp"
-        android:text="1" />
+        android:button="@null" />
 
     <TextView
         android:id="@+id/item_home_normal_listview_title_tv"

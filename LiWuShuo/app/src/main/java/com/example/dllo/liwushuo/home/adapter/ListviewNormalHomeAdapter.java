@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,7 +50,7 @@ public class ListviewNormalHomeAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         MyViewholder myViewholder = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_home_normal_listview, parent, false);
@@ -60,20 +62,32 @@ public class ListviewNormalHomeAdapter extends BaseAdapter {
 
         Picasso.with(App.context).load(normalListviewBean.getData().getItems().get(position).getCover_image_url()).centerCrop()
                 .transform(new RoundRectTool(20)).fit().into(myViewholder.itemHomeNormalListviewImg);
-        myViewholder.itemHomeNormalListviewLikeTv.setText(String.valueOf(normalListviewBean.getData().getItems().get(position).getLikes_count()));
+        myViewholder.itemHomeNormalListviewLikeCb.setText(String.valueOf(normalListviewBean.getData().getItems().get(position).getLikes_count()));
         myViewholder.itemHomeNormalListviewTitleTv.setText(normalListviewBean.getData().getItems().get(position).getTitle());
+        myViewholder.itemHomeNormalListviewLikeCb.setChecked(normalListviewBean.getData().getItems().get(position).isLiked());
+
+        //checkbox加监听, 解决复用问题
+        myViewholder.itemHomeNormalListviewLikeCb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox checkBox = (CheckBox) v;
+                normalListviewBean.getData().getItems().get(position).setLiked(checkBox.isChecked());
+               //TODO:checkbox继续设置
+            }
+        });
+
         return convertView;
     }
 
     class MyViewholder {
 
         private final ImageView itemHomeNormalListviewImg;
-        private final TextView itemHomeNormalListviewLikeTv;
+        private final CheckBox itemHomeNormalListviewLikeCb;
         private final TextView itemHomeNormalListviewTitleTv;
 
         public MyViewholder(View itemView) {
             itemHomeNormalListviewImg = (ImageView) itemView.findViewById(R.id.item_home_normal_listview_img);
-            itemHomeNormalListviewLikeTv = (TextView) itemView.findViewById(R.id.item_home_normal_listview_like_tv);
+            itemHomeNormalListviewLikeCb = (CheckBox) itemView.findViewById(R.id.item_home_normal_listview_like_cb);
             itemHomeNormalListviewTitleTv = (TextView) itemView.findViewById(R.id.item_home_normal_listview_title_tv);
         }
     }

@@ -2,12 +2,12 @@ package com.example.dllo.liwushuo.category;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 
 import com.example.dllo.liwushuo.MainActivity;
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.base.BaseFragment;
+import com.example.dllo.liwushuo.category.adapter.CategoryViewpagerAdapter;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by dllo on 16/5/19.
  */
 public class CategoryFragment extends BaseFragment {
-    private ViewPager categoryViewpager;
+    public ViewPager categoryViewpager;
     private CategoryViewpagerAdapter adapter;
     private ArrayList<Fragment> fragments;
 
@@ -58,12 +58,12 @@ public class CategoryFragment extends BaseFragment {
             public void onPageSelected(int position) {
                 if (position == 0) {
 
-                    boolean flag = true;
-                    ((MainActivity) getActivity()).changeImgBtn(flag);
+
+                    ((MainActivity) getActivity()).changecb(true);
                 }
                 if (position == 1) {
-                    boolean flag = false;
-                    ((MainActivity) getActivity()).changeImgBtn(flag);
+
+                    ((MainActivity) getActivity()).changecb(false);
                 }
             }
 

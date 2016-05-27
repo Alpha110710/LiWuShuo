@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
+import com.example.dllo.liwushuo.category.RaidersTopicBean;
 import com.example.dllo.liwushuo.home.adapter.CarouselHomeViewpagerAdapter;
 import com.example.dllo.liwushuo.home.adapter.RecyclerviewFeatureHomeAdapter;
 import com.example.dllo.liwushuo.home.bean.CarouselBean;
@@ -27,6 +28,7 @@ import java.util.Date;
 public class NetTool {
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
+    private Gson gson = new Gson();
 
     public NetTool() {
         requestQueue = VolleySingleton.getInstance().getRequestQueue();
@@ -57,7 +59,7 @@ public class NetTool {
         getAnalysis(URLValues.CAROUSEL, new NetListener() {
             @Override
             public void onSuccessed(String response) {
-                Gson gson = new Gson();
+
                 CarouselBean carouselBean = gson.fromJson(response, CarouselBean.class);
                 adapter.setCarouselBean(carouselBean);
 
@@ -75,7 +77,7 @@ public class NetTool {
         getAnalysis(URLValues.SPECIAL, new NetListener() {
             @Override
             public void onSuccessed(String response) {
-                Gson gson = new Gson();
+
                 RecyclerviewBean recyclerviewBean = gson.fromJson(response, RecyclerviewBean.class);
                 adapter.setRecyclerviewBean(recyclerviewBean);
             }
@@ -103,7 +105,7 @@ public class NetTool {
         getAnalysis(URLValues.SELECT, new NetListener() {
             @Override
             public void onSuccessed(String response) {
-                Gson gson = new Gson();
+
                 SelectBean selectBean = gson.fromJson(response, SelectBean.class);
                 EventBus eventBus = EventBus.getDefault();
                 eventBus.post(selectBean);
@@ -115,6 +117,24 @@ public class NetTool {
             }
         });
     }
+
+    //解析raidersCategory界面的数据
+    public void anlysisRaidersTopic(){
+        getAnalysis(URLValues.RAIDERS_TOPIC, new NetListener() {
+            @Override
+            public void onSuccessed(String response) {
+                RaidersTopicBean raidersTopicBean = gson.fromJson(response, RaidersTopicBean.class);
+                EventBus eventBus = EventBus.getDefault();
+                eventBus.post(raidersTopicBean);
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+
+            }
+        });
+    }
+
 
 
 

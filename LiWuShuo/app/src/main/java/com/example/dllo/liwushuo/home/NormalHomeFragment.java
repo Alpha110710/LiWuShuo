@@ -68,9 +68,5 @@ public class NormalHomeFragment extends BaseFragment {
 
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
 
-    }
 }

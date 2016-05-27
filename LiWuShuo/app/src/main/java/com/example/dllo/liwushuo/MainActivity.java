@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,7 +26,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private ImageView menologyToolbarImg, liwushuoToolbarTv;
     private TextView hotToolbarTv;
     private LinearLayout raidersGiftToolbarLayout;
-    private ImageButton raidersGiftToolbarImgbtn;
+    private CheckBox raidersGiftToolbarCb;
     private ImageView searchToolbarImg;
     private RadioButton home_radiobutton, select_radiobutton, category_radiobutton, profile_radiobutton;
     private HomeFragment homeFragment;
@@ -41,7 +42,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         liwushuoToolbarTv = findView(R.id.liwushuo_toolbar_tv);
         hotToolbarTv = findView(R.id.hot_toolbar_tv);
         raidersGiftToolbarLayout = findView(R.id.raiders_gift_toolbar_layout);
-        raidersGiftToolbarImgbtn = findView(R.id.raiders_gift_toolbar_imgbtn);
+        raidersGiftToolbarCb =  (CheckBox)findViewById(R.id.raiders_gift_toolbar_cb);
         searchToolbarImg = findView(R.id.search_toolbar_img);
         home_radiobutton = findView(R.id.home_radiobutton);
         select_radiobutton = findView(R.id.select_radiobutton);
@@ -58,6 +59,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         profileFragment = new ProfileFragment();
         addAllFragment();
         replaceFrameLayout(homeFragment);
+
+        //点击checkbox不同状态, 设置第三页面的viewpager
+        raidersGiftToolbarCb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox checkBox = (CheckBox) v;
+                if (checkBox.isChecked()){
+                    categoryFragment.categoryViewpager.setCurrentItem(1);
+                }else {
+                    categoryFragment.categoryViewpager.setCurrentItem(0);
+                }
+            }
+        });
 
     }
 
@@ -114,12 +128,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    public void changeImgBtn(boolean flag) {
+    public void changecb(boolean flag) {
         if (flag) {
-            raidersGiftToolbarImgbtn.setEnabled(false);
+            raidersGiftToolbarCb.setChecked(false);
 
         } else {
-            raidersGiftToolbarImgbtn.setEnabled(true);
+            raidersGiftToolbarCb.setChecked(true);
         }
     }
 }

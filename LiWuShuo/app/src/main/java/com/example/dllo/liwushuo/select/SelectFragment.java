@@ -52,6 +52,7 @@ public class SelectFragment extends BaseFragment implements AdapterView.OnItemCl
         adapter.unRegisterBus();
     }
 
+    //进行页面跳转进入淘宝fragment
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         selectBean = adapter.getSelectBean();

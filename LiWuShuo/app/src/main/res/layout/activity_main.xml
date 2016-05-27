@@ -44,18 +44,19 @@
 
             <LinearLayout
                 android:id="@+id/raiders_gift_toolbar_layout"
-                android:layout_width="98dp"
+                android:layout_width="110dp"
                 android:layout_height="30dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/raiders_gift_round"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
-                <ImageButton
-                    android:id="@+id/raiders_gift_toolbar_imgbtn"
-                    android:layout_width="wrap_content"
+                <CheckBox
+                    android:id="@+id/raiders_gift_toolbar_cb"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
+                    android:button="@null"
                     android:background="@drawable/selector_raiders_gift" />
             </LinearLayout>
 

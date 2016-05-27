@@ -47,8 +47,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private RollChannelBean rollChannelBean;
 
 
-
-
     @Override
     public int setLayout() {
         return R.layout.fragment_home;
@@ -65,7 +63,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void initData() {
-
 
 
         adapter = new HomeViewpagerAdapter(getChildFragmentManager());
@@ -86,9 +83,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         //设置popupwindow
         initHomePopup();
 
-        homePopup.setOutsideTouchable(true);
-        homePopup.setFocusable(true);
-
 
     }
 
@@ -96,60 +90,42 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     //    设置popupwindow
     private void initHomePopup() {
         gridviewPopupFeatureAdapter = new GridviewPopupFeatureAdapter(context);
-        homePopup = new PopupWindow(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         View view = LayoutInflater.from(context).inflate(R.layout.item_home_select_popup, null);
+        //参数1 view 参数4焦点
+        homePopup = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         GridView gridView = (GridView) view.findViewById(R.id.home_popup_gridview_select);
         gridView.setAdapter(gridviewPopupFeatureAdapter);
-        homePopup.setContentView(view);
+
         homePopup.setAnimationStyle(R.style.anim_popupwindow);
         gridView.setOnItemClickListener(this);
+        //设置popupwindow点击任意地址不可见需设置这个方法
+        homePopup.setBackgroundDrawable(getResources().getDrawable(R.mipmap.ic_about));
+        homePopup.setOutsideTouchable(true);
 
-
+        homePopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                homeTablayoutSelect.setChecked(false);
+            }
+        });
 
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d("HomeFragment", "stop");
-    }
-
+    //gridView监听事件
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             //checkBox监听事件 使popupwindow显示
             case R.id.home_tablayout_select:
-                if (homePopup.isShowing()) {
-                    homePopup.dismiss();
-                    homeChangeTv.setVisibility(View.GONE);
-                    homeTablayout.setVisibility(View.VISIBLE);
+                homePopup.showAsDropDown(homeTablayout);
+                homeChangeTv.setVisibility(View.VISIBLE);
+                homeTablayout.setVisibility(View.GONE);
 
-                } else {
-
-                    homePopup.showAsDropDown(homeTablayout);
-                    homeChangeTv.setVisibility(View.VISIBLE);
-                    homeTablayout.setVisibility(View.GONE);
-                }
                 break;
         }
 
 
     }
-
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d("HomeFragment", "onDestroy");
-        if (homePopup.isShowing()) {
-            homePopup.dismiss();
-            homeChangeTv.setVisibility(View.GONE);
-            homeTablayout.setVisibility(View.VISIBLE);
-        }
-    }
-
-    //gridView监听事件
 
 
     //解析Tablauoyt标题
@@ -200,14 +176,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        gridviewPopupFeatureAdapter.setRedLine(position);
-        homePopup.dismiss();
-        //设置对应频道的当前界面
-        homeViewpager.setCurrentItem(position);
-        homeChangeTv.setVisibility(View.GONE);
-        homeTablayout.setVisibility(View.VISIBLE);
-        homeTablayoutSelect.setChecked(false);
-    }
+        if (position < rollChannelBean.getData().getChannels().size()) {
+            gridviewPopupFeatureAdapter.setRedLine(position);
+            homePopup.dismiss();
+            //设置对应频道的当前界面
+            homeViewpager.setCurrentItem(position);
+            homeChangeTv.setVisibility(View.GONE);
+            homeTablayout.setVisibility(View.VISIBLE);
+        }
 
+    }
 
 }

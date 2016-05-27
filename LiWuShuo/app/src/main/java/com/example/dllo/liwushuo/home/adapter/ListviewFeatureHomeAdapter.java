@@ -80,7 +80,8 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
         }//设置好了
 
 
-        myholder.itemHomeFeatureListviewLikeTv.setText(String.valueOf(listviewBean.getData().getItems().get(position).getLikes_count()));
+        myholder.itemHomeFeatureListviewLikeCb.setText(String.valueOf(listviewBean.getData().getItems().get(position).getLikes_count()));
+        myholder.itemHomeFeatureListviewLikeCb.setChecked(listviewBean.getData().getItems().get(position).isLiked());
         Picasso.with(App.context).load(listviewBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ic_about).
                 transform(new RoundRectTool(20)).fit()
                 .into(myholder.itemHomeFeatureListviewImg);
@@ -102,6 +103,15 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
             myholder.itemHomeFeatureFreshImg.setVisibility(View.GONE);
         }
 
+        //checkbox加监听, 解决复用问题
+        myholder.itemHomeFeatureListviewLikeCb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox checkBox = (CheckBox) v;
+                listviewBean.getData().getItems().get(position).setLiked(checkBox.isChecked());
+            }
+        });
+
 
         return convertView;
     }
@@ -112,7 +122,6 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
     class Myholder {
 
         private final ImageView itemHomeFeatureListviewImg;
-        private final TextView itemHomeFeatureListviewLikeTv;
         private final TextView itemHomeFeatureDataTv;
         private final TextView itemHomeFeatureListviewTitleTv;
         private final LinearLayout itemHomeFeatureDataLayout;
@@ -123,7 +132,6 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
 
         public Myholder(View view) {
             itemHomeFeatureListviewImg = (ImageView) view.findViewById(R.id.item_home_feature_listview_img);
-            itemHomeFeatureListviewLikeTv = (TextView) view.findViewById(R.id.item_home_feature_listview_like_tv);
             itemHomeFeatureDataTv = (TextView) view.findViewById(R.id.item_home_feature_data_tv);
             itemHomeFeatureListviewTitleTv = (TextView) view.findViewById(R.id.item_home_feature_listview_title_tv);
             itemHomeFeatureDataLayout = (LinearLayout) view.findViewById(R.id.item_home_feature_data_layout);

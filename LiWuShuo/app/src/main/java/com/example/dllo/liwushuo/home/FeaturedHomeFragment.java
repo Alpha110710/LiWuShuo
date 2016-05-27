@@ -33,7 +33,6 @@ public class FeaturedHomeFragment extends BaseFragment {
     private Handler handler;
     private RecyclerView homeFeaturedRecyclerview;
     private RecyclerviewFeatureHomeAdapter recyclerviewFeatureHomeAdapter;
-
     private NetTool netTool = new NetTool();
     private ListView homeFeaturedListView;
     private ListviewFeatureHomeAdapter listviewFeatureHomeAdapter;
@@ -54,6 +53,27 @@ public class FeaturedHomeFragment extends BaseFragment {
     public void initData() {
 
 
+
+        //listview模块 ,轮播模块和小正方形模块为listview的头
+        listviewModule();
+
+        View view = LayoutInflater.from(context).inflate(R.layout.fragment_home_featured_listview_header, null);
+        carouselHomeViewpager = (ViewPager) view.findViewById(R.id.carousel_home_viewpager);
+        homeFeaturedRecyclerview = (RecyclerView) view.findViewById(R.id.home_featured_recyclerview);
+        //轮播模块
+        carouselModule();
+
+        //小正方形模块
+        recyclerModule();
+
+        homeFeaturedListView.addHeaderView(view);
+        homeFeaturedListView.setAdapter(listviewFeatureHomeAdapter);
+
+    }
+
+
+    //listview模块
+    private void listviewModule() {
         listviewFeatureHomeAdapter = new ListviewFeatureHomeAdapter();
         netTool.getAnalysis(URLValues.HOME_CELL, new NetListener() {
             @Override
@@ -68,23 +88,6 @@ public class FeaturedHomeFragment extends BaseFragment {
 
             }
         });
-
-        View view = LayoutInflater.from(context).inflate(R.layout.fragment_home_featured_listview_header, null);
-        carouselHomeViewpager = (ViewPager) view.findViewById(R.id.carousel_home_viewpager);
-        homeFeaturedRecyclerview = (RecyclerView) view.findViewById(R.id.home_featured_recyclerview);
-        //轮播模块
-        carouselModule();
-
-        //小正方形模块
-        recyclerModule();
-        homeFeaturedListView.addHeaderView(view);
-        homeFeaturedListView.setAdapter(listviewFeatureHomeAdapter);
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
 
     }
 

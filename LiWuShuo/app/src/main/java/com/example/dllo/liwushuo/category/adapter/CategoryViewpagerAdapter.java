@@ -1,4 +1,4 @@
-package com.example.dllo.liwushuo.category;
+package com.example.dllo.liwushuo.category.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
