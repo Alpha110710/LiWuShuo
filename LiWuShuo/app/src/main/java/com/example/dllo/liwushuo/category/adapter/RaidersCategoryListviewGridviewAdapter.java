@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.example.dllo.liwushuo.category.RaidersDownBean;
+import com.example.dllo.liwushuo.category.bean.RaidersDownBean;
 
 /**
  * Created by dllo on 16/5/27.

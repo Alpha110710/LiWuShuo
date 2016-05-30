@@ -1,4 +1,4 @@
-package com.example.dllo.liwushuo.category;
+package com.example.dllo.liwushuo.category.bean;
 
 import java.util.List;
 

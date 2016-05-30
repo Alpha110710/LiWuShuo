@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">礼物说</string>
+    <string name="security_code">使用验证码登陆</string>
+    <string name="password">使用密码登陆</string>
+
 </resources>

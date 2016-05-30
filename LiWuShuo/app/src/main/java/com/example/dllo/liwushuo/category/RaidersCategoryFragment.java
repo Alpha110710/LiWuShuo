@@ -9,10 +9,10 @@ import android.widget.ListView;
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.base.BaseFragment;
-import com.example.dllo.liwushuo.category.adapter.CategoryViewpagerAdapter;
 import com.example.dllo.liwushuo.category.adapter.RaidersCategoryListviewAdapter;
 import com.example.dllo.liwushuo.category.adapter.RaidersCategoryListviewGridviewAdapter;
 import com.example.dllo.liwushuo.category.adapter.RaidersCategoryRecyclerAdapter;
+import com.example.dllo.liwushuo.category.bean.RaidersDownBean;
 import com.example.dllo.liwushuo.net.NetListener;
 import com.example.dllo.liwushuo.net.URLValues;
 import com.example.dllo.liwushuo.tool.NetTool;
@@ -61,9 +61,9 @@ public class RaidersCategoryFragment extends BaseFragment {
 
         //获取解析攻略页面下方的数据
         getAnlysisCategoryDown();
-        //TODO:listview嵌套的gridview适配器初始化
-        raidersCategoryListviewGridviewAdapter = new RaidersCategoryListviewGridviewAdapter(context);
 
+        //TODO:初始化listviewGridview适配器:但是并没有用上
+        raidersCategoryListviewGridviewAdapter = new RaidersCategoryListviewGridviewAdapter(context);
 
     }
 
@@ -76,6 +76,7 @@ public class RaidersCategoryFragment extends BaseFragment {
                 raidersDownBean = gson.fromJson(response, RaidersDownBean.class);
                 raidersCategoryListviewAdapter.setRaidersDownBean(raidersDownBean);
                 raidersCategoryListviewGridviewAdapter.setRaidersDownBean(raidersDownBean);
+
             }
 
             @Override
@@ -90,5 +91,6 @@ public class RaidersCategoryFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         raidersCategoryRecyclerAdapter.unResgisterBus();
+
     }
 }

@@ -60,7 +60,7 @@ public class ListviewNormalHomeAdapter extends BaseAdapter {
             myViewholder = (MyViewholder) convertView.getTag();
         }
 
-        Picasso.with(App.context).load(normalListviewBean.getData().getItems().get(position).getCover_image_url()).centerCrop()
+        Picasso.with(context).load(normalListviewBean.getData().getItems().get(position).getCover_image_url()).centerCrop()
                 .transform(new RoundRectTool(20)).fit().into(myViewholder.itemHomeNormalListviewImg);
         myViewholder.itemHomeNormalListviewLikeCb.setText(String.valueOf(normalListviewBean.getData().getItems().get(position).getLikes_count()));
         myViewholder.itemHomeNormalListviewTitleTv.setText(normalListviewBean.getData().getItems().get(position).getTitle());

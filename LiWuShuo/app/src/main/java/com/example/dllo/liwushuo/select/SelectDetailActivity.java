@@ -43,6 +43,7 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
 
         selectDetailBackImg.setOnClickListener(this);
 
+
     }
 
 

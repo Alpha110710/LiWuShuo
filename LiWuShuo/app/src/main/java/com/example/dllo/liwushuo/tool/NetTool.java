@@ -1,13 +1,11 @@
 package com.example.dllo.liwushuo.tool;
 
-import android.util.Log;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
-import com.example.dllo.liwushuo.category.RaidersTopicBean;
+import com.example.dllo.liwushuo.category.bean.RaidersTopicBean;
 import com.example.dllo.liwushuo.home.adapter.CarouselHomeViewpagerAdapter;
 import com.example.dllo.liwushuo.home.adapter.RecyclerviewFeatureHomeAdapter;
 import com.example.dllo.liwushuo.home.bean.CarouselBean;

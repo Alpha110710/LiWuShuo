@@ -106,6 +106,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onDismiss() {
                 homeTablayoutSelect.setChecked(false);
+                homeChangeTv.setVisibility(View.GONE);
+                homeTablayout.setVisibility(View.VISIBLE);
             }
         });
 
