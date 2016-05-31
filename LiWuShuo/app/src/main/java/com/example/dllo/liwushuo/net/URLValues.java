@@ -32,5 +32,17 @@ public final class URLValues {
     //gift 礼物界面的listview解析url
     public static final String GIFT_LISTVIEW = "http://api.liwushuo.com/v2/item_categories/tree";
 
+    //gift礼物界面每个小圆形item的接口url
+    public static final String ITEM_GIFT_BEFORE = "http://api.liwushuo.com/v2/item_subcategories/";
+    public static final String ITEM_GIFT_AFTER = "/items?limit=20&offset=0";
+
+    //选礼神器点击进入下一个界面的item  url
+    public static final String SELECT_GIFT = "http://api.liwushuo.com/v2/search/item_by_type?limit=20&offset=0";//item 圆角正方形图片
+    public static final String SELECT_POPUP = "http://api.liwushuo.com/v2/search/item_filter";//popupwindow  每一个小挑选条件的url
+
+    //选礼神奇小四方块点击进入webview的url   需要拼接id  id为SELECT_GIFT圆角正方形图片解析出来的
+    public static final String SELECT_GIFT_WEB = "http://api.liwushuo.com/v2/items/";
+
+
 
 }

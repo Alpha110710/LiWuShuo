@@ -30,6 +30,7 @@
                 android:layout_margin="10dp"
                 android:layout_marginTop="12dp"
                 android:lines="2"
+                android:textColor="@color/colorBlack"
                 android:text="520必备味蕾之诗.最萌吃货进口零食礼盒" />
 
             <RelativeLayout

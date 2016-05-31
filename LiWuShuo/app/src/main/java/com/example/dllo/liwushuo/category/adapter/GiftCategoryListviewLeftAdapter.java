@@ -1,15 +1,19 @@
 package com.example.dllo.liwushuo.category.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.category.bean.GiftBean;
+import com.example.dllo.liwushuo.view.CheckableLinearLayout;
 
 /**
  * Created by dllo on 16/5/30.
@@ -17,6 +21,7 @@ import com.example.dllo.liwushuo.category.bean.GiftBean;
 public class GiftCategoryListviewLeftAdapter extends BaseAdapter {
     private GiftBean giftBean;
     private Context context;
+    private int selectPos = 0;
 
     public GiftCategoryListviewLeftAdapter(Context context) {
         this.context = context;
@@ -42,6 +47,12 @@ public class GiftCategoryListviewLeftAdapter extends BaseAdapter {
         return 0;
     }
 
+    //接受左侧listview点击位置
+    public void setSelectPos(int selectPos){
+        this.selectPos = selectPos;
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final MyGiftLeftViewHolder myGiftLeftViewHolder;
@@ -52,34 +63,28 @@ public class GiftCategoryListviewLeftAdapter extends BaseAdapter {
         } else {
             myGiftLeftViewHolder = (MyGiftLeftViewHolder) convertView.getTag();
         }
+        //判断当前显示position位置如果与传入位置一致,则设置选中状态
+        if(selectPos == position){
+            myGiftLeftViewHolder.itemGiftLeftPinkCb.setSelected(true);
 
-        myGiftLeftViewHolder.itemGiftLeftTagTv.setText(giftBean.getData().getCategories().get(position).getName());
+        }else {
+            myGiftLeftViewHolder.itemGiftLeftPinkCb.setSelected(false);
+        }
 
-        //TODO:设置粉色小条可见不可见
-        myGiftLeftViewHolder.itemGiftLeftLlayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myGiftLeftViewHolder.itemGiftLeftPinkTv.setVisibility(View.VISIBLE);
-            }
-        });
-
-//        myGiftLeftViewHolder.itemGiftLeftPinkTv.setVisibility(View.GONE);
-
-
+        myGiftLeftViewHolder.itemGiftLeftPinkCb.setText(giftBean.getData().getCategories().get(position).getName());
 
         return convertView;
     }
 
+
+
     class MyGiftLeftViewHolder{
 
-        private final TextView itemGiftLeftPinkTv;
-        private final TextView itemGiftLeftTagTv;
-        private final LinearLayout itemGiftLeftLlayout;
+        private final TextView itemGiftLeftPinkCb;
 
         public MyGiftLeftViewHolder(View itemView) {
-            itemGiftLeftPinkTv = (TextView) itemView.findViewById(R.id.item_gift_left_pink_tv);
-            itemGiftLeftTagTv = (TextView) itemView.findViewById(R.id.item_gift_left_tag_tv);
-            itemGiftLeftLlayout = (LinearLayout) itemView.findViewById(R.id.item_gift_left_llayout);
+            itemGiftLeftPinkCb = (TextView) itemView.findViewById(R.id.item_gift_left_pink_cb);
+
         }
     }
 }

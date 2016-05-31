@@ -1,6 +1,7 @@
 package com.example.dllo.liwushuo.category.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dllo.liwushuo.R;
+import com.example.dllo.liwushuo.category.GiftDetailsActivity;
 import com.example.dllo.liwushuo.category.bean.GiftBean;
 import com.example.dllo.liwushuo.view.NoScorllGridview;
 
@@ -89,11 +91,16 @@ public class GiftCategoryListviewRightAdapter extends BaseAdapter {
             myGiftRightViewHolder.itemGiftRightTitleLlayout.setVisibility(View.VISIBLE);
         }
 
-
+        //设置每一个小的gridview圆形图片的点击事件
         myGiftRightViewHolder.itemGiftRightListviewGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(context, "myGiftRightViewHolder.pos:" + myGiftRightViewHolder.pos + "~~~~~~~" + position, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(context, GiftDetailsActivity.class);
+                intent.putExtra("giftDetailUrl", String.valueOf(giftBean.getData().getCategories().get(myGiftRightViewHolder.pos).getSubcategories().get(position).getId()));
+                intent.putExtra("giftDetailName", giftBean.getData().getCategories().get(myGiftRightViewHolder.pos).getSubcategories().get(position).getName());
+                context.startActivity(intent);
+
             }
         });
 

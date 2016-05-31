@@ -4,12 +4,13 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical">
+
     <LinearLayout
+        android:id="@+id/item_gift_right_title_llayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:gravity="center_horizontal"
-        android:id="@+id/item_gift_right_title_llayout"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <TextView
@@ -34,13 +35,13 @@
             android:background="@color/colcorRadioButtonDeepgrey"
             android:gravity="right" />
     </LinearLayout>
+
     <com.example.dllo.liwushuo.view.NoScorllGridview
         android:id="@+id/item_gift_right_listview_gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:numColumns="3"
         android:horizontalSpacing="0dp"
-        android:layout_marginBottom="10dp"/>
+        android:numColumns="3" />
 
 </LinearLayout>

@@ -9,8 +9,14 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.base.BaseActivity;
+import com.example.dllo.liwushuo.category.bean.GiftSelectWebBean;
+import com.example.dllo.liwushuo.net.NetListener;
+import com.example.dllo.liwushuo.net.URLValues;
+import com.example.dllo.liwushuo.tool.NetTool;
+import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -27,6 +33,9 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
     private WebView selectDetailWebview;
     private ImageView selectDetailShareImg;
     private SelectBean selectBean;
+    private NetTool netTool = new NetTool();
+    private GiftSelectWebBean giftSelectWebBean;
+
 
     @Override
     public void initActivity() {
@@ -49,7 +58,7 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.select_detail_back_img:
                 finish();
                 break;
@@ -57,19 +66,57 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
     }
 
     //连接淘宝网络,接到SelectFragment传来的实体内部类
-    private void getWebviewUrl(){
-        Intent intent = getIntent();
-        final SelectBean.DataBean.ItemsBean itemsBean = (SelectBean.DataBean.ItemsBean) intent.getSerializableExtra("selectDetailUrl");
-        String url = itemsBean.getData().getPurchase_url();
-        selectDetailWebview.loadUrl(url);
-        selectDetailWebview.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                selectDetailWebview.loadUrl(url);
-                selectDetailBarTv.setText(itemsBean.getData().getName());
-                return true;
-            }
-        });
+    private void getWebviewUrl() {
+        final Intent intent = getIntent();
+
+        //if判断  用于解析gift挑选界面的webview跳转  需要拼接id
+        if (intent.getStringExtra("urlWebId") != null) {
+
+            netTool.getAnalysis(intent.getStringExtra("urlWebId"), new NetListener() {
+                @Override
+                public void onSuccessed(String response) {
+                    Gson gson = new Gson();
+                    giftSelectWebBean = gson.fromJson(response, GiftSelectWebBean.class);
+
+                    selectDetailWebview.loadUrl(giftSelectWebBean.getData().getPurchase_url());
+
+                    selectDetailWebview.setWebViewClient(new WebViewClient() {
+                        @Override
+                        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                            view.loadUrl(url);
+                            if (intent.getStringExtra("name") != null) {
+                                selectDetailBarTv.setText(giftSelectWebBean.getData().getName());
+                            }
+                            return true;
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailed(VolleyError error) {
+
+                }
+            });
+
+            //else用于select界面和礼物分类小圆圈图片界面的点击进入跳webview  只有接到对应url和name
+        } else {
+            selectDetailWebview.loadUrl(intent.getStringExtra("url"));
+
+            selectDetailWebview.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    view.loadUrl(url);
+
+                    if (intent.getStringExtra("name") != null) {
+                        selectDetailBarTv.setText(intent.getStringExtra("name"));
+                    }
+                    return true;
+                }
+            });
+        }
+
+
     }
+
 
 }

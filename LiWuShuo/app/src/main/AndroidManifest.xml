@@ -20,6 +20,8 @@
         <activity android:name=".select.SelectDetailActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".category.RaidersDetailsActivity"/>
+        <activity android:name=".category.GiftDetailsActivity"/>
+        <activity android:name=".category.GiftConditionSelectActivity"/>
 
     </application>
 

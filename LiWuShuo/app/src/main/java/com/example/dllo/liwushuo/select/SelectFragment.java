@@ -58,9 +58,11 @@ public class SelectFragment extends BaseFragment implements AdapterView.OnItemCl
         selectBean = adapter.getSelectBean();
         SelectBean.DataBean.ItemsBean itemsBean = selectBean.getData().getItems().get(position);
         Intent intent = new Intent(context, SelectDetailActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("selectDetailUrl", itemsBean);
-        intent.putExtras(bundle);
+        intent.putExtra("url", selectBean.getData().getItems().get(position).getData().getPurchase_url());
+        intent.putExtra("name", selectBean.getData().getItems().get(position).getData().getName());
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("selectDetailUrl", itemsBean);
+//        intent.putExtras(bundle);
         startActivity(intent);
 
     }

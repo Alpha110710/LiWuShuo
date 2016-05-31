@@ -1,4 +1,4 @@
-package com.example.dllo.liwushuo.select;
+package com.example.dllo.liwushuo.category.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,48 +9,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
+import com.example.dllo.liwushuo.category.bean.GiftDetailBean;
 import com.squareup.picasso.Picasso;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.ArrayList;
-
 /**
- * Created by dllo on 16/5/20.
+ * Created by dllo on 16/5/31.
  */
-public class SelectGridViewAdapter extends BaseAdapter {
-    private SelectBean selectBean;
+public class GiftDetailsGridviewAdapter extends BaseAdapter {
+    private GiftDetailBean giftDetailBean;
     private Context context;
 
-    public SelectGridViewAdapter(Context context) {
+    public GiftDetailsGridviewAdapter(Context context) {
         this.context = context;
-        EventBus.getDefault().register(this);
     }
 
-    public void setSelectBean(SelectBean selectBean) {
-        this.selectBean = selectBean;
+    public void setGiftDetailBean(GiftDetailBean giftDetailBean) {
+        this.giftDetailBean = giftDetailBean;
         notifyDataSetChanged();
-    }
-
-    public void unRegisterBus(){
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getAnlysisSelect(SelectBean selectBean){
-        this.selectBean = selectBean;
-        notifyDataSetChanged();
-    }
-
-    public SelectBean getSelectBean() {
-        return selectBean;
     }
 
     @Override
     public int getCount() {
-        return selectBean == null ? 0 : selectBean.getData().getItems().size();
+        return giftDetailBean == null ? 0 : giftDetailBean.getData().getItems().size();
     }
 
     @Override
@@ -60,7 +40,7 @@ public class SelectGridViewAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return 0;
     }
 
     @Override
@@ -74,16 +54,17 @@ public class SelectGridViewAdapter extends BaseAdapter {
             viewHolder = (SelectGridViewViewHolder) convertView.getTag();
         }
 
-        viewHolder.itemSelectGridviewPriceTv.setText(selectBean.getData().getItems().get(position).getData().getPrice());
-        viewHolder.itemSelectGridviewSupportTv.setText(String.valueOf(selectBean.getData().getItems().get(position).getData().getFavorites_count()));
-        viewHolder.itemSelectGridviewNameTv.setText(selectBean.getData().getItems().get(position).getData().getName());
-        Picasso.with(context).load(selectBean.getData().getItems().get(position).getData().getCover_image_url()).placeholder(R.mipmap.ic_about)
-        .centerCrop().fit().into(viewHolder.itemSelectGridviewImg);
+        viewHolder.itemSelectGridviewPriceTv.setText(giftDetailBean.getData().getItems().get(position).getPrice());
+        viewHolder.itemSelectGridviewSupportTv.setText(String.valueOf(giftDetailBean.getData().getItems().get(position).getFavorites_count()));
+        viewHolder.itemSelectGridviewNameTv.setText(giftDetailBean.getData().getItems().get(position).getName());
+        Picasso.with(context).load(giftDetailBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ic_about)
+                .centerCrop().fit().into(viewHolder.itemSelectGridviewImg);
 
 
         return convertView;
     }
 
+    //复用Select页面布局
     private class SelectGridViewViewHolder {
 
         private final ImageView itemSelectGridviewImg;

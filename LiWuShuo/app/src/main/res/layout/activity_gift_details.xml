@@ -9,7 +9,7 @@
         android:background="@color/colorRadioButtonDeepPink">
 
         <ImageView
-            android:id="@+id/raiders_detail_back_img"
+            android:id="@+id/gift_detail_back_img"
             android:layout_width="22dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
@@ -17,7 +17,7 @@
             android:src="@mipmap/ic_action_back" />
 
         <TextView
-            android:id="@+id/raiders_detail_bar_tv"
+            android:id="@+id/gift_detail_bar_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -30,7 +30,7 @@
 
 
         <ImageView
-            android:id="@+id/raiders_detail_sort_img"
+            android:id="@+id/gift_detail_sort_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -38,10 +38,15 @@
             android:layout_marginTop="14dp"
             android:src="@mipmap/ic_menu_sort" />
     </RelativeLayout>
-    <ListView
-        android:id="@+id/raiders_detail_listview"
+    <GridView
+        android:id="@+id/gift_detail_gridview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@null" />
-
+        android:layout_height="match_parent"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:columnWidth="90dp"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="6dp" />
 </LinearLayout>
