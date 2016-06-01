@@ -54,5 +54,23 @@ public class CreateSimpleAdapter {
         return simpleAdapter;
     }
 
+    public static SimpleAdapter CreateGiftConditionPopupSimpleAdapter(final Context context, final ArrayList<HashMap<String, String>> lst) {
+
+        SimpleAdapter simpleAdapter = new SimpleAdapter(context, lst, R.layout.item_gift_condition_popup_gridview,
+                new String[]{"giftCondotionPopupTv"}, new int[]{R.id.item_gift_condition_popup_gridview_tv});
+        simpleAdapter.setViewBinder(new SimpleAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Object data, String textRepresentation) {
+                if (view instanceof ImageView && data instanceof String) {
+
+                    Picasso.with(context).load((String) data).placeholder(R.mipmap.ic_about).into((ImageView) view);
+                    return true;
+                }
+                return false;
+            }
+        });
+        return simpleAdapter;
+    }
+
 
 }

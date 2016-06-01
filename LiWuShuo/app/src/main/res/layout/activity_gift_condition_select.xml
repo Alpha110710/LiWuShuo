@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -21,11 +22,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxWidth="170dp"
             android:text="挑选礼物"
             android:textColor="@color/colorWhite"
-            android:maxWidth="170dp"
-            android:maxLines="1"
-            android:ellipsize="end"
             android:textSize="20sp" />
 
 
@@ -38,6 +39,82 @@
             android:layout_marginTop="14dp"
             android:src="@mipmap/ic_menu_sort" />
     </RelativeLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/colorWhite"
+        android:weightSum="4"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/gift_condition_select_obj_rb"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableRight="@drawable/selector_home_tablayout"
+            android:layout_marginRight="13dp"
+            android:drawablePadding="-13dp"
+            android:text="对象"
+            android:gravity="center"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="18dp"
+            android:background="@color/colcorRadioButtonLightgrey" />
+
+        <RadioButton
+            android:id="@+id/gift_condition_select_occasion_rb"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableRight="@drawable/selector_home_tablayout"
+            android:layout_marginRight="13dp"
+            android:drawablePadding="-13dp"
+            android:text="场合"
+            android:gravity="center"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="18dp"
+            android:background="@color/colcorRadioButtonLightgrey" />
+
+        <RadioButton
+            android:id="@+id/gift_condition_select_habit_rb"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableRight="@drawable/selector_home_tablayout"
+            android:layout_marginRight="13dp"
+            android:drawablePadding="-13dp"
+            android:text="个性"
+            android:gravity="center"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="18dp"
+            android:background="@color/colcorRadioButtonLightgrey" />
+
+        <RadioButton
+            android:id="@+id/gift_condition_select_price_rb"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableRight="@drawable/selector_home_tablayout"
+            android:layout_marginRight="13dp"
+            android:drawablePadding="-13dp"
+            android:text="价格"
+            android:gravity="center"
+            android:textSize="14sp" />
+    </RadioGroup>
+
     <GridView
         android:id="@+id/gift_condition_select_gridview"
         android:layout_width="match_parent"
@@ -45,8 +122,8 @@
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
         android:columnWidth="90dp"
+        android:horizontalSpacing="6dp"
         android:numColumns="2"
         android:scrollbars="none"
-        android:stretchMode="columnWidth"
-        android:horizontalSpacing="6dp" />
+        android:stretchMode="columnWidth" />
 </LinearLayout>

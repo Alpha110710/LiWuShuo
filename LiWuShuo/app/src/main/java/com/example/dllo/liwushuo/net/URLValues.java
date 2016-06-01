@@ -43,6 +43,16 @@ public final class URLValues {
     //选礼神奇小四方块点击进入webview的url   需要拼接id  id为SELECT_GIFT圆角正方形图片解析出来的
     public static final String SELECT_GIFT_WEB = "http://api.liwushuo.com/v2/items/";
 
+    //选礼神奇点击进入筛选条件点击完的重新刷新下面小四方块url  参数拼的是"http://api.liwushuo.com/v2/search/item_filter每一个子key
+    public static final String SCREEN_REFRESH_HEAD_TARET = "http://api.liwushuo.com/v2/search/item_by_type?limit=20&target=";
+    public static final String SCREEN_REFRESH_SCENE = " &scene=";
+    public static final String SCREEN_REFRESH_PRICE = " &price=";
+    public static final String SCREEN_REFRESH_PERSONALITY = "&personality=";
+    public static final String SCREEN_REFRESH_END = "&offset=0";
+
+
+
+
 
 
 }
