@@ -60,6 +60,7 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
         } else {
             myholder = (Myholder) convertView.getTag();
         }
+
         //设置数据
         myholder.itemHomeFeatureListviewTitleTv.setText(listviewBean.getData().getItems().get(position).getTitle());
 
@@ -87,21 +88,21 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
                 .into(myholder.itemHomeFeatureListviewImg);
 
 
-        //设置new图片可见不可见
-        final Myholder finalMyholder = myholder;
-        myholder.itemHomeFeatureListviewRlayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listviewBean.getData().getItems().get(position).setStatus(1);
-                finalMyholder.itemHomeFeatureFreshImg.setVisibility(View.GONE);
-            }
-        });
-
-        if (listviewBean.getData().getItems().get(position).getStatus() != 1) {
-            myholder.itemHomeFeatureFreshImg.setVisibility(View.VISIBLE);
-        }else {
-            myholder.itemHomeFeatureFreshImg.setVisibility(View.GONE);
-        }
+        //TODO:设置new图片可见不可见
+//        final Myholder finalMyholder = myholder;
+//        myholder.itemHomeFeatureListviewRlayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                listviewBean.getData().getItems().get(position).setStatus(1);
+//                finalMyholder.itemHomeFeatureFreshImg.setVisibility(View.GONE);
+//            }
+//        });
+//
+//        if (listviewBean.getData().getItems().get(position).getStatus() != 1) {
+//            myholder.itemHomeFeatureFreshImg.setVisibility(View.VISIBLE);
+//        }else {
+//            myholder.itemHomeFeatureFreshImg.setVisibility(View.GONE);
+//        }
 
         //checkbox加监听, 解决复用问题
         myholder.itemHomeFeatureListviewLikeCb.setOnClickListener(new View.OnClickListener() {

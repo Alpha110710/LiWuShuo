@@ -6,8 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
-
+    </style>
+    <style name="anim_home_share_popup">
+        <item name="android:windowEnterAnimation">@anim/home_share_popup_show</item>
+        <item name="android:windowExitAnimation">@anim/home_share_popup_hide</item>
     </style>
 
 </resources>

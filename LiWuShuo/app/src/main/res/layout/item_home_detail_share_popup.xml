@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="分享到"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/item_home_share_popup_wechat_timeline_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_share_wechat_timeline"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="微信朋友圈"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/item_home_share_popup_wechat_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_share_wechat"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="微信好友"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/item_home_share_popup_sina_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_share_sina_weibo"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="新浪微博"
+            android:textColor="@color/colorBlack" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/item_home_share_popup_tencent_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_share_tencent_qzone"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="QQ空间"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/item_home_share_popup_tencent_qq_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_share_tencent_qq"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="QQ好友"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/item_home_share_popup_hyperlink_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_share_hyperlink"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="复制链接"
+            android:textColor="@color/colorBlack" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="360dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/colcorRadioButtonLightgrey" />
+
+    <TextView
+        android:id="@+id/item_home_share_popup_cancel_tv"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="取消"
+        android:textSize="25sp" />
+</LinearLayout>

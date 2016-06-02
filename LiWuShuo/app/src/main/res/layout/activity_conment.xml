@@ -9,7 +9,7 @@
         android:background="@color/colorRadioButtonDeepPink">
 
         <ImageView
-            android:id="@+id/raiders_detail_back_img"
+            android:id="@+id/home_conment_back_img"
             android:layout_width="22dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
@@ -17,32 +17,20 @@
             android:src="@mipmap/ic_action_back" />
 
         <TextView
-            android:id="@+id/raiders_detail_bar_tv"
+            android:id="@+id/home_conment_bar_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="宝贝详情"
-            android:textColor="@color/colorWhite"
-            android:maxWidth="170dp"
-            android:maxLines="1"
             android:ellipsize="end"
+            android:maxLines="1"
+            android:maxWidth="170dp"
+            android:text="评论"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp" />
 
-
-        <ImageView
-            android:id="@+id/raiders_detail_sort_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="14dp"
-            android:src="@mipmap/ic_menu_sort" />
     </RelativeLayout>
     <ListView
-        android:id="@+id/raiders_detail_listview"
+        android:id="@+id/home_conment_down_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:divider="@null" />
-
+        android:layout_height="wrap_content"/>
 </LinearLayout>

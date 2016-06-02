@@ -9,9 +9,16 @@ public final class URLValues {
     //home轮播图url
     public static final String CAROUSEL = "http://api.liwushuo.com/v2/banners";
     //home小方框url
-    public static final String  SPECIAL= "http://api.liwushuo.com/v2/secondary_banners?gender=2&generation=1";
+    public static final String SPECIAL = "http://api.liwushuo.com/v2/secondary_banners?gender=2&generation=1";
     //home的listview url
     public static final String HOME_CELL = "http://api.liwushuo.com/v2/channels/103/items?limit=20&ad=2&gender=2&offset=0&generation=1";
+
+    //home的listview 点击进入界面的url
+    public static final String HOME_DETAIL_CLICK_TAOBAO = "http://www.liwushuo.com/posts/";
+    public static final String HOME_DETAIL_BEFORE = "http://api.liwushuo.com/v2/posts/";
+    public static final String HOME_DETAIL_AFTER = "?show_baichuan=1";
+
+
 
     //select的分类页面
     public static final String SELECT = "http://api.liwushuo.com/v2/items?limit=20&offset=0&gender=2&generation=1";
@@ -42,13 +49,6 @@ public final class URLValues {
 
     //选礼神奇小四方块点击进入webview的url   需要拼接id  id为SELECT_GIFT圆角正方形图片解析出来的
     public static final String SELECT_GIFT_WEB = "http://api.liwushuo.com/v2/items/";
-
-    //选礼神奇点击进入筛选条件点击完的重新刷新下面小四方块url  参数拼的是"http://api.liwushuo.com/v2/search/item_filter每一个子key
-    public static final String SCREEN_REFRESH_HEAD_TARET = "http://api.liwushuo.com/v2/search/item_by_type?limit=20&target=";
-    public static final String SCREEN_REFRESH_SCENE = " &scene=";
-    public static final String SCREEN_REFRESH_PRICE = " &price=";
-    public static final String SCREEN_REFRESH_PERSONALITY = "&personality=";
-    public static final String SCREEN_REFRESH_END = "&offset=0";
 
 
 

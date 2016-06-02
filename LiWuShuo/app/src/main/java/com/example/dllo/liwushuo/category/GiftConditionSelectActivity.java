@@ -47,14 +47,16 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
     private GiftDetailsGridviewAdapter giftDetailsGridviewAdapter;
     private NetTool netTool = new NetTool();
     private GiftDetailBean giftDetailBean;
-    private GiftSelectWebBean giftSelectWebBean;
     private RadioButton giftConditionSelectObjRb, giftConditionSelectOccasionRb, giftConditionSelectHabitRb, giftConditionSelectPriceRb;
     private PopupWindow conditionPopup;
     private GridView giftConditionSelectPopupGridview;
     private GiftConditionPopupBean giftConditionPopupBean;
     private GiftConditionSelectPopupGridviewAdapter giftConditionSelectPopupGridviewAdapter;
+    private int radioPos;
 
-
+    private String screenRefresh;
+    //选礼神奇点击进入筛选条件点击完的重新刷新下面小四方块url  参数拼的是"http://api.liwushuo.com/v2/search/item_filter每一个子key
+    private String[] url = new String[4];
     @Override
     public void initActivity() {
         setContentView(R.layout.activity_gift_condition_select);
@@ -80,22 +82,8 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
         giftConditionSelectGridview.setAdapter(giftDetailsGridviewAdapter);
 
 
-        //TODO:当筛选条件不同对应url也不同
-        netTool.getAnalysis(URLValues.SELECT_GIFT, new NetListener() {
-            @Override
-            public void onSuccessed(String response) {
-                Gson gson = new Gson();
-                giftDetailBean = gson.fromJson(response, GiftDetailBean.class);
-                giftDetailsGridviewAdapter.setGiftDetailBean(giftDetailBean);
+        getItemAndRefreshAnlysis(URLValues.SELECT_GIFT);
 
-
-            }
-
-            @Override
-            public void onFailed(VolleyError error) {
-
-            }
-        });
 
         netTool.getAnalysis(URLValues.SELECT_POPUP, new NetListener() {
             @Override
@@ -139,6 +127,7 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.gift_condition_select_back_img:
                 finish();
@@ -148,21 +137,25 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
             case R.id.gift_condition_select_obj_rb:
                 initConditionPopup(0);
                 conditionPopup.showAsDropDown(giftConditionSelectObjRb);
+                radioPos = 0;
                 break;
             case R.id.gift_condition_select_occasion_rb:
                 initConditionPopup(1);
                 conditionPopup.showAsDropDown(giftConditionSelectObjRb);
+                radioPos = 1;
 
                 break;
             case R.id.gift_condition_select_habit_rb:
                 initConditionPopup(2);
                 conditionPopup.showAsDropDown(giftConditionSelectObjRb);
+                radioPos = 2;
 
                 break;
 
             case R.id.gift_condition_select_price_rb:
                 initConditionPopup(3);
                 conditionPopup.showAsDropDown(giftConditionSelectObjRb);
+                radioPos = 3;
 
                 break;
 
@@ -170,62 +163,106 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
     }
 
 
+    //popupwindow代码
     private void initConditionPopup(final int i) {
-        final RadioButton[] radioButtons = {giftConditionSelectObjRb, giftConditionSelectOccasionRb, giftConditionSelectHabitRb, giftConditionSelectPriceRb};
+        if (giftConditionPopupBean != null) {
+            final RadioButton radioButtons[] = {giftConditionSelectObjRb, giftConditionSelectOccasionRb, giftConditionSelectHabitRb, giftConditionSelectPriceRb};
 
-        final ArrayList<String> beans = new ArrayList<>();
-        beans.add("全部");
-        for (int i1 = 0; i1 < giftConditionPopupBean.getData().getFilters().get(i).getChannels().size(); i1++) {
-            beans.add(giftConditionPopupBean.getData().getFilters().get(i).getChannels().get(i1).getName());
+
+            final ArrayList<String> beans = new ArrayList<>();
+            beans.add("全部");
+            for (int i1 = 0; i1 < giftConditionPopupBean.getData().getFilters().get(i).getChannels().size(); i1++) {
+                beans.add(giftConditionPopupBean.getData().getFilters().get(i).getChannels().get(i1).getName());
+            }
+
+            //popupwindow的一系列处理
+            View view = LayoutInflater.from(this).inflate(R.layout.item_gift_condition_select_popup, null);
+            conditionPopup = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, 600, true);
+
+            giftConditionSelectPopupGridview = (GridView) view.findViewById(R.id.gift_condition_select_popup_gridview);
+            giftConditionSelectPopupGridviewAdapter = new GiftConditionSelectPopupGridviewAdapter(this);
+            giftConditionSelectPopupGridviewAdapter.setBeans(beans);
+            giftConditionSelectPopupGridview.setAdapter(giftConditionSelectPopupGridviewAdapter);
+
+            ColorDrawable colorDrawable = new ColorDrawable(0x00FFFFFF);
+            conditionPopup.setBackgroundDrawable(colorDrawable);
+            conditionPopup.setOutsideTouchable(true);
+            conditionPopup.setAnimationStyle(R.style.anim_popupwindow);
+            WindowManager.LayoutParams params = getWindow().getAttributes();
+            params.alpha = 0.7f;
+            getWindow().setAttributes(params);
+
+
+            giftConditionSelectPopupGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Toast.makeText(GiftConditionSelectActivity.this, "pos" + radioPos + "position:" + position, Toast.LENGTH_SHORT).show();
+                    giftConditionSelectPopupGridviewAdapter.setPos(position);
+                    giftConditionSelectPopupGridviewAdapter.notifyDataSetChanged();
+
+                    radioButtons[i].setText(beans.get(position));
+
+                    //点击刷新
+                    choiceUrl(radioPos, position);
+                    screenRefresh = "http://api.liwushuo.com/v2/search/item_by_type?limit=20&target=" + url[0] + "&scene="
+                            + url[1] + "&price=" + url[3] + "&personality=" + url[2] + "&offset=0";
+
+                    getItemAndRefreshAnlysis(screenRefresh);
+
+                    conditionPopup.dismiss();
+
+                }
+            });
+
+
+            conditionPopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    radioButtons[i].setSelected(false);
+                    WindowManager.LayoutParams params = getWindow().getAttributes();
+                    params.alpha = 1f;
+                    getWindow().setAttributes(params);
+                }
+            });
+
+        }
+    }
+
+
+
+    //调用此方法即可获得筛选后的url
+    private void choiceUrl(int radioPos, int position) {
+        for (int i = 0; i < url.length; i++) {
+            url[i] = "";
         }
 
+        if (position == 0) {
+            url[radioPos] = "";
+        } else {
+            url[radioPos] = giftConditionPopupBean.getData().getFilters().get(radioPos).getChannels().get(position - 1).getKey();
 
-        View view = LayoutInflater.from(this).inflate(R.layout.item_gift_condition_select_popup, null);
-        conditionPopup = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, 600, true);
-
-        giftConditionSelectPopupGridview = (GridView) view.findViewById(R.id.gift_condition_select_popup_gridview);
-        giftConditionSelectPopupGridviewAdapter = new GiftConditionSelectPopupGridviewAdapter(this);
-        giftConditionSelectPopupGridviewAdapter.setBeans(beans);
-        giftConditionSelectPopupGridview.setAdapter(giftConditionSelectPopupGridviewAdapter);
-
-        ColorDrawable colorDrawable = new ColorDrawable(0x00FFFFFF);
-        conditionPopup.setBackgroundDrawable(colorDrawable);
-        conditionPopup.setOutsideTouchable(true);
-        conditionPopup.setAnimationStyle(R.style.anim_popupwindow);
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.alpha = 0.7f;
-        getWindow().setAttributes(params);
-
-
-        giftConditionSelectPopupGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(GiftConditionSelectActivity.this, "position:" + position, Toast.LENGTH_SHORT).show();
-                giftConditionSelectPopupGridviewAdapter.setPos(position);
-                giftConditionSelectPopupGridviewAdapter.notifyDataSetChanged();
-
-                radioButtons[i].setText(beans.get(position));
-
-
-            }
-        });
-
-
-        conditionPopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                radioButtons[i].setSelected(false);
-                WindowManager.LayoutParams params = getWindow().getAttributes();
-                params.alpha = 1f;
-                getWindow().setAttributes(params);
-            }
-        });
+        }
 
     }
 
-    private void refreshUrl(int i, int pos) {
-        //TODO:拼url
-//        int url = URLValues.SCREEN_REFRESH_HEAD_TARET + giftConditionPopupBean.getData().getFilters().get(i).getKey()
+
+
+    //解析挑选礼物下面圆角图片的item数据
+    private void getItemAndRefreshAnlysis(String url) {
+        netTool.getAnalysis(url, new NetListener() {
+            @Override
+            public void onSuccessed(String response) {
+                Gson gson = new Gson();
+                giftDetailBean = gson.fromJson(response, GiftDetailBean.class);
+                giftDetailsGridviewAdapter.setGiftDetailBean(giftDetailBean);
+
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+
+            }
+        });
     }
 
 }
