@@ -24,6 +24,10 @@ public final class URLValues {
     public static final String SELECT = "http://api.liwushuo.com/v2/items?limit=20&offset=0&gender=2&generation=1";
     //home的tab分页url 穿搭
     public static final String ITEM_BEFORE = "http://api.liwushuo.com/v2/channels/";
+    public static final String CONTENT_DOWN_BEFORE = "http://api.liwushuo.com/v2/posts/";
+    public static final String CONTENT_DOWN_AFTER = "/comments?limit=20&offset=0";
+
+
     public static final String ITEM_AFTER = "/items?";
 
     //raidersCategoryfragment界面的上方平滑图片url
@@ -31,6 +35,11 @@ public final class URLValues {
 
     //raidersCategoryfragment界面的下方的圆形图片所有内容url
     public static final String RAIDERS_DOWN = "http://api.liwushuo.com/v2/channel_groups/all";
+
+
+    //raidersCategoryfragment界面上方圆角图片的点击url
+    public static final String ITEM_RAIDERS_UP_BEFORE = "http://api.liwushuo.com/v2/collections/";
+    public static final String ITEM_RAIDERS_UP_AFTER = "/posts?limit=20&offset=0";
 
     //raidersCategoryfragment界面下方圆形图片的点击url
     public static final String ITEM_RAIDERS_BEFORE = "http://api.liwushuo.com/v2/channels/";

@@ -16,6 +16,7 @@ import com.example.dllo.liwushuo.category.bean.GiftSelectWebBean;
 import com.example.dllo.liwushuo.net.NetListener;
 import com.example.dllo.liwushuo.net.URLValues;
 import com.example.dllo.liwushuo.tool.NetTool;
+import com.example.dllo.liwushuo.tool.PopTool;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -47,6 +48,8 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
         selectDetailWebview = (WebView) findViewById(R.id.select_detail_webview);
         selectDetailShareImg = (ImageView) findViewById(R.id.select_detail_share_img);
 
+        selectDetailShareImg.setOnClickListener(this);
+
         //调下面的方法,连接淘宝网
         getWebviewUrl();
 
@@ -61,6 +64,10 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.select_detail_back_img:
                 finish();
+                break;
+            case R.id.select_detail_share_img:
+                PopTool popTool = new PopTool(this, R.id.select_detail_share_img );
+                popTool.showSharePopupWindow();
                 break;
         }
     }

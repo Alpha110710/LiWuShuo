@@ -24,6 +24,7 @@ import com.example.dllo.liwushuo.home.bean.HomeDetailBean;
 import com.example.dllo.liwushuo.net.NetListener;
 import com.example.dllo.liwushuo.net.URLValues;
 import com.example.dllo.liwushuo.tool.NetTool;
+import com.example.dllo.liwushuo.tool.PopTool;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -111,79 +112,21 @@ public class HomeDetailActivity extends BaseActivity implements View.OnClickList
             case R.id.home_detail_like:
                 break;
             case R.id.home_detail_share:
-                //实例化popupwindow
-                initHomeSharePopup();
-                homeSharePopup.showAtLocation(homeDetailShare, Gravity.BOTTOM, 0, 0);
+                //popupwindow的调用
+                PopTool popTool = new PopTool(this, R.id.home_detail_share);
+                popTool.showSharePopupWindow();
                 break;
             case R.id.home_detail_comment:
+                Intent intent = new Intent();
+                intent.setClass(this, ConmentActivity.class);
+                intent.putExtra("contentDownId", String.valueOf(homeDetailBean.getData().getId()));
+                startActivity(intent);
                 break;
-            case R.id.item_home_share_popup_hyperlink_tv:
-                Toast.makeText(this, "hy", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.item_home_share_popup_sina_tv:
 
-                Toast.makeText(this, "item_home_share_popup_sina_tv", Toast.LENGTH_SHORT).show();
-
-                break;
-            case R.id.item_home_share_popup_tencent_qq_tv:
-                Toast.makeText(this, "item_home_share_popup_tencent_qq_tv", Toast.LENGTH_SHORT).show();
-
-                break;
-            case R.id.item_home_share_popup_tencent_tv:
-                Toast.makeText(this, "item_home_share_popup_tencent_tv", Toast.LENGTH_SHORT).show();
-
-                break;
-            case R.id.item_home_share_popup_wechat_timeline_tv:
-                Toast.makeText(this, "item_home_share_popup_wechat_timeline_tv", Toast.LENGTH_SHORT).show();
-
-                break;
-            case R.id.item_home_share_popup_wechat_tv:
-                Toast.makeText(this, "item_home_share_popup_wechat_tv", Toast.LENGTH_SHORT).show();
-
-                break;
-            case R.id.item_home_share_popup_cancel_tv:
-                homeSharePopup.dismiss();
-                break;
 
 
         }
     }
 
-    private void initHomeSharePopup() {
-        View view = LayoutInflater.from(this).inflate(R.layout.item_home_detail_share_popup, null);
-        homeSharePopup = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-        itemHomeSharePopupHyperlinkTv = (TextView) view.findViewById(R.id.item_home_share_popup_hyperlink_tv);
-        itemHomeSharePopupSinaTv = (TextView) view.findViewById(R.id.item_home_share_popup_sina_tv);
-        itemHomeSharePopupTencentQqTv = (TextView) view.findViewById(R.id.item_home_share_popup_tencent_qq_tv);
-        itemHomeSharePopupTencentTv = (TextView) view.findViewById(R.id.item_home_share_popup_tencent_tv);
-        itemHomeSharePopupWechatTimelineTv = (TextView) view.findViewById(item_home_share_popup_wechat_timeline_tv);
-        itemHomeSharePopupWechatTv = (TextView) view.findViewById(R.id.item_home_share_popup_wechat_tv);
-        itemomeSharePopupCancelTv = (TextView) view.findViewById(R.id.item_home_share_popup_cancel_tv);
 
-        itemHomeSharePopupWechatTimelineTv.setOnClickListener(this);
-        itemHomeSharePopupHyperlinkTv.setOnClickListener(this);
-        itemHomeSharePopupSinaTv.setOnClickListener(this);
-        itemHomeSharePopupTencentQqTv.setOnClickListener(this);
-        itemHomeSharePopupTencentTv.setOnClickListener(this);
-        itemHomeSharePopupWechatTv.setOnClickListener(this);
-        itemomeSharePopupCancelTv.setOnClickListener(this);
-
-        ColorDrawable colorDrawable = new ColorDrawable(0x00FFFFFF);
-        homeSharePopup.setBackgroundDrawable(colorDrawable);
-        homeSharePopup.setOutsideTouchable(true);
-        homeSharePopup.setAnimationStyle(R.style.anim_home_share_popup);
-
-        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-        layoutParams.alpha = 0.7f;
-        getWindow().setAttributes(layoutParams);
-
-        homeSharePopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                WindowManager.LayoutParams params = getWindow().getAttributes();
-                params.alpha = 1f;
-                getWindow().setAttributes(params);
-            }
-        });
-    }
 }

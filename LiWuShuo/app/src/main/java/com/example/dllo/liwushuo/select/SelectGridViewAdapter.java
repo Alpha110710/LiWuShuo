@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
+import com.example.dllo.liwushuo.tool.RoundRectTool;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;

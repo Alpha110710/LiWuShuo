@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -29,8 +30,44 @@
             android:textSize="20sp" />
 
     </RelativeLayout>
+
     <ListView
         android:id="@+id/home_conment_down_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:divider="@null" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colcorRadioButtonDeepgrey" />
+
+    <LinearLayout
+        android:id="@+id/home_conment_write_conment_rlayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_white_deepgrey"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:text="我也说几句" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical"
+            android:text="发送"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 </LinearLayout>
