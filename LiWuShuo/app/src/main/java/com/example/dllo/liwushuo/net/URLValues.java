@@ -32,6 +32,7 @@ public final class URLValues {
 
     //raidersCategoryfragment界面的上方平滑图片url
     public static final String RAIDERS_TOPIC = "http://api.liwushuo.com/v2/collections?limit=10&offset=0";
+    public static final String RAIDERS_TOPIC_ALL = "http://api.liwushuo.com/v2/collections?limit=20&offset=0";
 
     //raidersCategoryfragment界面的下方的圆形图片所有内容url
     public static final String RAIDERS_DOWN = "http://api.liwushuo.com/v2/channel_groups/all";
@@ -58,6 +59,12 @@ public final class URLValues {
 
     //选礼神奇小四方块点击进入webview的url   需要拼接id  id为SELECT_GIFT圆角正方形图片解析出来的
     public static final String SELECT_GIFT_WEB = "http://api.liwushuo.com/v2/items/";
+
+
+    //点击放大镜的url
+    public static final String SEARCH = "http://api.liwushuo.com/v2/search/hot_words";
+
+
 
 
 

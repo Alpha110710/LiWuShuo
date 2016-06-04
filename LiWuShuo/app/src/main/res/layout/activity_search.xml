@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorRadioButtonDeepPink">
+
+        <ImageView
+            android:id="@+id/main_search_bar_back_img"
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:src="@mipmap/ic_action_back" />
+
+
+        <TextView
+            android:id="@+id/main_search_bar_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="14dp"
+            android:text="搜索"
+            android:textColor="@color/colorWhite"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/main_search_bar_et"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/main_search_bar_tv"
+            android:layout_toRightOf="@id/main_search_bar_back_img"
+            android:background="@drawable/item_white_round"
+            android:drawableLeft="@mipmap/abc_ic_search_api_holo_light"
+            android:drawablePadding="5dp"
+            android:hint="搜索礼物、攻略"
+            android:paddingLeft="8dp"
+            android:paddingTop="2dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="18dp"
+        android:text="大家都在搜"
+        android:textSize="15sp" />
+
+
+        <GridView
+            android:id="@+id/main_search_gridview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorWhite"
+            android:horizontalSpacing="8dp"
+            android:numColumns="4"
+            android:paddingBottom="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" />
+
+    <TextView
+        android:id="@+id/main_search_fast_tv"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/colorWhite"
+        android:drawableLeft="@mipmap/gift_category_guide"
+        android:drawablePadding="7dp"
+        android:drawableRight="@mipmap/ic_chevron_dark"
+        android:padding="13dp"
+        android:paddingEnd="20dp"
+        android:text="使用选礼神器快速挑选礼物"
+        android:textColor="@color/colorBlack"
+        android:textSize="13sp" />
+</LinearLayout>

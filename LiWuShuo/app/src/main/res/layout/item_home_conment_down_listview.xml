@@ -65,6 +65,7 @@
             android:text="hi地方好地方都是封ID噢覅爽肤水封ID搜谱封IP手动封ID搜谱付给id人搜图二恶王瑞否迪欧腹地" />
 
         <TextView
+            android:id="@+id/item_conment_down_listview_line_tv"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignLeft="@id/item_conment_down_listview_content_tv"

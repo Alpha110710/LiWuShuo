@@ -78,7 +78,7 @@ public class SelectGridViewAdapter extends BaseAdapter {
         viewHolder.itemSelectGridviewPriceTv.setText(selectBean.getData().getItems().get(position).getData().getPrice());
         viewHolder.itemSelectGridviewSupportTv.setText(String.valueOf(selectBean.getData().getItems().get(position).getData().getFavorites_count()));
         viewHolder.itemSelectGridviewNameTv.setText(selectBean.getData().getItems().get(position).getData().getName());
-        Picasso.with(context).load(selectBean.getData().getItems().get(position).getData().getCover_image_url()).placeholder(R.mipmap.ic_about)
+        Picasso.with(context).load(selectBean.getData().getItems().get(position).getData().getCover_image_url()).placeholder(R.mipmap.ig_logo_text)
         .centerCrop().fit().into(viewHolder.itemSelectGridviewImg);
 
 

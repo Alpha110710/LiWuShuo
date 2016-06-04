@@ -83,7 +83,7 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
 
         myholder.itemHomeFeatureListviewLikeCb.setText(String.valueOf(listviewBean.getData().getItems().get(position).getLikes_count()));
         myholder.itemHomeFeatureListviewLikeCb.setChecked(listviewBean.getData().getItems().get(position).isLiked());
-        Picasso.with(App.context).load(listviewBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ic_about).
+        Picasso.with(App.context).load(listviewBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ig_logo_text).
                 transform(new RoundRectTool(20)).fit()
                 .into(myholder.itemHomeFeatureListviewImg);
 

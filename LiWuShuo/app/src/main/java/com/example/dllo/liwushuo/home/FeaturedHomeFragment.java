@@ -2,6 +2,7 @@ package com.example.dllo.liwushuo.home;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -17,10 +18,12 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.base.BaseFragment;
+import com.example.dllo.liwushuo.category.RaidersDetailsUpActivity;
 import com.example.dllo.liwushuo.home.adapter.CarouselHomeViewpagerAdapter;
 import com.example.dllo.liwushuo.home.adapter.ListviewFeatureHomeAdapter;
 import com.example.dllo.liwushuo.home.adapter.RecyclerviewFeatureHomeAdapter;
 import com.example.dllo.liwushuo.home.bean.ListviewBean;
+import com.example.dllo.liwushuo.home.bean.RecyclerviewBean;
 import com.example.dllo.liwushuo.net.NetListener;
 import com.example.dllo.liwushuo.net.URLValues;
 import com.example.dllo.liwushuo.tool.App;
@@ -43,6 +46,7 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
     private ListView homeFeaturedListView;
     private ListviewFeatureHomeAdapter listviewFeatureHomeAdapter;
     private ArrayList<String> urlIds;
+    private RecyclerviewBean recyclerviewBean;
 
 
     @Override
@@ -77,6 +81,46 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
         homeFeaturedListView.addHeaderView(view);
         homeFeaturedListView.setAdapter(listviewFeatureHomeAdapter);
 
+
+        //recycler点击事件的处理
+        initRecyclerOnclick();
+
+
+    }
+
+
+    //recycler点击事件的处理
+    private void initRecyclerOnclick() {
+        recyclerviewFeatureHomeAdapter.setHomeRecyclerVIewOnClickListener(new HomeRecyclerVIewOnClickListener() {
+            @Override
+            public void onClick(int position) {
+
+                switch (position) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        //intent跳转  复用raiders小圆角矩形点击进入的activity  实体类url全部一致
+                        Intent intent = new Intent();
+                        intent.setClass(context, RaidersDetailsUpActivity.class);
+                        recyclerviewBean = recyclerviewFeatureHomeAdapter.getRecyclerviewBean();
+
+                        if (recyclerviewBean != null) {
+                            String idBefore = recyclerviewBean.getData().getSecondary_banners().get(position).getTarget_url();
+                            String id = Uri.parse(idBefore).getQueryParameter("topic_id");
+//                            id = idBefore.replace("liwushuo:///page?type=topic&topic_id=", "");
+                            intent.putExtra("raidersDetailUrl", id);
+                            startActivity(intent);
+
+                        }
+
+                        break;
+                }
+            }
+        });
     }
 
 
@@ -140,6 +184,9 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
                 }
             }
         }).start();
+
+
+
     }
 
     //initData的recyclerview模块
@@ -150,6 +197,7 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
         homeFeaturedRecyclerview.setLayoutManager(manager);
         homeFeaturedRecyclerview.setAdapter(recyclerviewFeatureHomeAdapter);
         netTool.anlysisRecyclerview(recyclerviewFeatureHomeAdapter);
+
     }
 
 
@@ -159,7 +207,7 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
         int pos = (int) parent.getAdapter().getItemId(position);
         //给下一个页面传值
         Intent intent = new Intent(context, HomeDetailActivity.class);
-        if (urlIds != null){
+        if (urlIds != null) {
             intent.putStringArrayListExtra("urlId", urlIds);
             intent.putExtra("urlPos", pos);
         }

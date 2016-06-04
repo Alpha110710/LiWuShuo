@@ -50,7 +50,6 @@ public class RaidersCategoryRecyclerAdapter extends RecyclerView.Adapter<Raiders
     }
 
 
-
     @Override
     public MyCategoryholder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_raiders_topic_recyclerview, parent, false);
@@ -60,10 +59,12 @@ public class RaidersCategoryRecyclerAdapter extends RecyclerView.Adapter<Raiders
 
     @Override
     public void onBindViewHolder(final MyCategoryholder holder, int position) {
-        Picasso.with(context).load(raidersTopicBean.getData().getCollections().get(position).getBanner_webp_url()).placeholder(R.mipmap.ic_about)
-                .transform(new RoundRectTool(20)).fit().into(holder.itemCategoryTopicRecyclerImg);
-
-        if (recyclerviewOnClickListener != null){
+        if (!raidersTopicBean.getData().getCollections().get(position).getBanner_webp_url().trim().equals("")) {
+            Picasso.with(context).load(raidersTopicBean.getData().getCollections().get(position).getBanner_webp_url()).placeholder(R.mipmap.ig_logo_text)
+                    .transform(new RoundRectTool(20)).fit()
+                    .into(holder.itemCategoryTopicRecyclerImg);
+        }
+        if (recyclerviewOnClickListener != null) {
             holder.itemCategoryTopicRecyclerImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

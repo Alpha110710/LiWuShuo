@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/item_raiders_listview_see_all_img"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_transparent_black">
+
+        <LinearLayout
+            android:id="@+id/item_raiders_listview_see_all_tv_llyout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_raiders_listview_see_all_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="文艺家生活"
+                android:textColor="@color/colorWhite"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/item_raiders_listview_see_all_point_nine"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ig_topic_horizontal_rule" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_raiders_listview_see_all_title_detail_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_raiders_listview_see_all_tv_llyout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="将生活过成诗的文艺风家居"
+            android:textColor="@color/colorWhite"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

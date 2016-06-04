@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 
 /**
  * Created by dllo on 16/5/30.
+ * 本页activity共用四次  很重要  接受id  传入下一页webId集合   和name标题
  */
 public class RaidersDetailsUpActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
@@ -86,7 +88,7 @@ public class RaidersDetailsUpActivity extends BaseActivity implements View.OnCli
                 RaidersUpBean raidersUpBean = gson.fromJson(response, RaidersUpBean.class);
 
                 raidersDetailUpBarTv.setText(raidersUpBean.getData().getTitle());
-                Log.d("RaidersDetailsUpActivitRaidersDetailsUpActivit", "normalListviewBean.getData().getItems().get(0).getLikes_count():" + raidersUpBean.getData());
+
                 adapter.setRaidersUpBean(raidersUpBean);
                 //遍历实体类将urlId加入到集合中
                 urlIds = new ArrayList<>();

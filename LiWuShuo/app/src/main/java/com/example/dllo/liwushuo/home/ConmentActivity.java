@@ -105,6 +105,10 @@ public class ConmentActivity extends BaseActivity implements View.OnClickListene
             public void onSuccessed(String response) {
                 Gson gson = new Gson();
                 conmentBeanUp = gson.fromJson(response, ConmentBean.class);
+                //判断头部评论有无 没有的话 更多评论显示消失
+                if (conmentBeanUp.getData().getComments().size() == 0){
+                    conmentMoreLlayout.setVisibility(View.GONE);
+                }
                 conmentListviewHeadAdapter.setConmentBean(conmentBeanUp);
             }
 

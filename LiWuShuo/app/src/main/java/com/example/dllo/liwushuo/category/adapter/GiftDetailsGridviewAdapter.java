@@ -57,7 +57,7 @@ public class GiftDetailsGridviewAdapter extends BaseAdapter {
         viewHolder.itemSelectGridviewPriceTv.setText(giftDetailBean.getData().getItems().get(position).getPrice());
         viewHolder.itemSelectGridviewSupportTv.setText(String.valueOf(giftDetailBean.getData().getItems().get(position).getFavorites_count()));
         viewHolder.itemSelectGridviewNameTv.setText(giftDetailBean.getData().getItems().get(position).getName());
-        Picasso.with(context).load(giftDetailBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ic_about)
+        Picasso.with(context).load(giftDetailBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ig_logo_text)
                 .centerCrop().fit().into(viewHolder.itemSelectGridviewImg);
 
 

@@ -1,5 +1,6 @@
 package com.example.dllo.liwushuo;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -52,6 +53,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         select_radiobutton.setOnClickListener(this);
         category_radiobutton.setOnClickListener(this);
         profile_radiobutton.setOnClickListener(this);
+        searchToolbarImg.setOnClickListener(this);
 
         homeFragment = new HomeFragment();
         selectFragment = new SelectFragment();
@@ -124,6 +126,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 homeToolBar.setVisibility(View.GONE);
 
                 replaceFrameLayout(profileFragment);
+                break;
+
+            case R.id.search_toolbar_img:
+                Intent intent = new Intent();
+                intent.setClass(this, SearchActivity.class);
+                startActivity(intent);
                 break;
         }
     }

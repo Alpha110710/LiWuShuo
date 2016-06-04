@@ -66,7 +66,11 @@ public class ConmentListviewAdapter extends BaseAdapter {
         if (!conmentBean.getData().getComments().get(position).getUser().getAvatar_url().trim().equals("")) {
             Picasso.with(context).load(conmentBean.getData().getComments().get(position).getUser().getAvatar_url()).placeholder(R.mipmap.me_avatar_girl).fit().transform(new CircleTool()).into(holder.itemConmentDownListviewHeadImg);
         }
-        return convertView;
+        //判断最后一个位置  使下面横线消失
+        if (conmentBean.getData().getComments().size() == position + 1){
+            holder.itemConmentDownListviewLineTv.setVisibility(View.GONE);
+        }
+            return convertView;
     }
 
     class MyConmentListviewViewHolder {
@@ -75,7 +79,8 @@ public class ConmentListviewAdapter extends BaseAdapter {
         private final ImageView itemConmentDownListviewHeadImg;
         private final TextView itemConmentDownListviewNameTv;
         private final CheckBox itemConmentDownListviewPraiseCb;
-        private final TextView itemConmentDownListviewviewTimeTv;
+        private final TextView itemConmentDownListviewviewTimeTv, itemConmentDownListviewLineTv;
+
 
         public MyConmentListviewViewHolder(View itemView) {
             itemConmentDownListviewContentTv = (TextView) itemView.findViewById(R.id.item_conment_down_listview_content_tv);
@@ -83,6 +88,7 @@ public class ConmentListviewAdapter extends BaseAdapter {
             itemConmentDownListviewNameTv = (TextView) itemView.findViewById(R.id.item_conment_down_listview_name_tv);
             itemConmentDownListviewPraiseCb = (CheckBox) itemView.findViewById(R.id.item_conment_down_listview_praise_cb);
             itemConmentDownListviewviewTimeTv = (TextView) itemView.findViewById(R.id.item_conment_down_listview_time_tv);
+            itemConmentDownListviewLineTv = (TextView) itemView.findViewById(R.id.item_conment_down_listview_line_tv);
         }
 
     }

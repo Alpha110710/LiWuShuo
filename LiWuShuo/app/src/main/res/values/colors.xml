@@ -10,5 +10,6 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBackgroundLightgrey">#EEEEEE</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorTransparentBlack">#44000000</color>
     <color name="background">#F8F8F8</color>
 </resources>

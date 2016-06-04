@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -24,7 +25,7 @@ import com.google.gson.Gson;
 /**
  * Created by dllo on 16/5/20.
  */
-public class RaidersCategoryFragment extends BaseFragment {
+public class RaidersCategoryFragment extends BaseFragment implements View.OnClickListener {
     private RecyclerView categoryRaidersTopicRecyclerview;
     private RaidersCategoryRecyclerAdapter raidersCategoryRecyclerAdapter;
     private ListView categoryRaidersDownListview;
@@ -33,6 +34,7 @@ public class RaidersCategoryFragment extends BaseFragment {
     private RaidersDownBean raidersDownBean;
     private RaidersCategoryListviewGridviewAdapter raidersCategoryListviewGridviewAdapter;
     private RaidersTopicBean raidersTopicBean;
+    private TextView categoryRaidersLookallTv;
 
     @Override
     public int setLayout() {
@@ -49,6 +51,10 @@ public class RaidersCategoryFragment extends BaseFragment {
         //gridview
         View view = LayoutInflater.from(context).inflate(R.layout.fragment_category_raiders_header, null);
         categoryRaidersTopicRecyclerview = (RecyclerView) view.findViewById(R.id.category_raiders_topic_recyclerview);
+        categoryRaidersLookallTv = (TextView) view.findViewById(R.id.category_raiders_lookall_tv);
+        //查看全部点击事件跳转RaidersSeeAllActivity
+        categoryRaidersLookallTv.setOnClickListener(this);
+
         raidersCategoryRecyclerAdapter = new RaidersCategoryRecyclerAdapter(context);
         LinearLayoutManager manager = new LinearLayoutManager(context);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -109,5 +115,16 @@ public class RaidersCategoryFragment extends BaseFragment {
         super.onDestroy();
         raidersCategoryRecyclerAdapter.unResgisterBus();
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.category_raiders_lookall_tv:
+                Intent intent = new Intent();
+                intent.setClass(context, RaidersSeeAllActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

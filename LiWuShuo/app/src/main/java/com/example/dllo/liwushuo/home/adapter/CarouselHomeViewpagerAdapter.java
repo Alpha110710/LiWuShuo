@@ -2,6 +2,7 @@ package com.example.dllo.liwushuo.home.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.dllo.liwushuo.R;
+import com.example.dllo.liwushuo.category.RaidersDetailsUpActivity;
 import com.example.dllo.liwushuo.home.bean.CarouselBean;
 import com.example.dllo.liwushuo.tool.App;
 import com.squareup.picasso.Picasso;
@@ -48,7 +51,7 @@ public class CarouselHomeViewpagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_home_carouse, container, false);
         itemHomeCarouseImg = (ImageView) view.findViewById(R.id.item_home_carouse_img);
         itemHomeCarouseCb1 = (CheckBox) view.findViewById(R.id.item_home_carouse_cb1);
@@ -87,6 +90,21 @@ public class CarouselHomeViewpagerAdapter extends PagerAdapter {
 
         Picasso.with(App.context).load(carouselBean.getData().getBanners().get(position % carouselBean.getData().getBanners().size()).getImage_url()).fit()
                 .into(itemHomeCarouseImg);
+
+        //给轮播图的imageView加监听事件跳转 到raiders上面圆角正方形的进入activity中  复用的
+        itemHomeCarouseImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (position % carouselBean.getData().getBanners().size() != carouselBean.getData().getBanners().size() - 1) {
+                    Toast.makeText(context, "position:" + position % carouselBean.getData().getBanners().size(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, RaidersDetailsUpActivity.class);
+                    intent.putExtra("raidersDetailUrl", String.valueOf(carouselBean.getData().getBanners().get(position % carouselBean.getData().getBanners().size()).getTarget_id()));
+                    context.startActivity(intent);
+                }
+            }
+        });
+
 
         container.addView(view);
         return view;
