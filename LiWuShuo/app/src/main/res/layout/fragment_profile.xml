@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,31 +19,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@mipmap/bg_profile">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:src="@mipmap/icon_message" />
-
-
-                <ImageView
-                    android:id="@+id/profile_sweep_iv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@mipmap/me_settings" />
-
-                <ImageView
-                    android:id="@+id/profile_scan_iv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_toLeftOf="@id/profile_sweep_iv"
-                    android:src="@mipmap/icon_scan" />
 
 
                 <ImageView
@@ -77,6 +52,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
                     android:src="@mipmap/bg_feed_favourite" />
+
+
             </RelativeLayout>
 
             <LinearLayout
@@ -134,9 +111,42 @@
             <android.support.v4.view.ViewPager
                 android:id="@+id/profile_viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="500dp" />
+                android:layout_height="350dp" />
 
 
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:src="@mipmap/icon_message" />
+
+
+        <ImageView
+            android:id="@+id/profile_sweep_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:src="@mipmap/me_settings" />
+
+        <ImageView
+            android:id="@+id/profile_scan_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_toLeftOf="@id/profile_sweep_iv"
+            android:src="@mipmap/icon_scan" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

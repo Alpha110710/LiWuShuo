@@ -8,12 +8,11 @@ import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
@@ -28,25 +27,29 @@ import com.example.dllo.liwushuo.net.NetListener;
 import com.example.dllo.liwushuo.net.URLValues;
 import com.example.dllo.liwushuo.tool.App;
 import com.example.dllo.liwushuo.tool.NetTool;
+import com.example.dllo.liwushuo.view.XListView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * Created by dllo on 16/5/21.
  */
-public class FeaturedHomeFragment extends BaseFragment implements AdapterView.OnItemClickListener {
+public class FeaturedHomeFragment extends BaseFragment implements AdapterView.OnItemClickListener, XListView.IXListViewListener {
     private ViewPager carouselHomeViewpager;
     private CarouselHomeViewpagerAdapter adapter;
     private Handler handler;
     private RecyclerView homeFeaturedRecyclerview;
     private RecyclerviewFeatureHomeAdapter recyclerviewFeatureHomeAdapter;
     private NetTool netTool = new NetTool();
-    private ListView homeFeaturedListView;
+    private XListView homeFeaturedListView;
     private ListviewFeatureHomeAdapter listviewFeatureHomeAdapter;
     private ArrayList<String> urlIds;
     private RecyclerviewBean recyclerviewBean;
+    private ListviewBean listviewBean;
+    private String nextUrl;
 
 
     @Override
@@ -57,7 +60,7 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
     @Override
     public void initView(View view) {
 
-        homeFeaturedListView = (ListView) view.findViewById(R.id.home_featured_listView);
+        homeFeaturedListView = (XListView) view.findViewById(R.id.home_featured_listView);
     }
 
     @Override
@@ -85,6 +88,9 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
         //recycler点击事件的处理
         initRecyclerOnclick();
 
+        //实现下拉刷新和下拉加载需要这两个方法
+        homeFeaturedListView.setXListViewListener(this);
+        homeFeaturedListView.setPullLoadEnable(true);
 
     }
 
@@ -99,6 +105,8 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
                     case 1:
                         break;
                     case 2:
+                        Intent intent1 = new Intent(context, HomeCalendarActivity.class);
+                        startActivity(intent1);
                         break;
                     case 3:
                         break;
@@ -111,7 +119,6 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
                         if (recyclerviewBean != null) {
                             String idBefore = recyclerviewBean.getData().getSecondary_banners().get(position).getTarget_url();
                             String id = Uri.parse(idBefore).getQueryParameter("topic_id");
-//                            id = idBefore.replace("liwushuo:///page?type=topic&topic_id=", "");
                             intent.putExtra("raidersDetailUrl", id);
                             startActivity(intent);
 
@@ -131,8 +138,9 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
             @Override
             public void onSuccessed(String response) {
                 Gson gson = new Gson();
-                ListviewBean listviewBean = gson.fromJson(response, ListviewBean.class);
+                listviewBean = gson.fromJson(response, ListviewBean.class);
                 listviewFeatureHomeAdapter.setListviewBean(listviewBean);
+
 
                 //遍历实体类将urlId加入到集合中
                 urlIds = new ArrayList<String>();
@@ -186,7 +194,6 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
         }).start();
 
 
-
     }
 
     //initData的recyclerview模块
@@ -213,4 +220,64 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
         }
         startActivity(intent);
     }
+
+
+    //下拉刷新方法
+    @Override
+    public void onRefresh() {
+        netTool.getAnalysis(URLValues.HOME_CELL, new NetListener() {
+            @Override
+            public void onSuccessed(String response) {
+                Gson gson = new Gson();
+                listviewBean = gson.fromJson(response, ListviewBean.class);
+                listviewFeatureHomeAdapter.setListviewBean(listviewBean);
+
+                //遍历实体类将urlId加入到集合中
+                urlIds = new ArrayList<String>();
+                for (ListviewBean.DataBean.ItemsBean itemBean : listviewBean.getData().getItems()
+                        ) {
+                    urlIds.add(String.valueOf(itemBean.getId()));
+                }
+                onLoad();
+
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+
+            }
+        });
+    }
+
+    //上拉加载方法
+    @Override
+    public void onLoadMore() {
+        nextUrl = listviewBean.getData().getPaging().getNext_url();
+
+        netTool.getAnalysis(nextUrl, new NetListener() {
+            @Override
+            public void onSuccessed(String response) {
+                Gson gson = new Gson();
+                listviewBean = gson.fromJson(response, ListviewBean.class);
+                List<ListviewBean.DataBean.ItemsBean> itemsBeans = listviewBean.getData().getItems();
+                listviewFeatureHomeAdapter.addItemBean(itemsBeans);
+                onLoad();
+
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+
+            }
+        });
+    }
+
+    //onload方法  取消刷新和加载
+    private void onLoad() {
+        homeFeaturedListView.stopRefresh();
+        homeFeaturedListView.stopLoadMore();
+        homeFeaturedListView.setRefreshTime("刚刚");
+    }
+
+
 }

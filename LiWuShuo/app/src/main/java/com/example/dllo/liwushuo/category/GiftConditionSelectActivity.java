@@ -152,7 +152,7 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
         String urlWebId = URLValues.SELECT_GIFT_WEB + String.valueOf(giftDetailBean.getData().getItems().get(position).getId());
 
         Intent intent = new Intent(this, SelectDetailActivity.class);
-        //intent跳转传入对应id
+        //intent跳转传入对应id  只传一个selectDetailActivity用到的id就可以了
         intent.putExtra("urlWebId", urlWebId);
         startActivity(intent);
 
@@ -169,6 +169,9 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
             //点击出现排序pop
             case R.id.gift_condition_select_sort_img:
                 popTool.showSortPopupWindow();
+
+
+
 
                 break;
             case R.id.gift_condition_select_obj_rb:

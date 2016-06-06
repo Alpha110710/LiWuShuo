@@ -23,11 +23,13 @@
         <activity android:name=".category.GiftDetailsActivity"/>
         <activity android:name=".category.GiftConditionSelectActivity"/>
         <activity android:name=".home.HomeDetailActivity"/>
-        <activity android:name=".home.ConmentActivity"/>
+        <activity android:name=".home.HomeConmentActivity"/>
         <activity android:name=".home.MoreContentActivity"/>
         <activity android:name=".category.RaidersDetailsUpActivity"/>
         <activity android:name=".category.RaidersSeeAllActivity"/>
         <activity android:name=".SearchActivity"/>
+        <activity android:name=".select.SelectConmentActivity"/>
+        <activity android:name=".home.HomeCalendarActivity"/>
 
     </application>
 

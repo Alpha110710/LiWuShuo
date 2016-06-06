@@ -12,4 +12,7 @@
     <color name="colorBlack">#000000</color>
     <color name="colorTransparentBlack">#44000000</color>
     <color name="background">#F8F8F8</color>
+    <color name="orange">#ff8a70</color>
+    <color name="lightYellow">#fff7f1</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

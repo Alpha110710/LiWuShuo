@@ -2,8 +2,6 @@ package com.example.dllo.liwushuo.home;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
@@ -41,7 +38,7 @@ public class MoreContentActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void initActivity() {
-        setContentView(R.layout.activity_conment_more);
+        setContentView(R.layout.activity_home_conment_more);
         homeConmentMoreBackImg = (ImageView) findViewById(R.id.home_conment_more_back_img);
         homeConmentMoreListview = (ListView) findViewById(R.id.home_conment_more_listview);
 

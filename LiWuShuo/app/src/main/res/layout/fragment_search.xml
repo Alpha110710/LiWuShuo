@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="18dp"
+        android:text="大家都在搜"
+        android:textSize="15sp" />
+
+
+    <GridView
+        android:id="@+id/fragment_search_gridview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorWhite"
+        android:horizontalSpacing="8dp"
+        android:numColumns="4"
+        android:paddingBottom="10dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" />
+
+    <TextView
+        android:id="@+id/fragment_search_fast_tv"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/colorWhite"
+        android:drawableLeft="@mipmap/gift_category_guide"
+        android:drawablePadding="7dp"
+        android:drawableRight="@mipmap/ic_chevron_dark"
+        android:padding="13dp"
+        android:paddingEnd="20dp"
+        android:text="使用选礼神器快速挑选礼物"
+        android:textColor="@color/colorBlack"
+        android:textSize="13sp" />
+</LinearLayout>

@@ -19,6 +19,7 @@ import com.example.dllo.liwushuo.net.NetListener;
 import com.example.dllo.liwushuo.net.URLValues;
 import com.example.dllo.liwushuo.tool.App;
 import com.example.dllo.liwushuo.tool.NetTool;
+import com.example.dllo.liwushuo.tool.PopTool;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class RaidersDetailsActivity extends BaseActivity implements View.OnClick
     private NetTool netTool = new NetTool();
     private ListviewNormalHomeAdapter adapter;
     private ArrayList<String> urlIds;
+    private PopTool popTool;
+    private String url, id;
 
 
     @Override
@@ -49,10 +52,45 @@ public class RaidersDetailsActivity extends BaseActivity implements View.OnClick
         raidersDetailListview.setAdapter(adapter);
 
         raidersDetailBackImg.setOnClickListener(this);
+        raidersDetailSortImg.setOnClickListener(this);
         raidersDetailListview.setOnItemClickListener(this);
+        popTool = new PopTool(this, R.id.raiders_detail_sort_img, 3);
 
-        //设置解析数据listview上,和bar的标题
-        getRaidersDetailAnlysis();
+        //解析bar的标题
+        Intent intent = getIntent();
+        id = intent.getStringExtra("raidersDetailUrl");
+        url = URLValues.ITEM_RAIDERS_BEFORE + id + URLValues.ITEM_RAIDERS_AFTER;
+        String name = intent.getStringExtra("raidersDetailName");
+        raidersDetailBarTv.setText(name);
+
+        //设置解析数据listview上
+        getRaidersDetailSortAnlysis(url);
+        popTool.setSortOnClickListener(new PopTool.SortOnClickListener() {
+            @Override
+            public void getHotUrl() {
+
+                String hotUrl = "http://api.liwushuo.com/v2/channels/" + id + "/items?limit=20&gender=2&offset=0&generation=2&order_by=likes_count";
+                Log.d("RaidersDetailsActivity", hotUrl);
+                getRaidersDetailSortAnlysis(hotUrl);
+            }
+
+            @Override
+            public void getDefaultUrl() {
+                getRaidersDetailSortAnlysis(url);
+            }
+
+            //用不上的方法
+            @Override
+            public void getPriceHighToLow() {
+
+            }
+
+            //用不上的方法
+            @Override
+            public void getPriceLowToHigh() {
+
+            }
+        });
 
 
     }
@@ -65,15 +103,13 @@ public class RaidersDetailsActivity extends BaseActivity implements View.OnClick
                 finish();
                 break;
             case R.id.raiders_detail_sort_img:
+                popTool.showShortSortPopupWindow();
                 break;
         }
     }
 
     //设置解析数据listview上,和bar的标题
-    private void getRaidersDetailAnlysis() {
-        Intent intent = getIntent();
-        String id = intent.getStringExtra("raidersDetailUrl");
-        String url = URLValues.ITEM_RAIDERS_BEFORE + id + URLValues.ITEM_RAIDERS_AFTER;
+    private void getRaidersDetailSortAnlysis(String url) {
 
         netTool.getAnalysis(url, new NetListener() {
             @Override
@@ -97,8 +133,7 @@ public class RaidersDetailsActivity extends BaseActivity implements View.OnClick
             }
         });
 
-        String name = intent.getStringExtra("raidersDetailName");
-        raidersDetailBarTv.setText(name);
+
     }
 
     @Override

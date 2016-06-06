@@ -36,6 +36,7 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
     private SelectBean selectBean;
     private NetTool netTool = new NetTool();
     private GiftSelectWebBean giftSelectWebBean;
+    private String idConment;
 
 
     @Override
@@ -49,6 +50,7 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
         selectDetailShareImg = (ImageView) findViewById(R.id.select_detail_share_img);
 
         selectDetailShareImg.setOnClickListener(this);
+        selectDetailCommentsImg.setOnClickListener(this);
 
         //调下面的方法,连接淘宝网
         getWebviewUrl();
@@ -66,8 +68,13 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.select_detail_share_img:
-                PopTool popTool = new PopTool(this, R.id.select_detail_share_img );
+                PopTool popTool = new PopTool(this, R.id.select_detail_share_img);
                 popTool.showSharePopupWindow();
+                break;
+            case R.id.select_detail_comments_img:
+                Intent intent = new Intent(this, SelectConmentActivity.class);
+                intent.putExtra("conmentId", idConment);
+                startActivity(intent);
                 break;
         }
     }
@@ -91,9 +98,9 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
                         @Override
                         public boolean shouldOverrideUrlLoading(WebView view, String url) {
                             view.loadUrl(url);
-                            if (intent.getStringExtra("name") != null) {
-                                selectDetailBarTv.setText(giftSelectWebBean.getData().getName());
-                            }
+
+                            selectDetailBarTv.setText(giftSelectWebBean.getData().getName());
+                            idConment = String.valueOf(giftSelectWebBean.getData().getId());
                             return true;
                         }
                     });
@@ -117,6 +124,8 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
                     if (intent.getStringExtra("name") != null) {
                         selectDetailBarTv.setText(intent.getStringExtra("name"));
                     }
+                    //收到拼接评论的 id
+                    idConment = intent.getStringExtra("id");
                     return true;
                 }
             });

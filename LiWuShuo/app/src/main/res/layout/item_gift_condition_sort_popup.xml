@@ -55,6 +55,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/sort_hot_line_tv"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/colorWhite" />
@@ -82,6 +83,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/sort_price_low_to_high_line_tv"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/colorWhite" />

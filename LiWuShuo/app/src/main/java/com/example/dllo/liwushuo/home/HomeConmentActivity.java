@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 /**
  * Created by dllo on 16/6/2.
  */
-public class ConmentActivity extends BaseActivity implements View.OnClickListener {
+public class HomeConmentActivity extends BaseActivity implements View.OnClickListener {
 
     private ListView homeConmentDownListview;
     private ImageView homeConmentBackImg;
@@ -47,7 +47,7 @@ public class ConmentActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void initActivity() {
         //绑布局组件
-        setContentView(R.layout.activity_conment);
+        setContentView(R.layout.activity_home_conment);
         homeConmentDownListview = (ListView) findViewById(R.id.home_conment_down_listview);
         homeConmentBackImg = (ImageView) findViewById(R.id.home_conment_back_img);
         homeConmentWriteConmentRlayout = (LinearLayout) findViewById(R.id.home_conment_write_conment_rlayout);

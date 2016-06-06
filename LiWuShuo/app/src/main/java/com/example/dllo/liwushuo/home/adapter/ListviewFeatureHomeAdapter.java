@@ -20,7 +20,9 @@ import com.example.dllo.liwushuo.tool.RoundRectTool;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -28,10 +30,19 @@ import java.util.Date;
  */
 public class ListviewFeatureHomeAdapter extends BaseAdapter {
     private ListviewBean listviewBean;
+    private List<ListviewBean.DataBean.ItemsBean> itemsBeans;
 
 
     public void setListviewBean(ListviewBean listviewBean) {
         this.listviewBean = listviewBean;
+        notifyDataSetChanged();
+    }
+
+    //为了下拉舒心增加的方法
+    public void addItemBean(List<ListviewBean.DataBean.ItemsBean> itemsBeans) {
+
+        this.itemsBeans = itemsBeans;
+        listviewBean.getData().getItems().addAll(itemsBeans);
         notifyDataSetChanged();
     }
 
@@ -116,8 +127,6 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
 
         return convertView;
     }
-
-
 
 
     class Myholder {

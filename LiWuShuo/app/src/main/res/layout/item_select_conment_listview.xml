@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:descendantFocusability="blocksDescendants">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_select_conment_listview_head_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/me_avatar_girl" />
+
+        <RelativeLayout
+            android:id="@+id/item_select_conment_listview_rlyout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/item_select_conment_listview_head_img">
+
+            <TextView
+                android:id="@+id/item_select_conment_listview_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:text="我的世界"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:id="@+id/item_select_conment_listview_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="12dp"
+                android:text="14小时前, 06:24"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/item_select_conment_listview_content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/item_select_conment_listview_rlyout"
+            android:layout_alignRight="@id/item_conment_down_listview_praise_cb"
+            android:layout_below="@id/item_select_conment_listview_head_img"
+            android:lineSpacingMultiplier="1.3"
+            android:text="hi地方好地方都是封ID噢覅爽肤水封ID搜谱封IP手动封ID搜谱付给id人搜图二恶王瑞否迪欧腹地" />
+
+        <TextView
+            android:id="@+id/item_select_conment_listview_line_tv"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignLeft="@id/item_select_conment_listview_content_tv"
+            android:layout_below="@id/item_select_conment_listview_content_tv"
+            android:layout_marginTop="8dp"
+            android:background="@color/colcorRadioButtonLightgrey" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

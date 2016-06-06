@@ -1,21 +1,13 @@
 package com.example.dllo.liwushuo.home;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
@@ -28,8 +20,6 @@ import com.example.dllo.liwushuo.tool.PopTool;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-
-import static com.example.dllo.liwushuo.R.id.item_home_share_popup_wechat_timeline_tv;
 
 /**
  * Created by dllo on 16/6/2.
@@ -118,7 +108,7 @@ public class HomeDetailActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.home_detail_comment:
                 Intent intent = new Intent();
-                intent.setClass(this, ConmentActivity.class);
+                intent.setClass(this, HomeConmentActivity.class);
                 intent.putExtra("contentDownId", String.valueOf(homeDetailBean.getData().getId()));
                 startActivity(intent);
                 break;

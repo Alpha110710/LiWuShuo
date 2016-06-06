@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.dllo.liwushuo.base.BaseActivity;
 import com.example.dllo.liwushuo.category.CategoryFragment;
+import com.example.dllo.liwushuo.home.HomeCalendarActivity;
 import com.example.dllo.liwushuo.home.HomeFragment;
 import com.example.dllo.liwushuo.profile.ProfileFragment;
 import com.example.dllo.liwushuo.select.SelectFragment;
@@ -54,6 +55,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         category_radiobutton.setOnClickListener(this);
         profile_radiobutton.setOnClickListener(this);
         searchToolbarImg.setOnClickListener(this);
+        menologyToolbarImg.setOnClickListener(this);
 
         homeFragment = new HomeFragment();
         selectFragment = new SelectFragment();
@@ -132,6 +134,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 Intent intent = new Intent();
                 intent.setClass(this, SearchActivity.class);
                 startActivity(intent);
+                break;
+
+            case R.id.menology_toolbar_img:
+                Intent intent1 = new Intent(this, HomeCalendarActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

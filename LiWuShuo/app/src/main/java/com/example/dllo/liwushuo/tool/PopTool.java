@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ public class PopTool implements View.OnClickListener {
         this.id = id;
         this.style = style;
 
-        popupWindow  = new PopupWindow(440, WindowManager.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(440, WindowManager.LayoutParams.WRAP_CONTENT);
 
 
     }
@@ -66,7 +67,7 @@ public class PopTool implements View.OnClickListener {
         this.sortOnClickListener = sortOnClickListener;
     }
 
-    public void showSortPopupWindow(){
+    public void showSortPopupWindow() {
         popupWindow.setFocusable(true);
         ColorDrawable colorDrawable = new ColorDrawable(0X00FFFFFF);
         popupWindow.setBackgroundDrawable(colorDrawable);
@@ -84,15 +85,68 @@ public class PopTool implements View.OnClickListener {
         sortPriceLowToHighImg = (ImageView) view.findViewById(R.id.sort_price_low_to_high_img);
 
         popupWindow.showAsDropDown(activity.findViewById(id));
-
+        //设置四个小对号  可见不可见
+        if (pos == 0) {
+            sortDefaultImg.setVisibility(View.VISIBLE);
+        } else {
+            sortDefaultImg.setVisibility(View.GONE);
+        }
+        if (pos == 1) {
+            sortHotImg.setVisibility(View.VISIBLE);
+        } else {
+            sortHotImg.setVisibility(View.GONE);
+        }
+        if (pos == 2) {
+            sortPriceHighToLowImg.setVisibility(View.VISIBLE);
+        } else {
+            sortPriceHighToLowImg.setVisibility(View.GONE);
+        }
+        if (pos == 3) {
+            sortPriceLowToHighImg.setVisibility(View.VISIBLE);
+        } else {
+            sortPriceLowToHighImg.setVisibility(View.GONE);
+        }
 
     }
 
 
+    public void showShortSortPopupWindow() {
+        popupWindow.setFocusable(true);
+        ColorDrawable colorDrawable = new ColorDrawable(0X00FFFFFF);
+        popupWindow.setBackgroundDrawable(colorDrawable);
+        View view = LayoutInflater.from(activity).inflate(R.layout.item_gift_condition_sort_popup, null);
+        popupWindow.setContentView(view);
+
+        view.findViewById(R.id.sort_default_rlayout).setOnClickListener(this);
+        view.findViewById(R.id.sort_hot_rlayout).setOnClickListener(this);
+        RelativeLayout sort_price_high_to_low_rlayout = (RelativeLayout) view.findViewById(R.id.sort_price_high_to_low_rlayout);
+        RelativeLayout sort_price_low_to_high_rlayout = (RelativeLayout) view.findViewById(R.id.sort_price_low_to_high_rlayout);
+        TextView sort_hot_line_tv = (TextView) view.findViewById(R.id.sort_hot_line_tv);
+        TextView sort_price_low_to_high_line_tv = (TextView) view.findViewById(R.id.sort_price_low_to_high_line_tv);
+        sort_price_high_to_low_rlayout.setVisibility(View.GONE);
+        sort_price_low_to_high_rlayout.setVisibility(View.GONE);
+        sort_hot_line_tv.setVisibility(View.GONE);
+        sort_price_low_to_high_line_tv.setVisibility(View.GONE);
+
+        sortDefaultImg = (ImageView) view.findViewById(R.id.sort_default_img);
+        sortHotImg = (ImageView) view.findViewById(R.id.sort_hot_img);
 
 
+        popupWindow.showAsDropDown(activity.findViewById(id));
+        //设置四个小对号  可见不可见
+        if (pos == 0) {
+            sortDefaultImg.setVisibility(View.VISIBLE);
+        } else {
+            sortDefaultImg.setVisibility(View.GONE);
+        }
+        if (pos == 1) {
+            sortHotImg.setVisibility(View.VISIBLE);
+        } else {
+            sortHotImg.setVisibility(View.GONE);
+        }
 
 
+    }
 
 
     public void showSharePopupWindow() {
@@ -122,19 +176,10 @@ public class PopTool implements View.OnClickListener {
         final WindowManager.LayoutParams params = activity.getWindow().getAttributes();
         params.alpha = 0.7f;
         activity.getWindow().setAttributes(params);
-//        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-//             @Override
-//                public void onDismiss() {
-//                    WindowManager.LayoutParams params1 = activity.getWindow().getAttributes();
-//                    params1.alpha = 1;
-//                    activity.getWindow().setAttributes(params1);
-//                }
-//            });
+
+
     }
 
-    public void dismissPopupWindow() {
-        popupWindow.dismiss();
-    }
 
     //popupWindow点击事件
     @Override
@@ -171,74 +216,36 @@ public class PopTool implements View.OnClickListener {
             //sort的组件
             case R.id.sort_default_rlayout:
                 sortOnClickListener.getDefaultUrl();
-//                sortDefaultImg.setVisibility(View.VISIBLE);
-//                sortPriceHighToLowImg.setVisibility(View.GONE);
-//                sortPriceLowToHighImg.setVisibility(View.GONE);
-//                sortHotImg.setVisibility(View.GONE);
-
-                if (pos == 0){
-                    sortDefaultImg.setVisibility(View.VISIBLE);
-                }else {
-                    sortDefaultImg.setVisibility(View.GONE);
-                }
                 popupWindow.dismiss();
                 pos = 0;
                 break;
             case R.id.sort_hot_rlayout:
                 sortOnClickListener.getHotUrl();
-//                sortDefaultImg.setVisibility(View.GONE);
-//                sortPriceHighToLowImg.setVisibility(View.GONE);
-//                sortPriceLowToHighImg.setVisibility(View.GONE);
-//                sortHotImg.setVisibility(View.VISIBLE);
-
-                if (pos == 1){
-                    sortHotImg.setVisibility(View.VISIBLE);
-                }else {
-                    sortHotImg.setVisibility(View.GONE);
-                }
                 popupWindow.dismiss();
                 pos = 1;
-
 
                 break;
             case R.id.sort_price_high_to_low_rlayout:
                 sortOnClickListener.getPriceHighToLow();
-//                sortDefaultImg.setVisibility(View.GONE);
-//                sortPriceHighToLowImg.setVisibility(View.VISIBLE);
-//                sortPriceLowToHighImg.setVisibility(View.GONE);
-//                sortHotImg.setVisibility(View.GONE);
-//                popupWindow.dismiss();
-                if (pos == 2){
-                    sortPriceHighToLowImg.setVisibility(View.VISIBLE);
-                }else {
-                    sortPriceHighToLowImg.setVisibility(View.GONE);
-                }
                 popupWindow.dismiss();
                 pos = 2;
-                Log.d("PopTool", "pos:" + pos);
 
                 break;
             case R.id.sort_price_low_to_high_rlayout:
                 sortOnClickListener.getPriceLowToHigh();
-//                sortDefaultImg.setVisibility(View.GONE);
-//                sortPriceHighToLowImg.setVisibility(View.GONE);
-//                sortPriceLowToHighImg.setVisibility(View.VISIBLE);
-//                sortHotImg.setVisibility(View.GONE);
-//                popupWindow.dismiss();
-                if (pos == 3){
-                    sortPriceLowToHighImg.setVisibility(View.VISIBLE);
-                }else {
-                    sortPriceLowToHighImg.setVisibility(View.GONE);
-                }
                 popupWindow.dismiss();
                 pos = 3;
                 break;
         }
     }
-    public interface SortOnClickListener{
+
+    public interface SortOnClickListener {
         void getHotUrl();
+
         void getDefaultUrl();
+
         void getPriceHighToLow();
+
         void getPriceLowToHigh();
 
     }
