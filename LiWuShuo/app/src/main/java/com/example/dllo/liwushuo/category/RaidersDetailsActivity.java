@@ -20,24 +20,27 @@ import com.example.dllo.liwushuo.net.URLValues;
 import com.example.dllo.liwushuo.tool.App;
 import com.example.dllo.liwushuo.tool.NetTool;
 import com.example.dllo.liwushuo.tool.PopTool;
+import com.example.dllo.liwushuo.view.XListView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by dllo on 16/5/30.
  */
-public class RaidersDetailsActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class RaidersDetailsActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, XListView.IXListViewListener {
 
     private ImageView raidersDetailBackImg;
     private TextView raidersDetailBarTv;
     private ImageView raidersDetailSortImg;
-    private ListView raidersDetailListview;
+    private XListView raidersDetailListview;
     private NetTool netTool = new NetTool();
     private ListviewNormalHomeAdapter adapter;
     private ArrayList<String> urlIds;
     private PopTool popTool;
-    private String url, id;
+    private String url, id, nextUrl;
+    private NormalListviewBean normalListviewBean;
 
 
     @Override
@@ -46,7 +49,7 @@ public class RaidersDetailsActivity extends BaseActivity implements View.OnClick
         raidersDetailBackImg = (ImageView) findViewById(R.id.raiders_detail_back_img);
         raidersDetailBarTv = (TextView) findViewById(R.id.raiders_detail_bar_tv);
         raidersDetailSortImg = (ImageView) findViewById(R.id.raiders_detail_sort_img);
-        raidersDetailListview = (ListView) findViewById(R.id.raiders_detail_listview);
+        raidersDetailListview = (XListView) findViewById(R.id.raiders_detail_listview);
         adapter = new ListviewNormalHomeAdapter(this);
 
         raidersDetailListview.setAdapter(adapter);
@@ -92,7 +95,10 @@ public class RaidersDetailsActivity extends BaseActivity implements View.OnClick
             }
         });
 
-
+        //刷新
+        raidersDetailListview.setXListViewListener(this);
+        raidersDetailListview.setPullRefreshEnable(true);
+        raidersDetailListview.setPullLoadEnable(true);
     }
 
 
@@ -116,7 +122,7 @@ public class RaidersDetailsActivity extends BaseActivity implements View.OnClick
             public void onSuccessed(String response) {
 
                 Gson gson = new Gson();
-                NormalListviewBean normalListviewBean = gson.fromJson(response, NormalListviewBean.class);
+                normalListviewBean = gson.fromJson(response, NormalListviewBean.class);
                 adapter.setNormalListviewBean(normalListviewBean);
                 //遍历实体类将urlId加入到集合中
                 urlIds = new ArrayList<String>();
@@ -145,5 +151,54 @@ public class RaidersDetailsActivity extends BaseActivity implements View.OnClick
             intent.putExtra("urlPos", position);
         }
         startActivity(intent);
+    }
+
+    //刷新
+    @Override
+    public void onRefresh() {
+        netTool.getAnalysis(url, new NetListener() {
+            @Override
+            public void onSuccessed(String response) {
+
+                Gson gson = new Gson();
+                normalListviewBean = gson.fromJson(response, NormalListviewBean.class);
+                adapter.setNormalListviewBean(normalListviewBean);
+                //遍历实体类将urlId加入到集合中
+                urlIds = new ArrayList<String>();
+                for (NormalListviewBean.DataBean.ItemsBean itemBean : normalListviewBean.getData().getItems()
+                        ) {
+                    urlIds.add(String.valueOf(itemBean.getId()));
+                }
+
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onLoadMore() {
+        nextUrl = normalListviewBean.getData().getPaging().getNext_url();
+
+        netTool.getAnalysis(nextUrl, new NetListener() {
+            @Override
+            public void onSuccessed(String response) {
+                Gson gson = new Gson();
+                normalListviewBean = gson.fromJson(response, NormalListviewBean.class);
+                List<NormalListviewBean.DataBean.ItemsBean> itemsBeans = normalListviewBean.getData().getItems();
+                adapter.addItemBean(itemsBeans);
+
+                raidersDetailListview.stopLoadMore();
+
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+
+            }
+        });
     }
 }

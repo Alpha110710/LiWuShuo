@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.example.dllo.liwushuo.view.XListView
-        android:id="@+id/normal_home_listview"
+    <RelativeLayout
+        android:id="@+id/xGridView_footer_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@null" />
-
+        android:layout_height="30dp"></RelativeLayout>
 </LinearLayout>

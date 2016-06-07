@@ -17,6 +17,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by dllo on 16/5/20.
@@ -32,6 +33,10 @@ public class SelectGridViewAdapter extends BaseAdapter {
 
     public void setSelectBean(SelectBean selectBean) {
         this.selectBean = selectBean;
+        notifyDataSetChanged();
+    }
+    public void addItems(List<SelectBean.DataBean.ItemsBean> itemsBeen){
+        selectBean.getData().getItems().addAll(itemsBeen);
         notifyDataSetChanged();
     }
 

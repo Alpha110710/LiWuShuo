@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <GridView
+    <com.example.dllo.liwushuo.view.XGridView
         android:id="@+id/select_gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

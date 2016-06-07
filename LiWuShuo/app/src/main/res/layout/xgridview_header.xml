@@ -6,12 +6,12 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/xListView_header_content"
+        android:id="@+id/xGridView_header_content"
         android:layout_width="match_parent"
         android:layout_height="90dp">
 
         <ImageView
-            android:id="@+id/xListView_header_heart"
+            android:id="@+id/xGridView_header_heart"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
@@ -23,7 +23,7 @@
            />
 
         <ImageView
-            android:id="@+id/xListView_header_arrow"
+            android:id="@+id/xGridView_header_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

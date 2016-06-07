@@ -7,10 +7,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -19,6 +17,7 @@ import com.example.dllo.liwushuo.category.CategoryFragment;
 import com.example.dllo.liwushuo.home.HomeCalendarActivity;
 import com.example.dllo.liwushuo.home.HomeFragment;
 import com.example.dllo.liwushuo.profile.ProfileFragment;
+import com.example.dllo.liwushuo.search.SearchActivity;
 import com.example.dllo.liwushuo.select.SelectFragment;
 
 

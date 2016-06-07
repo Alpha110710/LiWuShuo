@@ -3,17 +3,12 @@ package com.example.dllo.liwushuo.view;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -22,10 +17,10 @@ import android.widget.TextView;
 import com.example.dllo.liwushuo.R;
 
 
-public class XListViewHeader extends LinearLayout {
+public class XGridViewHeader extends LinearLayout {
     private LinearLayout mContainer;
     private ImageView mArrowImageView;
-    private ImageView xListViewHeaderHeart;
+    private ImageView XGridViewHeaderHeart;
     private ProgressBar mProgressBar;
     private TextView mHintTextView;
     private int mState = STATE_NORMAL;
@@ -38,19 +33,19 @@ public class XListViewHeader extends LinearLayout {
     public final static int STATE_NORMAL = 0;
     public final static int STATE_READY = 1;
     public final static int STATE_REFRESHING = 2;
-    private XListView xListView;
+    private XGridView XGridView;
 
-    public XListViewHeader(Context context,XListView xListView) {
+    public XGridViewHeader(Context context, XGridView XGridView) {
         super(context);
         initView(context);
-        this.xListView = xListView;
+        this.XGridView = XGridView;
     }
 
     /**
      * @param context
      * @param attrs
      */
-    public XListViewHeader(Context context, AttributeSet attrs) {
+    public XGridViewHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
     }
@@ -60,12 +55,12 @@ public class XListViewHeader extends LinearLayout {
         LayoutParams lp = new LayoutParams(
                 LayoutParams.FILL_PARENT, 0);
         mContainer = (LinearLayout) LayoutInflater.from(context).inflate(
-                R.layout.xlistview_header, null);
+                R.layout.xgridview_header, null);
         addView(mContainer, lp);
         setGravity(Gravity.BOTTOM);
 
-        mArrowImageView = (ImageView) findViewById(R.id.xListView_header_arrow);
-        xListViewHeaderHeart = (ImageView) mContainer.findViewById(R.id.xListView_header_heart);
+        mArrowImageView = (ImageView) findViewById(R.id.xGridView_header_arrow);
+        XGridViewHeaderHeart = (ImageView) mContainer.findViewById(R.id.xGridView_header_heart);
 
 
         mRotateUpAnim = new RotateAnimation(0.0f, -180.0f,
@@ -90,7 +85,7 @@ public class XListViewHeader extends LinearLayout {
 
             final AnimationDrawable drawable = (AnimationDrawable) mArrowImageView.getBackground();
             drawable.start();
-            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(xListViewHeaderHeart, "translationY", -3, -150);
+            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(XGridViewHeaderHeart, "translationY", -3, -150);
             objectAnimator.setDuration(1000);
             objectAnimator.setStartDelay(600);
             objectAnimator.setRepeatCount(1);
@@ -98,14 +93,14 @@ public class XListViewHeader extends LinearLayout {
             objectAnimator.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
-                    xListViewHeaderHeart.setVisibility(VISIBLE);
+                    XGridViewHeaderHeart.setVisibility(VISIBLE);
 
                 }
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    xListViewHeaderHeart.setVisibility(GONE);
-                    xListView.stopRefresh();
+                    XGridViewHeaderHeart.setVisibility(GONE);
+                    XGridView.stopRefresh();
                     drawable.stop();
                 }
 

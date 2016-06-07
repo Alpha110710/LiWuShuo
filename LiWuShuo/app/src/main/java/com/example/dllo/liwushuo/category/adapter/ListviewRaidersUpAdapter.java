@@ -15,6 +15,8 @@ import com.example.dllo.liwushuo.home.bean.NormalListviewBean;
 import com.example.dllo.liwushuo.tool.RoundRectTool;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 /**
  * Created by dllo on 16/5/25.
  */
@@ -25,6 +27,11 @@ public class ListviewRaidersUpAdapter extends BaseAdapter {
     public void setRaidersUpBean(RaidersUpBean raidersUpBean) {
         this.raidersUpBean = raidersUpBean;
         notifyDataSetChanged();
+    }
+    public void  addBean(List<RaidersUpBean.DataBean.PostsBean> postsBeen){
+        raidersUpBean.getData().getPosts().addAll(postsBeen);
+        notifyDataSetChanged();
+
     }
 
     public ListviewRaidersUpAdapter(Context context) {

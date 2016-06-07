@@ -1,5 +1,6 @@
 package com.example.dllo.liwushuo.search;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -47,6 +48,13 @@ public class SearchDetailFragment extends BaseFragment {
         searchDetailViewpagerAdapter.setFragments(fragments);
         searchDetailViewPager.setAdapter(searchDetailViewpagerAdapter);
         searchDetailTablayout.setupWithViewPager(searchDetailViewPager);
+
+        //接editText的值  然后再传给下一集fragment
+        Bundle bundle = getArguments();
+        String key = bundle.getString("key");
+
+        bundle.putString("key", key);
+        searchDetailGiftFragment.setArguments(bundle);
 
     }
 }

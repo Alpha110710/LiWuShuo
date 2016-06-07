@@ -64,6 +64,9 @@ public final class URLValues {
     //点击放大镜的url
     public static final String SEARCH = "http://api.liwushuo.com/v2/search/hot_words";
 
+    //查找进入的礼物界面
+    public static final String SEARCH_GIFT = "http://api.liwushuo.com/v2/search/item?limit=20&offset=0&sort=&keyword=";
+
 
 
 

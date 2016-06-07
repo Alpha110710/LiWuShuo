@@ -27,7 +27,7 @@
         <activity android:name=".home.MoreContentActivity"/>
         <activity android:name=".category.RaidersDetailsUpActivity"/>
         <activity android:name=".category.RaidersSeeAllActivity"/>
-        <activity android:name=".SearchActivity"/>
+        <activity android:name=".search.SearchActivity"/>
         <activity android:name=".select.SelectConmentActivity"/>
         <activity android:name=".home.HomeCalendarActivity"/>
 

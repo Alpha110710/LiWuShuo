@@ -13,9 +13,12 @@ import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.home.bean.NormalListviewBean;
+import com.example.dllo.liwushuo.select.SelectBean;
 import com.example.dllo.liwushuo.tool.App;
 import com.example.dllo.liwushuo.tool.RoundRectTool;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 /**
  * Created by dllo on 16/5/25.
@@ -24,6 +27,8 @@ public class ListviewNormalHomeAdapter extends BaseAdapter {
     private Context context;
     private NormalListviewBean normalListviewBean;
 
+
+
     public void setNormalListviewBean(NormalListviewBean normalListviewBean) {
         this.normalListviewBean = normalListviewBean;
         notifyDataSetChanged();
@@ -31,6 +36,11 @@ public class ListviewNormalHomeAdapter extends BaseAdapter {
 
     public ListviewNormalHomeAdapter(Context context) {
         this.context = context;
+    }
+
+    public void addItemBean (List<NormalListviewBean.DataBean.ItemsBean> itemsBeans){
+        normalListviewBean.getData().getItems().addAll(itemsBeans);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -61,7 +71,7 @@ public class ListviewNormalHomeAdapter extends BaseAdapter {
         }
 
         Picasso.with(context).load(normalListviewBean.getData().getItems().get(position).getCover_image_url()).centerCrop()
-                .transform(new RoundRectTool(20)).fit().into(myViewholder.itemHomeNormalListviewImg);
+                .transform(new RoundRectTool(20)).fit().skipMemoryCache().into(myViewholder.itemHomeNormalListviewImg);
         myViewholder.itemHomeNormalListviewLikeCb.setText(String.valueOf(normalListviewBean.getData().getItems().get(position).getLikes_count()));
         myViewholder.itemHomeNormalListviewTitleTv.setText(normalListviewBean.getData().getItems().get(position).getTitle());
         myViewholder.itemHomeNormalListviewLikeCb.setChecked(normalListviewBean.getData().getItems().get(position).isLiked());

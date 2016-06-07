@@ -5,11 +5,10 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
 
-public class XListViewFooter extends LinearLayout {
+public class XGridViewFooter extends LinearLayout {
     public final static int STATE_NORMAL = 0;
     public final static int STATE_READY = 1;
     public final static int STATE_LOADING = 2;
@@ -18,12 +17,12 @@ public class XListViewFooter extends LinearLayout {
     private View mContentView;
 
 
-    public XListViewFooter(Context context) {
+    public XGridViewFooter(Context context) {
         super(context);
         initView(context);
     }
 
-    public XListViewFooter(Context context, AttributeSet attrs) {
+    public XGridViewFooter(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
     }
@@ -62,11 +61,11 @@ public class XListViewFooter extends LinearLayout {
 
     private void initView(Context context) {
         mContext = context;
-        LinearLayout moreView = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.xlistview_footer, null);
+        LinearLayout moreView = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.xgridview_footer, null);
         addView(moreView);
         moreView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 
-        mContentView = moreView.findViewById(R.id.xListView_footer_content);
+        mContentView = moreView.findViewById(R.id.xGridView_footer_content);
 
     }
 

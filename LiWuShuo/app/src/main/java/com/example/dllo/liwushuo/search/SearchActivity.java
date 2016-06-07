@@ -1,11 +1,13 @@
-package com.example.dllo.liwushuo;
+package com.example.dllo.liwushuo.search;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.transition.Transition;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -16,14 +18,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.base.BaseActivity;
 import com.example.dllo.liwushuo.category.GiftConditionSelectActivity;
 import com.example.dllo.liwushuo.net.NetListener;
 import com.example.dllo.liwushuo.net.URLValues;
 import com.example.dllo.liwushuo.search.SearchDetailFragment;
+import com.example.dllo.liwushuo.search.SearchDetailGiftFragment;
 import com.example.dllo.liwushuo.search.SearchFragment;
 import com.example.dllo.liwushuo.tool.NetTool;
 import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +37,7 @@ import java.util.HashMap;
 /**
  * Created by dllo on 16/6/4.
  */
-public class SearchActivity extends BaseActivity implements View.OnClickListener {
+public class SearchActivity extends BaseActivity implements OnClickListener {
 
     private ImageView mainSearchBarBackImg;
     private EditText mainSearchBarEt;
@@ -56,7 +62,12 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         replaceFragment(searchFragment);
 
 
-
+        searchFragment.setMainSearchBarEtListener(new MainSearchBarEtListener() {
+            @Override
+            public void setText(String text) {
+                mainSearchBarEt.setText(text);
+            }
+        });
 
 
     }
@@ -78,11 +89,20 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             case R.id.main_search_bar_tv:
                 if (!mainSearchBarEt.getText().toString().equals("")) {
                     replaceFragment(searchDetailFragment);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("key", mainSearchBarEt.getText().toString());
+                    searchDetailFragment.setArguments(bundle);
                 } else {
                     Toast.makeText(this, "请输入关键字进行搜索", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
+    }
+
+
+    public interface MainSearchBarEtListener {
+        void setText(String text);
     }
 
 

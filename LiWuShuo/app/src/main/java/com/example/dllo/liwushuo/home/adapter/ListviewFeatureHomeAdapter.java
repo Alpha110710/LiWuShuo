@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,8 +31,7 @@ import java.util.List;
  */
 public class ListviewFeatureHomeAdapter extends BaseAdapter {
     private ListviewBean listviewBean;
-    private List<ListviewBean.DataBean.ItemsBean> itemsBeans;
-
+    private RoundRectTool roundRectTool = new RoundRectTool(20);
 
     public void setListviewBean(ListviewBean listviewBean) {
         this.listviewBean = listviewBean;
@@ -40,8 +40,6 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
 
     //为了下拉舒心增加的方法
     public void addItemBean(List<ListviewBean.DataBean.ItemsBean> itemsBeans) {
-
-        this.itemsBeans = itemsBeans;
         listviewBean.getData().getItems().addAll(itemsBeans);
         notifyDataSetChanged();
     }
@@ -71,7 +69,7 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
         } else {
             myholder = (Myholder) convertView.getTag();
         }
-
+        myholder.setPos(position);
         //设置数据
         myholder.itemHomeFeatureListviewTitleTv.setText(listviewBean.getData().getItems().get(position).getTitle());
 
@@ -95,7 +93,7 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
         myholder.itemHomeFeatureListviewLikeCb.setText(String.valueOf(listviewBean.getData().getItems().get(position).getLikes_count()));
         myholder.itemHomeFeatureListviewLikeCb.setChecked(listviewBean.getData().getItems().get(position).isLiked());
         Picasso.with(App.context).load(listviewBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ig_logo_text).
-                transform(new RoundRectTool(20)).fit()
+                transform(roundRectTool).fit().skipMemoryCache()
                 .into(myholder.itemHomeFeatureListviewImg);
 
 
@@ -116,13 +114,12 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
 //        }
 
         //checkbox加监听, 解决复用问题
-        myholder.itemHomeFeatureListviewLikeCb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CheckBox checkBox = (CheckBox) v;
-                listviewBean.getData().getItems().get(position).setLiked(checkBox.isChecked());
-            }
-        });
+//        myholder.itemHomeFeatureListviewLikeCb.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
 
         return convertView;
@@ -130,7 +127,7 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
 
 
     class Myholder {
-
+        private int pos;
         private final ImageView itemHomeFeatureListviewImg;
         private final TextView itemHomeFeatureDataTv;
         private final TextView itemHomeFeatureListviewTitleTv;
@@ -139,6 +136,13 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
         private final RelativeLayout itemHomeFeatureListviewRlayout;
         private CheckBox itemHomeFeatureListviewLikeCb;
 
+        public int getPos() {
+            return pos;
+        }
+
+        public void setPos(int pos) {
+            this.pos = pos;
+        }
 
         public Myholder(View view) {
             itemHomeFeatureListviewImg = (ImageView) view.findViewById(R.id.item_home_feature_listview_img);
@@ -148,6 +152,13 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
             itemHomeFeatureFreshImg = (ImageView) view.findViewById(R.id.item_home_feature_fresh_img);
             itemHomeFeatureListviewRlayout = (RelativeLayout) view.findViewById(R.id.item_home_feature_listview_rlayout);
             itemHomeFeatureListviewLikeCb = (CheckBox) view.findViewById(R.id.item_home_feature_listview_like_cb);
+            itemHomeFeatureListviewLikeCb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckBox checkBox = (CheckBox) v;
+                    listviewBean.getData().getItems().get(pos).setLiked(checkBox.isChecked());
+                }
+            });
         }
     }
 }

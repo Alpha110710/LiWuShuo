@@ -91,6 +91,7 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
         //实现下拉刷新和下拉加载需要这两个方法
         homeFeaturedListView.setXListViewListener(this);
         homeFeaturedListView.setPullLoadEnable(true);
+        homeFeaturedListView.setPullRefreshEnable(true);
 
     }
 
@@ -238,7 +239,6 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
                         ) {
                     urlIds.add(String.valueOf(itemBean.getId()));
                 }
-                onLoad();
 
             }
 
@@ -261,7 +261,9 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
                 listviewBean = gson.fromJson(response, ListviewBean.class);
                 List<ListviewBean.DataBean.ItemsBean> itemsBeans = listviewBean.getData().getItems();
                 listviewFeatureHomeAdapter.addItemBean(itemsBeans);
-                onLoad();
+
+                homeFeaturedListView.stopLoadMore();
+
 
             }
 
@@ -270,13 +272,6 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
 
             }
         });
-    }
-
-    //onload方法  取消刷新和加载
-    private void onLoad() {
-        homeFeaturedListView.stopRefresh();
-        homeFeaturedListView.stopLoadMore();
-        homeFeaturedListView.setRefreshTime("刚刚");
     }
 
 

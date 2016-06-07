@@ -4,10 +4,12 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -15,19 +17,18 @@ import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
-import com.example.dllo.liwushuo.home.FeaturedHomeFragment;
 
-public class XListView extends ListView implements OnScrollListener {
+public class XGridView extends GridViewWithHeaderAndFooter implements OnScrollListener {
 
     private float mLastY = -1; // save event y//保存事件
     private Scroller mScroller; // used for scroll back用于滑动返回
     private OnScrollListener mScrollListener; // user's scroll listener用于滑动的监听
 
     // the interface to trigger refresh and load more.触发刷新和加载更多的接口。
-    private IXListViewListener mListViewListener;
+    private IXGridViewListener mListViewListener;
 
     // -- header view
-    private XListViewHeader mHeaderView;
+    public XGridViewHeader mHeaderView;
     // header view content, use it to calculate the Header's height. And hide it
     // when disable pull refresh.头视图内容,用它来计算头部的高度。和隐藏时禁用下拉刷新。
     private RelativeLayout mHeaderViewContent;
@@ -37,7 +38,7 @@ public class XListView extends ListView implements OnScrollListener {
     private boolean mPullRefreshing = false; // is refreashing.
 
     // -- footer view
-    private XListViewFooter mFooterView;
+    private XGridViewFooter mFooterView;
     private boolean mEnablePullLoad;
     private boolean mPullLoading;
     private boolean mIsFooterReady = false;
@@ -61,36 +62,36 @@ public class XListView extends ListView implements OnScrollListener {
     /**
      * @param context
      */
-    public XListView(Context context) {
+    public XGridView(Context context) {
         super(context);
         initWithContext(context);
     }
 
-    public XListView(Context context, AttributeSet attrs) {
+    public XGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initWithContext(context);
     }
 
-    public XListView(Context context, AttributeSet attrs, int defStyle) {
+    public XGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initWithContext(context);
     }
 
     private void initWithContext(Context context) {
         mScroller = new Scroller(context, new DecelerateInterpolator());
-        // XListView need the scroll event, and it will dispatch the event to
+        // XGridView need the scroll event, and it will dispatch the event to
         // user's listener (as a proxy).
         super.setOnScrollListener(this);
 
         // init header view
-        mHeaderView = new XListViewHeader(context, this);
+        mHeaderView = new XGridViewHeader(context, this);
         mHeaderViewContent = (RelativeLayout) mHeaderView
-                .findViewById(R.id.xListView_header_content);
+                .findViewById(R.id.xGridView_header_content);
 
         addHeaderView(mHeaderView);
 
         // init footer view
-        mFooterView = new XListViewFooter(context);
+        mFooterView = new XGridViewFooter(context);
 
         // init header height
         mHeaderView.getViewTreeObserver().addOnGlobalLayoutListener(
@@ -106,9 +107,10 @@ public class XListView extends ListView implements OnScrollListener {
 
     @Override
     public void setAdapter(ListAdapter adapter) {
-        // make sure XListViewFooter is the last footer view, and only add once.
+        // make sure XGridViewFooter is the last footer view, and only add once.
         if (mIsFooterReady == false) {
             mIsFooterReady = true;
+
             addFooterView(mFooterView);
         }
         super.setAdapter(adapter);
@@ -139,12 +141,12 @@ public class XListView extends ListView implements OnScrollListener {
             mFooterView.hide();
             mFooterView.setOnClickListener(null);
             //make sure "pull up" don't show a line in bottom when listview with one page
-            setFooterDividersEnabled(false);
+//            setFooterDividersEnabled(false);
         } else {
             mPullLoading = false;
             mFooterView.show();
             //make sure "pull up" don't show a line in bottom when listview with one page
-            setFooterDividersEnabled(true);
+//            setFooterDividersEnabled(true);
             // both "pull up" and "click" will invoke load more.
             mFooterView.setOnClickListener(new OnClickListener() {
                 @Override
@@ -172,7 +174,7 @@ public class XListView extends ListView implements OnScrollListener {
     public void stopLoadMore() {
         if (mPullLoading == true) {
             mPullLoading = false;
-//            mFooterView.setState(XListViewFooter.STATE_NORMAL);
+//            mFooterView.setState(XGridViewFooter.STATE_NORMAL);
         }
     }
 
@@ -189,9 +191,9 @@ public class XListView extends ListView implements OnScrollListener {
                 + mHeaderView.getVisiableHeight());
         if (mEnablePullRefresh && !mPullRefreshing) { // 未处于刷新状态，更新箭头
             if (mHeaderView.getVisiableHeight() > mHeaderViewHeight) {
-                mHeaderView.setState(XListViewHeader.STATE_READY);
+                mHeaderView.setState(XGridViewHeader.STATE_READY);
             } else {
-                mHeaderView.setState(XListViewHeader.STATE_NORMAL);
+                mHeaderView.setState(XGridViewHeader.STATE_NORMAL);
             }
         }
         setSelection(0); // scroll to top each time
@@ -225,9 +227,9 @@ public class XListView extends ListView implements OnScrollListener {
         if (mEnablePullLoad && !mPullLoading) {
             if (height > PULL_LOAD_MORE_DELTA) { // height enough to invoke load
                 // more.
-//                mFooterView.setState(XListViewFooter.STATE_READY);
+//                mFooterView.setState(XGridViewFooter.STATE_READY);
             } else {
-//                mFooterView.setState(XListViewFooter.STATE_NORMAL);
+//                mFooterView.setState(XGridViewFooter.STATE_NORMAL);
             }
         }
         mFooterView.setBottomMargin(height);
@@ -247,7 +249,7 @@ public class XListView extends ListView implements OnScrollListener {
 
     private void startLoadMore() {
         mPullLoading = true;
-//        mFooterView.setState(XListViewFooter.STATE_LOADING);
+//        mFooterView.setState(XGridViewFooter.STATE_LOADING);
         if (mListViewListener != null) {
             mListViewListener.onLoadMore();
         }
@@ -284,7 +286,7 @@ public class XListView extends ListView implements OnScrollListener {
                     if (mEnablePullRefresh
                             && mHeaderView.getVisiableHeight() > mHeaderViewHeight) {
                         mPullRefreshing = true;
-                        mHeaderView.setState(XListViewHeader.STATE_REFRESHING);
+                        mHeaderView.setState(XGridViewHeader.STATE_REFRESHING);
                         if (mListViewListener != null) {
                             mListViewListener.onRefresh();
                         }
@@ -341,7 +343,7 @@ public class XListView extends ListView implements OnScrollListener {
         }
     }
 
-    public void setXListViewListener(IXListViewListener l) {
+    public void setXGridViewListener(IXGridViewListener l) {
         mListViewListener = l;
     }
 
@@ -356,9 +358,8 @@ public class XListView extends ListView implements OnScrollListener {
     /**
      * implements this interface to get refresh/load more event.
      */
-    public interface IXListViewListener {
-        public void onRefresh();
-
-        public void onLoadMore();
+    public interface IXGridViewListener {
+        void onRefresh();
+        void onLoadMore();
     }
 }

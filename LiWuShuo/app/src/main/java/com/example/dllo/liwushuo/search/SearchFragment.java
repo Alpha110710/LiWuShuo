@@ -29,6 +29,13 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
     private GridView fragmentSearchGridview;
     private NetTool netTool = new NetTool();
     private SimpleAdapter simpleAdapter;
+    private SearchActivity.MainSearchBarEtListener mainSearchBarEtListener;
+    private SearchBean searchBean;
+
+
+    public void setMainSearchBarEtListener(SearchActivity.MainSearchBarEtListener mainSearchBarEtListener) {
+        this.mainSearchBarEtListener = mainSearchBarEtListener;
+    }
 
     @Override
     public int setLayout() {
@@ -65,6 +72,7 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        mainSearchBarEtListener.setText(searchBean.getData().getHot_words().get(position));
 
     }
 
@@ -75,7 +83,7 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void onSuccessed(String response) {
                 Gson gson = new Gson();
-                SearchBean searchBean = gson.fromJson(response, SearchBean.class);
+                searchBean = gson.fromJson(response, SearchBean.class);
 
 
                 for (String s : searchBean.getData().getHot_words()) {
