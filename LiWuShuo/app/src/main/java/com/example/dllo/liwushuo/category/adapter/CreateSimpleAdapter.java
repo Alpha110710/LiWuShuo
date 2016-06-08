@@ -26,7 +26,7 @@ public class CreateSimpleAdapter {
             public boolean setViewValue(View view, Object data, String textRepresentation) {
                 if (view instanceof ImageView && data instanceof String) {
 
-                    Picasso.with(context).load((String) data).placeholder(R.mipmap.ic_about).into((ImageView) view);
+                    Picasso.with(context).load((String) data).placeholder(R.mipmap.ig_logo_text).into((ImageView) view);
                     return true;
                 }
                 return false;

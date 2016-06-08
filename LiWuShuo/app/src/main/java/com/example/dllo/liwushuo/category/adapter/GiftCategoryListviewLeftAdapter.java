@@ -6,14 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.category.bean.GiftBean;
-import com.example.dllo.liwushuo.view.CheckableLinearLayout;
+
 
 /**
  * Created by dllo on 16/5/30.

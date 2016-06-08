@@ -67,6 +67,7 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
     public void initData() {
 
         homeFeaturedListView.setOnItemClickListener(this);
+        urlIds = new ArrayList<String>();
 
 
         //listview模块 ,轮播模块和小正方形模块为listview的头
@@ -142,14 +143,6 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
                 listviewBean = gson.fromJson(response, ListviewBean.class);
                 listviewFeatureHomeAdapter.setListviewBean(listviewBean);
 
-
-                //遍历实体类将urlId加入到集合中
-                urlIds = new ArrayList<String>();
-                for (ListviewBean.DataBean.ItemsBean itemBean : listviewBean.getData().getItems()
-                        ) {
-                    urlIds.add(String.valueOf(itemBean.getId()));
-                }
-
             }
 
             @Override
@@ -213,13 +206,21 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //获取真实的pos  因为加头
         int pos = (int) parent.getAdapter().getItemId(position);
-        //给下一个页面传值
-        Intent intent = new Intent(context, HomeDetailActivity.class);
-        if (urlIds != null) {
+
+        //遍历实体类将urlId加入到集合中
+        for (ListviewBean.DataBean.ItemsBean itemBean : listviewBean.getData().getItems()
+                ) {
+            urlIds.add(String.valueOf(itemBean.getId()));
+        }
+
+        if (urlIds.size() > pos) {
+
+            //给下一个页面传值
+            Intent intent = new Intent(context, HomeDetailActivity.class);
             intent.putStringArrayListExtra("urlId", urlIds);
             intent.putExtra("urlPos", pos);
+            startActivity(intent);
         }
-        startActivity(intent);
     }
 
 
@@ -233,12 +234,6 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
                 listviewBean = gson.fromJson(response, ListviewBean.class);
                 listviewFeatureHomeAdapter.setListviewBean(listviewBean);
 
-                //遍历实体类将urlId加入到集合中
-                urlIds = new ArrayList<String>();
-                for (ListviewBean.DataBean.ItemsBean itemBean : listviewBean.getData().getItems()
-                        ) {
-                    urlIds.add(String.valueOf(itemBean.getId()));
-                }
 
             }
 

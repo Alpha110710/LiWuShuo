@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
@@ -61,6 +62,7 @@ public class NormalHomeFragment extends BaseFragment implements AdapterView.OnIt
     public void initData() {
 
         normalHomeListview.setOnItemClickListener(this);
+        urlIds = new ArrayList<>();
 
 
         Bundle bundle = getArguments();
@@ -71,13 +73,6 @@ public class NormalHomeFragment extends BaseFragment implements AdapterView.OnIt
                 Gson gson = new Gson();
                 normalListviewBean = gson.fromJson(response, NormalListviewBean.class);
                 adapter.setNormalListviewBean(normalListviewBean);
-
-                //遍历实体类将urlId加入到集合中
-                urlIds = new ArrayList<String>();
-                for (NormalListviewBean.DataBean.ItemsBean itemBean : normalListviewBean.getData().getItems()
-                        ) {
-                    urlIds.add(String.valueOf(itemBean.getId()));
-                }
             }
 
             @Override
@@ -97,13 +92,20 @@ public class NormalHomeFragment extends BaseFragment implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        //给下一个页面传值
-        Intent intent = new Intent(context, HomeDetailActivity.class);
-        if (urlIds != null) {
-            intent.putStringArrayListExtra("urlId", urlIds);
-            intent.putExtra("urlPos", position);
+        //遍历实体类将urlId加入到集合中
+
+        for (NormalListviewBean.DataBean.ItemsBean itemBean : normalListviewBean.getData().getItems()
+                ) {
+            urlIds.add(String.valueOf(itemBean.getId()));
         }
-        startActivity(intent);
+        if (urlIds.size() > position - 1) {
+            //给下一个页面传值
+            Intent intent = new Intent(context, HomeDetailActivity.class);
+            intent.putStringArrayListExtra("urlId", urlIds);
+            intent.putExtra("urlPos", position - 1);
+            startActivity(intent);
+        }
+
     }
 
 
@@ -117,12 +119,7 @@ public class NormalHomeFragment extends BaseFragment implements AdapterView.OnIt
                 normalListviewBean = gson.fromJson(response, NormalListviewBean.class);
                 adapter.setNormalListviewBean(normalListviewBean);
 
-                //遍历实体类将urlId加入到集合中
-                urlIds = new ArrayList<String>();
-                for (NormalListviewBean.DataBean.ItemsBean itemBean : normalListviewBean.getData().getItems()
-                        ) {
-                    urlIds.add(String.valueOf(itemBean.getId()));
-                }
+
             }
 
             @Override

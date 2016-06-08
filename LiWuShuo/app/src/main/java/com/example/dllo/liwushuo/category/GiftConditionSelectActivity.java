@@ -57,6 +57,7 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
     private PopTool popTool;
 
     private String screenRefresh;
+    private String littlePopParams = "";
     //选礼神奇点击进入筛选条件点击完的重新刷新下面小四方块url  参数拼的是"http://api.liwushuo.com/v2/search/item_filter每一个子key
     private String[] url = new String[4];
 
@@ -80,6 +81,11 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
         giftConditionSelectPriceRb.setOnClickListener(this);
         giftConditionSelectSortImg.setOnClickListener(this);
         popTool = new PopTool(this, R.id.gift_condition_select_sort_img, 1);
+
+        //数组初始化
+        for (int i1 = 0; i1 < url.length; i1++) {
+            url[i1] = "";
+        }
 
 
         //复用giftDetailActivity适配器
@@ -118,27 +124,47 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
         popTool.setSortOnClickListener(new PopTool.SortOnClickListener() {
             @Override
             public void getHotUrl() {
-                String hotUrl = "http://api.liwushuo.com/v2/search/item_by_type?target=&limit=20&scene=&price=&sort=hot&personality=&offset=0";
-                getItemAndRefreshAnlysis(hotUrl);
+                littlePopParams = "&sort=hot";
+                if (screenRefresh == null) {
+                    String hotUrl = "http://api.liwushuo.com/v2/search/item_by_type?target=&limit=20&scene=&price=&sort=hot&personality=&offset=0";
+                    getItemAndRefreshAnlysis(hotUrl);
+                } else {
+                    getItemAndRefreshAnlysis(screenRefresh + littlePopParams);
+                }
             }
 
             @Override
             public void getDefaultUrl() {
-                String defaultUrl = "http://api.liwushuo.com/v2/search/item_by_type?limit=20&offset=0";
-                getItemAndRefreshAnlysis(defaultUrl);
+                littlePopParams = "";
+                if (screenRefresh == null) {
+                    String defaultUrl = "http://api.liwushuo.com/v2/search/item_by_type?limit=20&offset=0";
+                    getItemAndRefreshAnlysis(defaultUrl);
+                } else {
+                    getItemAndRefreshAnlysis(screenRefresh + littlePopParams);
+                }
             }
 
             @Override
             public void getPriceHighToLow() {
-                String priceHighToLow = "http://api.liwushuo.com/v2/search/item_by_type?target=&limit=20&scene=&price=&sort=price:asc&personality=&offset=0";
-                getItemAndRefreshAnlysis(priceHighToLow);
+                littlePopParams = "&sort=price:asc";
+                if (screenRefresh == null) {
+                    String priceHighToLow = "http://api.liwushuo.com/v2/search/item_by_type?target=&limit=20&scene=&price=&sort=price:asc&personality=&offset=0";
+                    getItemAndRefreshAnlysis(priceHighToLow);
+                } else {
+                    getItemAndRefreshAnlysis(screenRefresh + littlePopParams);
+                }
 
             }
 
             @Override
             public void getPriceLowToHigh() {
-                String priceLowToHigh = "http://api.liwushuo.com/v2/search/item_by_type?target=&limit=20&scene=&price=&sort=price:desc&personality=&offset=0";
-                getItemAndRefreshAnlysis(priceLowToHigh);
+                littlePopParams = "&sort=price:desc";
+                if (screenRefresh == null) {
+                    String priceLowToHigh = "http://api.liwushuo.com/v2/search/item_by_type?target=&limit=20&scene=&price=&sort=price:desc&personality=&offset=0";
+                    getItemAndRefreshAnlysis(priceLowToHigh);
+                } else {
+                    getItemAndRefreshAnlysis(screenRefresh + littlePopParams);
+                }
 
             }
         });
@@ -169,8 +195,6 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
             //点击出现排序pop
             case R.id.gift_condition_select_sort_img:
                 popTool.showSortPopupWindow();
-
-
 
 
                 break;
@@ -206,6 +230,10 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
 
     //popupwindow代码
     private void initConditionPopup(final int i) {
+
+
+
+
         if (giftConditionPopupBean != null) {
             final RadioButton radioButtons[] = {giftConditionSelectObjRb, giftConditionSelectOccasionRb, giftConditionSelectHabitRb, giftConditionSelectPriceRb};
 
@@ -246,7 +274,7 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
                     //点击刷新
                     choiceUrl(radioPos, position);
                     screenRefresh = "http://api.liwushuo.com/v2/search/item_by_type?limit=20&target=" + url[0] + "&scene="
-                            + url[1] + "&price=" + url[3] + "&personality=" + url[2] + "&offset=0";
+                            + url[1] + "&price=" + url[3] + "&personality=" + url[2] + "&offset=0" + littlePopParams;
 
                     getItemAndRefreshAnlysis(screenRefresh);
 
@@ -272,9 +300,6 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
 
     //调用此方法即可获得筛选后的url
     private void choiceUrl(int radioPos, int position) {
-        for (int i = 0; i < url.length; i++) {
-            url[i] = "";
-        }
 
         if (position == 0) {
             url[radioPos] = "";

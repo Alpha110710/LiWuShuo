@@ -86,9 +86,9 @@ public class XGridViewHeader extends LinearLayout {
             final AnimationDrawable drawable = (AnimationDrawable) mArrowImageView.getBackground();
             drawable.start();
             ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(XGridViewHeaderHeart, "translationY", -3, -150);
-            objectAnimator.setDuration(1000);
+            objectAnimator.setDuration(1400);
             objectAnimator.setStartDelay(600);
-            objectAnimator.setRepeatCount(1);
+            objectAnimator.setRepeatCount(0);
             objectAnimator.start();
             objectAnimator.addListener(new Animator.AnimatorListener() {
                 @Override
@@ -101,6 +101,10 @@ public class XGridViewHeader extends LinearLayout {
                 public void onAnimationEnd(Animator animation) {
                     XGridViewHeaderHeart.setVisibility(GONE);
                     XGridView.stopRefresh();
+                    XGridView.setSelection(1);
+                    XGridView.removeHeaderView(XGridView.mHeaderView);
+
+//                    XGridView.addHeaderView(XGridView.mHeaderView);
                     drawable.stop();
                 }
 

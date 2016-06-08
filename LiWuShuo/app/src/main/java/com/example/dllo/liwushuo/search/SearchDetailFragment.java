@@ -23,6 +23,10 @@ public class SearchDetailFragment extends BaseFragment {
     private SearchDetailRaidersFragment searchDetailRaidersFragment;
     private ArrayList<Fragment> fragments;
 
+
+
+
+
     @Override
     public int setLayout() {
         return R.layout.fragment_search_detail;
@@ -57,4 +61,6 @@ public class SearchDetailFragment extends BaseFragment {
         searchDetailGiftFragment.setArguments(bundle);
 
     }
+
+
 }

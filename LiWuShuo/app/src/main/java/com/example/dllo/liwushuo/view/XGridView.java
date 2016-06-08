@@ -58,6 +58,7 @@ public class XGridView extends GridViewWithHeaderAndFooter implements OnScrollLi
     // load more.底部,触发加载更多。
     private final static float OFFSET_RADIO = 1.8f; // support iOS like pull
     // feature.
+    private Context context;
 
     /**
      * @param context
@@ -65,16 +66,21 @@ public class XGridView extends GridViewWithHeaderAndFooter implements OnScrollLi
     public XGridView(Context context) {
         super(context);
         initWithContext(context);
+        this.context = context;
     }
 
     public XGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initWithContext(context);
+        this.context = context;
+
     }
 
     public XGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initWithContext(context);
+        this.context = context;
+
     }
 
     private void initWithContext(Context context) {
@@ -87,7 +93,7 @@ public class XGridView extends GridViewWithHeaderAndFooter implements OnScrollLi
         mHeaderView = new XGridViewHeader(context, this);
         mHeaderViewContent = (RelativeLayout) mHeaderView
                 .findViewById(R.id.xGridView_header_content);
-
+        mHeaderView.setVisibility(VISIBLE);
         addHeaderView(mHeaderView);
 
         // init footer view
@@ -263,9 +269,13 @@ public class XGridView extends GridViewWithHeaderAndFooter implements OnScrollLi
 
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                //改了这两句
+                removeHeaderView(mHeaderView);
+                initWithContext(context);
                 mLastY = ev.getRawY();
                 break;
             case MotionEvent.ACTION_MOVE:
+
                 final float deltaY = ev.getRawY() - mLastY;
                 mLastY = ev.getRawY();
                 if (getFirstVisiblePosition() == 0

@@ -1,6 +1,7 @@
 package com.example.dllo.liwushuo.home;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -61,6 +62,7 @@ public class HomeDetailActivity extends BaseActivity implements View.OnClickList
         urlIds = intent.getStringArrayListExtra("urlId");
         pos = intent.getIntExtra("urlPos", 0);
 
+
         String homeDetailUrl = URLValues.HOME_DETAIL_BEFORE + urlIds.get(pos) + URLValues.HOME_DETAIL_AFTER;
 
         netTool.getAnalysis(homeDetailUrl, new NetListener() {
@@ -90,8 +92,8 @@ public class HomeDetailActivity extends BaseActivity implements View.OnClickList
             }
         });
 
-
     }
+
 
     @Override
     public void onClick(View v) {
@@ -112,7 +114,6 @@ public class HomeDetailActivity extends BaseActivity implements View.OnClickList
                 intent.putExtra("contentDownId", String.valueOf(homeDetailBean.getData().getId()));
                 startActivity(intent);
                 break;
-
 
 
         }

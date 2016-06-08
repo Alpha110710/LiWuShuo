@@ -91,9 +91,9 @@ public class XListViewHeader extends LinearLayout {
             final AnimationDrawable drawable = (AnimationDrawable) mArrowImageView.getBackground();
             drawable.start();
             ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(xListViewHeaderHeart, "translationY", -3, -150);
-            objectAnimator.setDuration(1000);
+            objectAnimator.setDuration(1400);
             objectAnimator.setStartDelay(600);
-            objectAnimator.setRepeatCount(1);
+            objectAnimator.setRepeatCount(0);
             objectAnimator.start();
             objectAnimator.addListener(new Animator.AnimatorListener() {
                 @Override

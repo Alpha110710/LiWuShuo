@@ -29,13 +29,14 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
     private GridView fragmentSearchGridview;
     private NetTool netTool = new NetTool();
     private SimpleAdapter simpleAdapter;
-    private SearchActivity.MainSearchBarEtListener mainSearchBarEtListener;
     private SearchBean searchBean;
+    private GridViewOnClickListener gridViewOnClickListener;
 
-
-    public void setMainSearchBarEtListener(SearchActivity.MainSearchBarEtListener mainSearchBarEtListener) {
-        this.mainSearchBarEtListener = mainSearchBarEtListener;
+    //设置接口
+    public void setGridViewOnClickListener(GridViewOnClickListener gridViewOnClickListener) {
+        this.gridViewOnClickListener = gridViewOnClickListener;
     }
+
 
     @Override
     public int setLayout() {
@@ -72,12 +73,13 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mainSearchBarEtListener.setText(searchBean.getData().getHot_words().get(position));
+
+        gridViewOnClickListener.skip(searchBean.getData().getHot_words().get(position));
 
     }
 
     //解析网格布局里的数据  分类
-    private void initGetAnlysisGridview() {
+    public void initGetAnlysisGridview() {
         final ArrayList<HashMap<String, String>> hashMaps = new ArrayList<HashMap<String, String>>();
         netTool.getAnalysis(URLValues.SEARCH, new NetListener() {
             @Override
@@ -92,6 +94,11 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
                     hashMaps.add(hashMap);
                 }
 
+                //数据转换为hasmap直接设置给simpleAdapter
+                simpleAdapter = new SimpleAdapter(context, hashMaps, R.layout.item_main_search_gridview, new String[]{"aaa"},
+                        new int[]{R.id.item_main_search_gridview_tv});
+                fragmentSearchGridview.setAdapter(simpleAdapter);
+
             }
 
             @Override
@@ -100,10 +107,11 @@ public class SearchFragment extends BaseFragment implements View.OnClickListener
             }
         });
 
-        //数据转换为hasmap直接设置给simpleAdapter
-        simpleAdapter = new SimpleAdapter(context, hashMaps, R.layout.item_main_search_gridview, new String[]{"aaa"},
-                new int[]{R.id.item_main_search_gridview_tv});
-        fragmentSearchGridview.setAdapter(simpleAdapter);
+
+    }
+
+    public interface GridViewOnClickListener{
+        void skip(String key);
     }
 
 }

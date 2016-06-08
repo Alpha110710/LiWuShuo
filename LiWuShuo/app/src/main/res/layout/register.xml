@@ -60,13 +60,14 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="15dp"
                 android:src="@mipmap/icon_password" />
+
             <ImageView
                 android:id="@+id/register_message_img"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@mipmap/icon_login_message"
+                android:layout_marginLeft="40dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginLeft="40dp"/>
+                android:src="@mipmap/icon_login_message" />
 
             <Button
                 android:id="@+id/register_getcode"
@@ -74,7 +75,8 @@
                 android:layout_height="40dp"
                 android:layout_alignRight="@id/register_password_et"
                 android:text="获取验证码"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorWhite"
+                android:visibility="gone" />
         </RelativeLayout>
 
     </LinearLayout>

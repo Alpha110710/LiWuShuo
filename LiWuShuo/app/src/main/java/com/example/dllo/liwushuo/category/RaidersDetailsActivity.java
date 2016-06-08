@@ -53,7 +53,7 @@ public class RaidersDetailsActivity extends BaseActivity implements View.OnClick
         adapter = new ListviewNormalHomeAdapter(this);
 
         raidersDetailListview.setAdapter(adapter);
-
+        urlIds = new ArrayList<String>();
         raidersDetailBackImg.setOnClickListener(this);
         raidersDetailSortImg.setOnClickListener(this);
         raidersDetailListview.setOnItemClickListener(this);
@@ -124,12 +124,6 @@ public class RaidersDetailsActivity extends BaseActivity implements View.OnClick
                 Gson gson = new Gson();
                 normalListviewBean = gson.fromJson(response, NormalListviewBean.class);
                 adapter.setNormalListviewBean(normalListviewBean);
-                //遍历实体类将urlId加入到集合中
-                urlIds = new ArrayList<String>();
-                for (NormalListviewBean.DataBean.ItemsBean itemBean : normalListviewBean.getData().getItems()
-                        ) {
-                    urlIds.add(String.valueOf(itemBean.getId()));
-                }
 
             }
 
@@ -144,13 +138,20 @@ public class RaidersDetailsActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //给下一个页面传值
-        Intent intent = new Intent(this, HomeDetailActivity.class);
-        if (urlIds != null) {
-            intent.putStringArrayListExtra("urlId", urlIds);
-            intent.putExtra("urlPos", position);
+
+        //遍历实体类将urlId加入到集合中
+        for (NormalListviewBean.DataBean.ItemsBean itemBean : normalListviewBean.getData().getItems()
+                ) {
+            urlIds.add(String.valueOf(itemBean.getId()));
         }
-        startActivity(intent);
+
+        if (urlIds.size() > position - 1) {
+            //给下一个页面传值
+            Intent intent = new Intent(this, HomeDetailActivity.class);
+            intent.putStringArrayListExtra("urlId", urlIds);
+            intent.putExtra("urlPos", position - 1);
+            startActivity(intent);
+        }
     }
 
     //刷新
@@ -163,12 +164,6 @@ public class RaidersDetailsActivity extends BaseActivity implements View.OnClick
                 Gson gson = new Gson();
                 normalListviewBean = gson.fromJson(response, NormalListviewBean.class);
                 adapter.setNormalListviewBean(normalListviewBean);
-                //遍历实体类将urlId加入到集合中
-                urlIds = new ArrayList<String>();
-                for (NormalListviewBean.DataBean.ItemsBean itemBean : normalListviewBean.getData().getItems()
-                        ) {
-                    urlIds.add(String.valueOf(itemBean.getId()));
-                }
 
             }
 

@@ -54,7 +54,7 @@ public class RaidersDetailsUpActivity extends BaseActivity implements View.OnCli
         adapter = new ListviewRaidersUpAdapter(this);
 
         raidersDetailListview.setAdapter(adapter);
-
+        urlIds = new ArrayList<>();
         raidersDetailUpBackImg.setOnClickListener(this);
         raidersDetailUpShareImg.setOnClickListener(this);
         raidersDetailListview.setOnItemClickListener(this);
@@ -98,12 +98,7 @@ public class RaidersDetailsUpActivity extends BaseActivity implements View.OnCli
                 raidersDetailUpBarTv.setText(raidersUpBean.getData().getTitle());
 
                 adapter.setRaidersUpBean(raidersUpBean);
-                //遍历实体类将urlId加入到集合中
-                urlIds = new ArrayList<>();
-                for (RaidersUpBean.DataBean.PostsBean postsBean : raidersUpBean.getData().getPosts()
-                        ) {
-                    urlIds.add(String.valueOf(postsBean.getId()));
-                }
+
 
             }
 
@@ -113,19 +108,25 @@ public class RaidersDetailsUpActivity extends BaseActivity implements View.OnCli
             }
         });
 
-//        String name = intent.getStringExtra("raidersDetailName");
-//        raidersDetailBarTv.setText(name);
+
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //给下一个页面传值
-        Intent intent = new Intent(this, HomeDetailActivity.class);
-        if (urlIds != null) {
-            intent.putStringArrayListExtra("urlId", urlIds);
-            intent.putExtra("urlPos", position);
+
+        //遍历实体类将urlId加入到集合中
+        for (RaidersUpBean.DataBean.PostsBean postsBean : raidersUpBean.getData().getPosts()
+                ) {
+            urlIds.add(String.valueOf(postsBean.getId()));
         }
-        startActivity(intent);
+
+        if (urlIds.size() > position - 1) {
+            //给下一个页面传值
+            Intent intent = new Intent(this, HomeDetailActivity.class);
+            intent.putStringArrayListExtra("urlId", urlIds);
+            intent.putExtra("urlPos", position - 1);
+            startActivity(intent);
+        }
     }
 
     //刷新
@@ -137,16 +138,8 @@ public class RaidersDetailsUpActivity extends BaseActivity implements View.OnCli
 
                 Gson gson = new Gson();
                 raidersUpBean = gson.fromJson(response, RaidersUpBean.class);
-
                 raidersDetailUpBarTv.setText(raidersUpBean.getData().getTitle());
-
                 adapter.setRaidersUpBean(raidersUpBean);
-                //遍历实体类将urlId加入到集合中
-                urlIds = new ArrayList<>();
-                for (RaidersUpBean.DataBean.PostsBean postsBean : raidersUpBean.getData().getPosts()
-                        ) {
-                    urlIds.add(String.valueOf(postsBean.getId()));
-                }
 
             }
 

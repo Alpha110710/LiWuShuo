@@ -112,7 +112,7 @@ public class SelectFragment extends BaseFragment implements XGridView.IXGridView
                 List<SelectBean.DataBean.ItemsBean> itemsBeen = selectBean.getData().getItems();
                 adapter.addItems(itemsBeen);
 
-                selectGridview.stopLoadMore();
+               selectGridview.stopLoadMore();
 
             }
 
