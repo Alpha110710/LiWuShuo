@@ -1,5 +1,7 @@
 package com.example.dllo.liwushuo.home.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.home.bean.ListviewBean;
+import com.example.dllo.liwushuo.register.RegisterActivity;
 import com.example.dllo.liwushuo.tool.App;
 import com.example.dllo.liwushuo.tool.NetTool;
 import com.example.dllo.liwushuo.tool.RoundRectTool;
@@ -25,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import cn.bmob.v3.BmobUser;
+
 
 /**
  * Created by dllo on 16/5/24.
@@ -32,13 +37,22 @@ import java.util.List;
 public class ListviewFeatureHomeAdapter extends BaseAdapter {
     private ListviewBean listviewBean;
     private RoundRectTool roundRectTool = new RoundRectTool(20);
+    public Context context;
+
+
+    public ListviewFeatureHomeAdapter(Context context) {
+        this.context = context;
+    }
+
+    public ListviewFeatureHomeAdapter() {
+    }
 
     public void setListviewBean(ListviewBean listviewBean) {
         this.listviewBean = listviewBean;
         notifyDataSetChanged();
     }
 
-    //为了下拉舒心增加的方法
+    //为了下拉刷新增加的方法
     public void addItemBean(List<ListviewBean.DataBean.ItemsBean> itemsBeans) {
         listviewBean.getData().getItems().addAll(itemsBeans);
         notifyDataSetChanged();
@@ -93,8 +107,7 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
         myholder.itemHomeFeatureListviewLikeCb.setText(String.valueOf(listviewBean.getData().getItems().get(position).getLikes_count()));
         myholder.itemHomeFeatureListviewLikeCb.setChecked(listviewBean.getData().getItems().get(position).isLiked());
         Picasso.with(App.context).load(listviewBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ig_logo_text).
-                transform(roundRectTool).fit().skipMemoryCache()
-                .into(myholder.itemHomeFeatureListviewImg);
+                transform(roundRectTool).fit().into(myholder.itemHomeFeatureListviewImg);
 
 
         //TODO:设置new图片可见不可见
@@ -155,8 +168,15 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
             itemHomeFeatureListviewLikeCb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CheckBox checkBox = (CheckBox) v;
-                    listviewBean.getData().getItems().get(pos).setLiked(checkBox.isChecked());
+                    BmobUser bmobUser = BmobUser.getCurrentUser(context);
+                    if (bmobUser == null) {
+                        Intent intent = new Intent(context, RegisterActivity.class);
+                        context.startActivity(intent);
+                        itemHomeFeatureListviewLikeCb.setChecked(false);
+                    } else {
+                        CheckBox checkBox = (CheckBox) v;
+                        listviewBean.getData().getItems().get(pos).setLiked(checkBox.isChecked());
+                    }
                 }
             });
         }

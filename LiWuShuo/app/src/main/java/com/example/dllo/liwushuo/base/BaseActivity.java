@@ -5,15 +5,19 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import cn.bmob.v3.BmobUser;
+
 /**
  * Created by dllo on 16/5/18.
  */
 public abstract class BaseActivity extends AppCompatActivity {
+    protected BmobUser bmobUser;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         initActivity();
+        bmobUser = BmobUser.getCurrentUser(this);
     }
 
     public abstract void initActivity();

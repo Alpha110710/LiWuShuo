@@ -8,6 +8,7 @@ import android.webkit.WebViewClient;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
@@ -15,12 +16,25 @@ import com.example.dllo.liwushuo.base.BaseActivity;
 import com.example.dllo.liwushuo.category.bean.GiftSelectWebBean;
 import com.example.dllo.liwushuo.net.NetListener;
 import com.example.dllo.liwushuo.net.URLValues;
+import com.example.dllo.liwushuo.register.BmobCollectBean;
+import com.example.dllo.liwushuo.register.RegisterActivity;
+import com.example.dllo.liwushuo.tool.CollectCheckBoxTool;
 import com.example.dllo.liwushuo.tool.NetTool;
 import com.example.dllo.liwushuo.tool.PopTool;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
+
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.DeleteListener;
+import cn.bmob.v3.listener.FindCallback;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by dllo on 16/5/25.
@@ -28,7 +42,7 @@ import org.greenrobot.eventbus.ThreadMode;
 public class SelectDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView selectDetailBackImg;
-    private CheckBox selectDetailFavoritesImg;
+    private CheckBox selectDetailFavoritesCb;
     private TextView selectDetailBarTv;
     private ImageView selectDetailCommentsImg;
     private WebView selectDetailWebview;
@@ -36,14 +50,17 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
     private SelectBean selectBean;
     private NetTool netTool = new NetTool();
     private GiftSelectWebBean giftSelectWebBean;
-    private String idConment;
+    private String idConment, url, name, price, imgUrl, likeNum;
+    private BmobCollectBean collectBean;
+    private Intent intent;
+    private CollectCheckBoxTool checkBoxTool;
 
 
     @Override
     public void initActivity() {
         setContentView(R.layout.activity_select_detail);
         selectDetailBackImg = (ImageView) findViewById(R.id.select_detail_back_img);
-        selectDetailFavoritesImg = (CheckBox) findViewById(R.id.select_detail_favorites_img);
+        selectDetailFavoritesCb = (CheckBox) findViewById(R.id.select_detail_favorites_cb);
         selectDetailBarTv = (TextView) findViewById(R.id.select_detail_bar_tv);
         selectDetailCommentsImg = (ImageView) findViewById(R.id.select_detail_comments_img);
         selectDetailWebview = (WebView) findViewById(R.id.select_detail_webview);
@@ -51,11 +68,19 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
 
         selectDetailShareImg.setOnClickListener(this);
         selectDetailCommentsImg.setOnClickListener(this);
+        selectDetailFavoritesCb.setOnClickListener(this);
+
+        checkBoxTool = new CollectCheckBoxTool(this);
 
         //调下面的方法,连接淘宝网
         getWebviewUrl();
 
         selectDetailBackImg.setOnClickListener(this);
+        collectBean = new BmobCollectBean();
+
+        //查询是否已经标记为喜欢的方法
+        checkBoxTool.queryIsLike(this.intent, selectDetailFavoritesCb);
+
 
 
     }
@@ -76,13 +101,53 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
                 intent.putExtra("conmentId", idConment);
                 startActivity(intent);
                 break;
+            case R.id.select_detail_favorites_cb:
+                //url, name, id, price, imgUrl, likeNum;
+                idConment = this.intent.getStringExtra("id");
+                price = this.intent.getStringExtra("price");
+                name = this.intent.getStringExtra("name");
+                imgUrl = this.intent.getStringExtra("imgUrl");
+                likeNum = this.intent.getStringExtra("likeNum");
+
+                BmobUser bmobUser = BmobUser.getCurrentUser(this);
+                if (bmobUser == null) {
+                    Intent intent1 = new Intent(this, RegisterActivity.class);
+                    startActivity(intent1);
+                    selectDetailFavoritesCb.setChecked(false);
+                } else {
+                    if (selectDetailFavoritesCb.isChecked()) {
+
+                        //存储数据库
+                        collectBean.setId(idConment);
+                        collectBean.setImgUrl(imgUrl);
+                        collectBean.setName(name);
+                        collectBean.setLikeNum(likeNum);
+                        collectBean.setPrice(price);
+                        collectBean.setLike(true);
+                        collectBean.save(this, new SaveListener() {
+                            @Override
+                            public void onSuccess() {
+                                Toast.makeText(SelectDetailActivity.this, "喜欢成功", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(int i, String s) {
+                                Toast.makeText(SelectDetailActivity.this, "喜欢失败" + s, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    } else {
+
+                        checkBoxTool.cancleLike(this.intent);
+                    }
+                }
+                break;
         }
     }
 
     //连接淘宝网络,接到SelectFragment传来的实体内部类
     private void getWebviewUrl() {
-        final Intent intent = getIntent();
-
+        intent = getIntent();
         //if判断  用于解析gift挑选界面的webview跳转  需要拼接id
         if (intent.getStringExtra("urlWebId") != null) {
 
@@ -114,7 +179,8 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
 
             //else用于select界面和礼物分类小圆圈图片界面的点击进入跳webview  只有接到对应url和name
         } else {
-            selectDetailWebview.loadUrl(intent.getStringExtra("url"));
+            url = intent.getStringExtra("url");
+            selectDetailWebview.loadUrl(intent.getStringExtra(url));
 
             selectDetailWebview.setWebViewClient(new WebViewClient() {
                 @Override
@@ -126,6 +192,7 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
                     }
                     //收到拼接评论的 id
                     idConment = intent.getStringExtra("id");
+
                     return true;
                 }
             });

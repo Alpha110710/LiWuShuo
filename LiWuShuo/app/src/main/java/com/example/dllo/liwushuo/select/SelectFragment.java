@@ -74,6 +74,9 @@ public class SelectFragment extends BaseFragment implements XGridView.IXGridView
         intent.putExtra("url", selectBean.getData().getItems().get(position).getData().getPurchase_url());
         intent.putExtra("name", selectBean.getData().getItems().get(position).getData().getName());
         intent.putExtra("id", String.valueOf(selectBean.getData().getItems().get(position).getData().getId()));
+        intent.putExtra("price", selectBean.getData().getItems().get(position).getData().getPrice());
+        intent.putExtra("imgUrl", selectBean.getData().getItems().get(position).getData().getCover_image_url());
+        intent.putExtra("likeNum", String.valueOf(selectBean.getData().getItems().get(position).getData().getFavorites_count()));
 
         startActivity(intent);
 

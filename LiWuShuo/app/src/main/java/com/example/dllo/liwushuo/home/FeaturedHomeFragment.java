@@ -135,7 +135,7 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
 
     //listview模块
     private void listviewModule() {
-        listviewFeatureHomeAdapter = new ListviewFeatureHomeAdapter();
+        listviewFeatureHomeAdapter = new ListviewFeatureHomeAdapter(context);
         netTool.getAnalysis(URLValues.HOME_CELL, new NetListener() {
             @Override
             public void onSuccessed(String response) {

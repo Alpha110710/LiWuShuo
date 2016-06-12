@@ -8,17 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import cn.bmob.v3.BmobUser;
+
 /**
  * Created by dllo on 16/5/18.
  */
 public abstract class BaseFragment extends Fragment {
 
     protected Context context;
+    protected BmobUser bmobUser;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
+        bmobUser = BmobUser.getCurrentUser(context);
     }
 
     @Nullable

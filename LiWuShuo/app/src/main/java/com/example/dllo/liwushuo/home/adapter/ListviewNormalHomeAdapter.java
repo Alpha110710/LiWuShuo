@@ -1,6 +1,7 @@
 package com.example.dllo.liwushuo.home.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.home.bean.NormalListviewBean;
+import com.example.dllo.liwushuo.register.RegisterActivity;
 import com.example.dllo.liwushuo.select.SelectBean;
 import com.example.dllo.liwushuo.tool.App;
 import com.example.dllo.liwushuo.tool.RoundRectTool;
@@ -20,13 +22,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import cn.bmob.v3.BmobUser;
+
 /**
  * Created by dllo on 16/5/25.
  */
 public class ListviewNormalHomeAdapter extends BaseAdapter {
     private Context context;
     private NormalListviewBean normalListviewBean;
-
 
 
     public void setNormalListviewBean(NormalListviewBean normalListviewBean) {
@@ -38,7 +41,7 @@ public class ListviewNormalHomeAdapter extends BaseAdapter {
         this.context = context;
     }
 
-    public void addItemBean (List<NormalListviewBean.DataBean.ItemsBean> itemsBeans){
+    public void addItemBean(List<NormalListviewBean.DataBean.ItemsBean> itemsBeans) {
         normalListviewBean.getData().getItems().addAll(itemsBeans);
         notifyDataSetChanged();
     }
@@ -77,12 +80,21 @@ public class ListviewNormalHomeAdapter extends BaseAdapter {
         myViewholder.itemHomeNormalListviewLikeCb.setChecked(normalListviewBean.getData().getItems().get(position).isLiked());
 
         //checkbox加监听, 解决复用问题
+        final MyViewholder finalMyViewholder = myViewholder;
         myViewholder.itemHomeNormalListviewLikeCb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CheckBox checkBox = (CheckBox) v;
-                normalListviewBean.getData().getItems().get(position).setLiked(checkBox.isChecked());
-               //TODO:checkbox继续设置
+                //判断是否登录
+                BmobUser bmobUser = BmobUser.getCurrentUser(context);
+                if (bmobUser == null) {
+                    Intent intent = new Intent(context, RegisterActivity.class);
+                    context.startActivity(intent);
+                    finalMyViewholder.itemHomeNormalListviewLikeCb.setChecked(false);
+                } else {
+                    CheckBox checkBox = (CheckBox) v;
+                    normalListviewBean.getData().getItems().get(position).setLiked(checkBox.isChecked());
+                }
+
             }
         });
 
