@@ -29,6 +29,7 @@ public class ExitRegisterActivity extends BaseActivity implements View.OnClickLi
 
 
         exitRegisterExitTv.setOnClickListener(this);
+        exitRegisterBackBarImg.setOnClickListener(this);
 
 //        bmobUser = BmobUser.getCurrentUser(this);
     }

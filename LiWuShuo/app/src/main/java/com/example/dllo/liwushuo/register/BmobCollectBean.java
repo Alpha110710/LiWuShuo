@@ -10,8 +10,16 @@ import cn.bmob.v3.BmobObject;
  */
 public class BmobCollectBean extends BmobObject {
 
-    private String url, name, id, price, imgUrl, likeNum;
+    private String url, name, id, price, imgUrl, likeNum, userName;
     private Boolean isLike;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public Boolean getLike() {
         return isLike;

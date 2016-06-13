@@ -2,33 +2,32 @@ package com.example.dllo.liwushuo.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.home.bean.ListviewBean;
+import com.example.dllo.liwushuo.register.BmobRaidersBean;
 import com.example.dllo.liwushuo.register.RegisterActivity;
 import com.example.dllo.liwushuo.tool.App;
+import com.example.dllo.liwushuo.tool.CollectCheckBoxTool;
 import com.example.dllo.liwushuo.tool.NetTool;
 import com.example.dllo.liwushuo.tool.RoundRectTool;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.SaveListener;
 
 
 /**
@@ -38,10 +37,15 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
     private ListviewBean listviewBean;
     private RoundRectTool roundRectTool = new RoundRectTool(20);
     public Context context;
+    private CollectCheckBoxTool checkBoxTool;
+    public BmobRaidersBean collectRaidersBean;
 
 
     public ListviewFeatureHomeAdapter(Context context) {
         this.context = context;
+        checkBoxTool = new CollectCheckBoxTool(this.context);
+        checkBoxTool.queryAllLike(this);
+
     }
 
     public ListviewFeatureHomeAdapter() {
@@ -105,9 +109,20 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
 
 
         myholder.itemHomeFeatureListviewLikeCb.setText(String.valueOf(listviewBean.getData().getItems().get(position).getLikes_count()));
-        myholder.itemHomeFeatureListviewLikeCb.setChecked(listviewBean.getData().getItems().get(position).isLiked());
-        Picasso.with(App.context).load(listviewBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ig_logo_text).
-                transform(roundRectTool).fit().into(myholder.itemHomeFeatureListviewImg);
+//        myholder.itemHomeFeatureListviewLikeCb.setChecked(listviewBean.getData().getItems().get(position).isLiked());
+        //判断是否标记为喜欢
+        checkBoxTool.queryIsLikeRaiders(String.valueOf(listviewBean.getData().getItems().get(position).getId()), myholder.itemHomeFeatureListviewLikeCb);
+
+
+        Picasso.with(App.context).load(listviewBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ig_logo_text).skipMemoryCache().
+                transform(roundRectTool).fit().skipMemoryCache().into(myholder.itemHomeFeatureListviewImg);
+
+        //设置new图片
+        if (listviewBean.getData().getItems().get(position).getStatus() != 1) {
+            myholder.itemHomeFeatureFreshImg.setVisibility(View.VISIBLE);
+        } else {
+            myholder.itemHomeFeatureFreshImg.setVisibility(View.GONE);
+        }
 
 
         //TODO:设置new图片可见不可见
@@ -120,12 +135,7 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
 //            }
 //        });
 //
-//        if (listviewBean.getData().getItems().get(position).getStatus() != 1) {
-//            myholder.itemHomeFeatureFreshImg.setVisibility(View.VISIBLE);
-//        }else {
-//            myholder.itemHomeFeatureFreshImg.setVisibility(View.GONE);
-//        }
-
+//
         //checkbox加监听, 解决复用问题
 //        myholder.itemHomeFeatureListviewLikeCb.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -165,6 +175,9 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
             itemHomeFeatureFreshImg = (ImageView) view.findViewById(R.id.item_home_feature_fresh_img);
             itemHomeFeatureListviewRlayout = (RelativeLayout) view.findViewById(R.id.item_home_feature_listview_rlayout);
             itemHomeFeatureListviewLikeCb = (CheckBox) view.findViewById(R.id.item_home_feature_listview_like_cb);
+            //TODO: 实体类没有上传数据库
+
+
             itemHomeFeatureListviewLikeCb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -176,6 +189,35 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
                     } else {
                         CheckBox checkBox = (CheckBox) v;
                         listviewBean.getData().getItems().get(pos).setLiked(checkBox.isChecked());
+
+                        if (checkBox.isChecked()) {
+                            //像网络数据库传入数据 title isLike imgUrl raiders id
+                            collectRaidersBean = new BmobRaidersBean();
+                            collectRaidersBean.setLike(listviewBean.getData().getItems().get(pos).isLiked());
+                            collectRaidersBean.setId(String.valueOf(listviewBean.getData().getItems().get(pos).getId()));
+                            collectRaidersBean.setImgurl(listviewBean.getData().getItems().get(pos).getCover_image_url());
+                            collectRaidersBean.setRaiders(true);
+                            collectRaidersBean.setTitle(listviewBean.getData().getItems().get(pos).getTitle());
+                            collectRaidersBean.setUserName(bmobUser.getUsername());
+
+                            collectRaidersBean.save(context, new SaveListener() {
+                                @Override
+                                public void onSuccess() {
+                                    Toast.makeText(context, "喜欢成功", Toast.LENGTH_SHORT).show();
+                                    //查询方法
+                                    checkBoxTool.queryAllLike();
+                                }
+
+                                @Override
+                                public void onFailure(int i, String s) {
+                                    Toast.makeText(context, "喜欢失败" + s, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            //取消喜欢
+                            checkBoxTool.cancleLikeRaiders(String.valueOf(listviewBean.getData().getItems().get(pos).getId()));
+                            checkBoxTool.queryAllLike();
+                        }
                     }
                 }
             });

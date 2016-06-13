@@ -66,6 +66,7 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
 
         //解析传入参数
         url = URLValues.ITEM_GIFT_BEFORE + giftDetailUrl + URLValues.ITEM_GIFT_AFTER;
+        Log.d("GiftDetailsActivity", url);
         getAnlysisSort(url);
 
 
@@ -131,11 +132,14 @@ public class GiftDetailsActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        //url, name, id, price, imgUrl, likeNum,
         Intent intent = new Intent(this, SelectDetailActivity.class);
         intent.putExtra("url", giftDetailBean.getData().getItems().get(position).getPurchase_url());
         intent.putExtra("name", giftDetailBean.getData().getItems().get(position).getName());
         intent.putExtra("id", String.valueOf(giftDetailBean.getData().getItems().get(position).getId()));
+        intent.putExtra("price", giftDetailBean.getData().getItems().get(position).getPrice());
+        intent.putExtra("imgUrl", giftDetailBean.getData().getItems().get(position).getImage_urls().get(0));
+        intent.putExtra("likeNum", String.valueOf(giftDetailBean.getData().getItems().get(position).getFavorites_count()));
         startActivity(intent);
 
     }

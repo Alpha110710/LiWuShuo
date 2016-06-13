@@ -4,119 +4,116 @@
     android:layout_height="match_parent">
 
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusable="true">
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@mipmap/bg_profile">
+
+
+            <ImageView
+                android:id="@+id/profile_me_avatar_boy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/me_avatar_boy" />
+
+            <ImageView
+                android:id="@+id/profile_me_avatar_girl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/me_avatar_girl" />
+
+            <TextView
+                android:id="@+id/proile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_me_avatar_girl"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="未登录"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_me_avatar_boy"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:src="@mipmap/bg_feed_favourite"
+                android:visibility="gone" />
+
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="55dp"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/icon_cart"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="购物车" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@mipmap/bg_profile">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/icon_order"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="订单" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/icon_coupon"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="礼券" />
 
-                <ImageView
-                    android:id="@+id/profile_me_avatar_boy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@mipmap/me_avatar_boy" />
-
-                <ImageView
-                    android:id="@+id/profile_me_avatar_girl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@mipmap/me_avatar_girl" />
-
-                <TextView
-                    android:id="@+id/proile_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/profile_me_avatar_girl"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:text="未登录"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/profile_me_avatar_boy"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="30dp"
-                    android:src="@mipmap/bg_feed_favourite" />
-
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@color/colorWhite"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:drawableTop="@mipmap/icon_cart"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="购物车" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:drawableTop="@mipmap/icon_order"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="订单" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:drawableTop="@mipmap/icon_coupon"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="礼券" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:drawableTop="@mipmap/icon_service"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="客服" />
-
-            </LinearLayout>
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/profile_tablayout"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorWhite" />
-
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/profile_viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="350dp" />
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/icon_service"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="客服" />
 
         </LinearLayout>
-    </ScrollView>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/profile_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorWhite" />
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/profile_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"

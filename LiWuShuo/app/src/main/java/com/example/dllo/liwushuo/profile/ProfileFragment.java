@@ -26,8 +26,6 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     private TabLayout profileTablayout;
     private ViewPager profileViewpager;
     private ProfileViewpagerAdapter adapter;
-    private GiftProfileFragment giftProfileFragment;
-    private RaidersProfileFragment raidersProfileFragment;
     private ArrayList<Fragment> fragments;
     private TextView proileName;
     private ImageView profileMeAvatarGirl;
@@ -54,13 +52,14 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         proileName.setOnClickListener(this);
         profileMeAvatarGirl.setOnClickListener(this);
 
-        giftProfileFragment = new GiftProfileFragment();
-        raidersProfileFragment = new RaidersProfileFragment();
+        //不用建好的对象了 因为需要刷新
+//        giftProfileFragment = new GiftProfileFragment();
+//        raidersProfileFragment = new RaidersProfileFragment();
         adapter = new ProfileViewpagerAdapter(getChildFragmentManager());
 
         fragments = new ArrayList<>();
-        fragments.add(giftProfileFragment);
-        fragments.add(raidersProfileFragment);
+        fragments.add(new GiftProfileFragment());
+        fragments.add(new RaidersProfileFragment());
         adapter.setFragments(fragments);
         profileViewpager.setAdapter(adapter);
         profileTablayout.setupWithViewPager(profileViewpager);
@@ -75,6 +74,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
+
         refreshFragment();
 
     }
@@ -104,6 +104,14 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     //刷新fragment
     void refreshFragment(){
+        //重新设置viewpager
+        fragments = new ArrayList<>();
+        fragments.add(new GiftProfileFragment());
+        fragments.add(new RaidersProfileFragment());
+        adapter.setFragments(fragments);
+        profileViewpager.setAdapter(adapter);
+
+        //设置头像登录未登录状态
         String username = (String) BmobUser.getObjectByKey(context, "username");
         if (username == null){
             proileName.setText("未登录");

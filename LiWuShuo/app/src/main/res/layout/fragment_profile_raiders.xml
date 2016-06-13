@@ -3,9 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <TextView
+
+    <ListView
+        android:id="@+id/profile_raiders_listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="222"/>
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="2dp"/>
 
 </LinearLayout>

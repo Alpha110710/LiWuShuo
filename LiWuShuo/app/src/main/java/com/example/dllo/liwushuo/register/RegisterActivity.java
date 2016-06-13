@@ -62,7 +62,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 bmobUser = new BmobUser();
                 bmobUser.setUsername(registerTeltnumEt.getText().toString());
                 bmobUser.setPassword(registerPasswordEt.getText().toString());
-                Log.d("RegisterActivity", registerTeltnumEt.getText().toString());
+
                 if (isLogin) {
                     bmobUser.login(App.context, new SaveListener() {
                         @Override
@@ -73,7 +73,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
                         @Override
                         public void onFailure(int i, String s) {
-                            Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "登录失败" + s, Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -89,7 +89,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         @Override
                         public void onFailure(int i, String s) {
 
-                            Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "注册失败" + s, Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

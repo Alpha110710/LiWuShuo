@@ -206,6 +206,9 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //获取真实的pos  因为加头
         int pos = (int) parent.getAdapter().getItemId(position);
+        //原本为0 为了设置new图片不可见
+        listviewBean.getData().getItems().get(pos).setStatus(1);
+        listviewFeatureHomeAdapter.setListviewBean(listviewBean);
 
         //遍历实体类将urlId加入到集合中
         for (ListviewBean.DataBean.ItemsBean itemBean : listviewBean.getData().getItems()

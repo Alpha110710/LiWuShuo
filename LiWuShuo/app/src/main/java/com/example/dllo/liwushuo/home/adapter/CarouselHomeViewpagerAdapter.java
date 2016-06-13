@@ -97,7 +97,6 @@ public class CarouselHomeViewpagerAdapter extends PagerAdapter {
             public void onClick(View v) {
 
                 if (position % carouselBean.getData().getBanners().size() != carouselBean.getData().getBanners().size() - 1) {
-                    Toast.makeText(context, "position:" + position % carouselBean.getData().getBanners().size(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, RaidersDetailsUpActivity.class);
                     intent.putExtra("raidersDetailUrl", String.valueOf(carouselBean.getData().getBanners().get(position % carouselBean.getData().getBanners().size()).getTarget_id()));
                     context.startActivity(intent);

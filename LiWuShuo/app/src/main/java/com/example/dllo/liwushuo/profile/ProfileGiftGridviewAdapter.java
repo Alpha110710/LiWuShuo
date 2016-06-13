@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.register.BmobCollectBean;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +57,10 @@ public class ProfileGiftGridviewAdapter extends BaseAdapter {
             viewHolder = (MyProfileGiftGridviewViewHolder) convertView.getTag();
         }
         viewHolder.itemSelectGridviewNameTv.setText(collectBeans.get(position).getName());
-        viewHolder.itemSelectGridviewPriceTv.setText("aaa");
-        //TODO:没写好
+        viewHolder.itemSelectGridviewPriceTv.setText(collectBeans.get(position).getPrice());
+        viewHolder.itemSelectGridviewSupportTv.setText(collectBeans.get(position).getLikeNum());
+        Picasso.with(context).load(collectBeans.get(position).getImgUrl()).fit().into(viewHolder.itemSelectGridviewImg);
+        //TODO:收藏点击不点了
 
 
         return convertView;
@@ -65,8 +68,8 @@ public class ProfileGiftGridviewAdapter extends BaseAdapter {
 
     class MyProfileGiftGridviewViewHolder {
 
-        private final ImageView itemSelectGridviewImg;
-        private final TextView itemSelectGridviewSupportTv, itemSelectGridviewPriceTv, itemSelectGridviewNameTv;
+        final ImageView itemSelectGridviewImg;
+        final TextView itemSelectGridviewSupportTv, itemSelectGridviewPriceTv, itemSelectGridviewNameTv;
 
         public MyProfileGiftGridviewViewHolder(View view) {
 

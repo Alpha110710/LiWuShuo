@@ -76,10 +76,9 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
         getWebviewUrl();
 
         selectDetailBackImg.setOnClickListener(this);
-        collectBean = new BmobCollectBean();
 
         //查询是否已经标记为喜欢的方法
-        checkBoxTool.queryIsLike(this.intent, selectDetailFavoritesCb);
+        checkBoxTool.queryIsLike(this.intent.getStringExtra("id"), selectDetailFavoritesCb);
 
 
 
@@ -102,12 +101,13 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.select_detail_favorites_cb:
-                //url, name, id, price, imgUrl, likeNum;
+                //url, name, id, price, imgUrl, likeNum, like;
                 idConment = this.intent.getStringExtra("id");
                 price = this.intent.getStringExtra("price");
                 name = this.intent.getStringExtra("name");
                 imgUrl = this.intent.getStringExtra("imgUrl");
                 likeNum = this.intent.getStringExtra("likeNum");
+                url = this.intent.getStringExtra("url");
 
                 BmobUser bmobUser = BmobUser.getCurrentUser(this);
                 if (bmobUser == null) {
@@ -116,20 +116,24 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
                     selectDetailFavoritesCb.setChecked(false);
                 } else {
                     if (selectDetailFavoritesCb.isChecked()) {
+                        collectBean = new BmobCollectBean();
 
-                        //存储数据库
+                        //存储数据库 url, name, id, price, imgUrl, likeNum,
                         collectBean.setId(idConment);
                         collectBean.setImgUrl(imgUrl);
                         collectBean.setName(name);
                         collectBean.setLikeNum(likeNum);
                         collectBean.setPrice(price);
+                        collectBean.setUrl(url);
+
+                        collectBean.setUserName(bmobUser.getUsername());
                         collectBean.setLike(true);
+                        //像Bmob数据库存入数据
                         collectBean.save(this, new SaveListener() {
                             @Override
                             public void onSuccess() {
                                 Toast.makeText(SelectDetailActivity.this, "喜欢成功", Toast.LENGTH_SHORT).show();
                             }
-
                             @Override
                             public void onFailure(int i, String s) {
                                 Toast.makeText(SelectDetailActivity.this, "喜欢失败" + s, Toast.LENGTH_SHORT).show();
@@ -138,7 +142,7 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
 
                     } else {
 
-                        checkBoxTool.cancleLike(this.intent);
+                        checkBoxTool.cancleLike(this.intent.getStringExtra("id"));
                     }
                 }
                 break;
@@ -147,8 +151,8 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
 
     //连接淘宝网络,接到SelectFragment传来的实体内部类
     private void getWebviewUrl() {
-        intent = getIntent();
         //if判断  用于解析gift挑选界面的webview跳转  需要拼接id
+        final Intent intent = getIntent();
         if (intent.getStringExtra("urlWebId") != null) {
 
             netTool.getAnalysis(intent.getStringExtra("urlWebId"), new NetListener() {
@@ -157,15 +161,15 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
                     Gson gson = new Gson();
                     giftSelectWebBean = gson.fromJson(response, GiftSelectWebBean.class);
 
-                    selectDetailWebview.loadUrl(giftSelectWebBean.getData().getPurchase_url());
+                    selectDetailBarTv.setText(giftSelectWebBean.getData().getName());
+                    idConment = String.valueOf(giftSelectWebBean.getData().getId());
 
+                    selectDetailWebview.loadUrl(giftSelectWebBean.getData().getPurchase_url());
                     selectDetailWebview.setWebViewClient(new WebViewClient() {
                         @Override
                         public boolean shouldOverrideUrlLoading(WebView view, String url) {
                             view.loadUrl(url);
 
-                            selectDetailBarTv.setText(giftSelectWebBean.getData().getName());
-                            idConment = String.valueOf(giftSelectWebBean.getData().getId());
                             return true;
                         }
                     });
@@ -178,24 +182,28 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
             });
 
             //else用于select界面和礼物分类小圆圈图片界面的点击进入跳webview  只有接到对应url和name
+            this.intent = intent;
         } else {
-            url = intent.getStringExtra("url");
-            selectDetailWebview.loadUrl(intent.getStringExtra(url));
+            final Intent intent1 = getIntent();
+            url = intent1.getStringExtra("url");
+            selectDetailWebview.loadUrl(intent1.getStringExtra(url));
 
             selectDetailWebview.setWebViewClient(new WebViewClient() {
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
                     view.loadUrl(url);
 
-                    if (intent.getStringExtra("name") != null) {
-                        selectDetailBarTv.setText(intent.getStringExtra("name"));
-                    }
-                    //收到拼接评论的 id
-                    idConment = intent.getStringExtra("id");
-
                     return true;
                 }
             });
+            if (intent1.getStringExtra("name") != null) {
+                selectDetailBarTv.setText(intent1.getStringExtra("name"));
+            }
+            //收到拼接评论的 id
+            idConment = intent1.getStringExtra("id");
+            this.intent = intent1;
+
+
         }
 
 
