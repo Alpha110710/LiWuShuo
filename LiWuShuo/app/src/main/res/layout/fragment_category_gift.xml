@@ -6,16 +6,16 @@
     <TextView
         android:id="@+id/fragment_category_gift_artifact_tv"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/forty_five_dp"
         android:drawableLeft="@mipmap/gift_category_guide"
-        android:drawablePadding="7dp"
+        android:drawablePadding="@dimen/seven_dp"
         android:drawableRight="@mipmap/ic_chevron_dark"
-        android:padding="13dp"
-        android:paddingEnd="20dp"
+        android:padding="@dimen/thirteen_dp"
+        android:paddingEnd="@dimen/twenty_dp"
         android:background="@color/colorWhite"
-        android:text="选礼神器"
+        android:text="@string/category_guide"
         android:textColor="@color/colorBlack"
-        android:textSize="13sp"/>
+        android:textSize="@dimen/thirteen_sp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         android:weightSum="4">
         <ListView
             android:id="@+id/fragment_category_gift_listview_left"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="wrap_content"
             android:scrollbars="none"
             android:divider="@null"
@@ -32,7 +32,7 @@
             android:layout_weight="1"/>
         <ListView
             android:id="@+id/fragment_category_gift_listview_right"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="wrap_content"
             android:scrollbars="none"
             android:divider="@null"

@@ -5,11 +5,11 @@
 
     <ImageView
         android:id="@+id/item_category_down_listview_gridview_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/sixty_dp"
+        android:layout_height="@dimen/sixty_dp"
         android:layout_centerHorizontal="true"
         android:src="@mipmap/ic_about"
-        android:text="222" />
+         />
 
     <TextView
         android:id="@+id/item_category_down_listview_gridview_tv"
@@ -17,9 +17,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/item_category_down_listview_gridview_img"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="111"
+        android:layout_marginTop="@dimen/seven_dp"
+        android:layout_marginBottom="@dimen/seven_dp"
         android:textColor="@color/colorBlack"
-        android:textSize="17sp" />
+        android:textSize="@dimen/seventeen_sp" />
 
 </RelativeLayout>

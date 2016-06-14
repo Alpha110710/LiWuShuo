@@ -47,11 +47,12 @@ public class SearchDetailFragment extends BaseFragment {
         searchDetailGiftFragment = new SearchDetailGiftFragment();
         searchDetailRaidersFragment = new SearchDetailRaidersFragment();
         fragments.add(searchDetailGiftFragment);
-        fragments.add(searchDetailRaidersFragment);
+//        fragments.add(searchDetailRaidersFragment);
 
         searchDetailViewpagerAdapter.setFragments(fragments);
         searchDetailViewPager.setAdapter(searchDetailViewpagerAdapter);
         searchDetailTablayout.setupWithViewPager(searchDetailViewPager);
+        searchDetailTablayout.setSelectedTabIndicatorColor(0x00000000);
 
         //接editText的值  然后再传给下一集fragment
         Bundle bundle = getArguments();

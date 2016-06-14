@@ -6,17 +6,17 @@
     <ImageView
         android:id="@+id/item_raiders_listview_see_all_img"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp" />
+        android:layout_height="@dimen/one_hundred_fifty_dp"
+        android:layout_marginLeft="@dimen/five_dp"
+        android:layout_marginRight="@dimen/five_dp"
+        android:layout_marginTop="@dimen/ten_dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="@dimen/one_hundred_fifty_dp"
+        android:layout_marginLeft="@dimen/five_dp"
+        android:layout_marginRight="@dimen/five_dp"
+        android:layout_marginTop="@dimen/ten_dp"
         android:background="@drawable/round_transparent_black">
 
         <LinearLayout
@@ -24,22 +24,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="@dimen/forty_dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/item_raiders_listview_see_all_title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="文艺家生活"
                 android:textColor="@color/colorWhite"
-                android:textSize="22sp" />
+                android:textSize="@dimen/twenty_two_sp" />
 
             <TextView
                 android:id="@+id/item_raiders_listview_see_all_point_nine"
                 android:layout_width="match_parent"
-                android:layout_height="12dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="@dimen/twelve_dp"
+                android:layout_marginTop="@dimen/five_dp"
                 android:background="@drawable/ig_topic_horizontal_rule" />
         </LinearLayout>
 
@@ -49,10 +48,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/item_raiders_listview_see_all_tv_llyout"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:text="将生活过成诗的文艺风家居"
+            android:layout_marginTop="@dimen/five_dp"
             android:textColor="@color/colorWhite"
-            android:textSize="17sp" />
+            android:textSize="@dimen/seventeen_sp" />
     </RelativeLayout>
 
 

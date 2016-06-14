@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="280dp"
+    android:layout_height="@dimen/two_hundred_eighty_dp"
     android:background="@color/colorWhite"
-    android:layout_marginTop="1dp"
+    android:layout_marginTop="@dimen/one_dp"
     android:orientation="vertical"
     android:weightSum="8">
 
     <GridView
         android:id="@+id/gift_condition_select_popup_gridview"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_height="@dimen/zero_dp"
+        android:layout_marginLeft="@dimen/ten_dp"
+        android:layout_marginRight="@dimen/ten_dp"
         android:layout_weight="7"
         android:choiceMode="multipleChoice"
         android:gravity="center"
-        android:horizontalSpacing="10dp"
+        android:horizontalSpacing="@dimen/ten_dp"
         android:scrollbars="none"
         android:numColumns="3" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="@dimen/one_dp"
+        android:layout_marginTop="@dimen/five_dp"
         android:background="@color/colcorRadioButtonLightgrey" />
 
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/forty_dp"
+        android:layout_height="@dimen/zero_dp"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:src="@mipmap/ic_search_channel_button" />

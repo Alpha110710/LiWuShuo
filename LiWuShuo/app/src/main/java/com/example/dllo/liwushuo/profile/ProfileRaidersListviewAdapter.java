@@ -57,7 +57,7 @@ public class ProfileRaidersListviewAdapter extends BaseAdapter {
             viewHolder = (MyProfileRaidersListviewViewHolder) convertView.getTag();
         }
         viewHolder.itemProfileRaidersListviewTv.setText(bmobRaidersBeen.get(position).getTitle());
-        Picasso.with(context).load(bmobRaidersBeen.get(position).getImgurl()).placeholder(R.mipmap.ic_about).transform(new RoundRectTool(20)).fit().into(viewHolder.itemProfileRaidersListviewImg);
+        Picasso.with(context).load(bmobRaidersBeen.get(position).getImgurl()).transform(new RoundRectTool(20)).fit().into(viewHolder.itemProfileRaidersListviewImg);
 
         return convertView;
     }

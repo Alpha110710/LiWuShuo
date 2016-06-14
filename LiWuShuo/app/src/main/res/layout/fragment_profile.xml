@@ -12,7 +12,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="@dimen/one_hundred_twenty_dp"
             android:background="@mipmap/bg_profile">
 
 
@@ -36,17 +36,17 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_me_avatar_girl"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
-                android:text="未登录"
+                android:layout_marginTop="@dimen/two_dp"
+                android:text="@string/unregister"
                 android:textColor="@color/colorWhite"
-                android:textSize="15sp" />
+                android:textSize="@dimen/fifteen_sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_me_avatar_boy"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/thirty_dp"
                 android:src="@mipmap/bg_feed_favourite"
                 android:visibility="gone" />
 
@@ -55,7 +55,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="@dimen/fifty_five_dp"
             android:background="@color/colorWhite"
             android:orientation="horizontal">
 
@@ -65,8 +65,8 @@
                 android:layout_weight="1"
                 android:drawableTop="@mipmap/icon_cart"
                 android:gravity="center"
-                android:paddingTop="10dp"
-                android:text="购物车" />
+                android:paddingTop="@dimen/five_dp"
+                android:text="@string/cart" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -74,8 +74,8 @@
                 android:layout_weight="1"
                 android:drawableTop="@mipmap/icon_order"
                 android:gravity="center"
-                android:paddingTop="10dp"
-                android:text="订单" />
+                android:paddingTop="@dimen/five_dp"
+                android:text="@string/order" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,8 +83,8 @@
                 android:layout_weight="1"
                 android:drawableTop="@mipmap/icon_coupon"
                 android:gravity="center"
-                android:paddingTop="10dp"
-                android:text="礼券" />
+                android:paddingTop="@dimen/five_dp"
+                android:text="@string/coupon" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -92,23 +92,23 @@
                 android:layout_weight="1"
                 android:drawableTop="@mipmap/icon_service"
                 android:gravity="center"
-                android:paddingTop="10dp"
-                android:text="客服" />
+                android:paddingTop="@dimen/five_dp"
+                android:text="@string/service" />
 
         </LinearLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/profile_tablayout"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="@dimen/thirty_dp"
+            android:layout_marginTop="@dimen/ten_dp"
             android:background="@color/colorWhite" />
 
 
         <android.support.v4.view.ViewPager
             android:id="@+id/profile_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/zero_dp"
             android:layout_weight="1" />
 
 
@@ -123,7 +123,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_margin="@dimen/fifteen_dp"
             android:src="@mipmap/icon_message" />
 
 
@@ -132,16 +132,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginRight="@dimen/twelve_dp"
+            android:layout_marginTop="@dimen/fifteen_dp"
             android:src="@mipmap/me_settings" />
 
         <ImageView
             android:id="@+id/profile_scan_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginRight="@dimen/twenty_dp"
+            android:layout_marginTop="@dimen/fifteen_dp"
             android:layout_toLeftOf="@id/profile_sweep_iv"
             android:src="@mipmap/icon_scan" />
 

@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
-import com.example.dllo.liwushuo.SearchBean;
 import com.example.dllo.liwushuo.base.BaseFragment;
 import com.example.dllo.liwushuo.category.GiftConditionSelectActivity;
 import com.example.dllo.liwushuo.net.NetListener;

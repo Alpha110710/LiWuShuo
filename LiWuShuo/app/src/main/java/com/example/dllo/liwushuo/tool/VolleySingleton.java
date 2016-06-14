@@ -3,6 +3,7 @@ package com.example.dllo.liwushuo.tool;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.example.dllo.liwushuo.base.App;
 import com.example.dllo.liwushuo.net.MemoryCache;
 
 /**

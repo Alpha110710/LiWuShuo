@@ -6,10 +6,10 @@
 
     <ImageView
         android:id="@+id/register_back_img"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="7dp"
+        android:layout_width="@dimen/fifty_dp"
+        android:layout_height="@dimen/fifty_dp"
+        android:layout_marginLeft="@dimen/twelve_dp"
+        android:layout_marginTop="@dimen/seven_dp"
         android:src="@mipmap/abc_ic_clear_search_api_disabled_holo_light" />
 
     <LinearLayout
@@ -19,20 +19,20 @@
 
         <ImageView
             android:id="@+id/register_phone_img"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="70dp"
+            android:layout_width="@dimen/twelve_dp"
+            android:layout_height="@dimen/twelve_dp"
+            android:layout_marginLeft="@dimen/forty_dp"
+            android:layout_marginTop="@dimen/seventy_dp"
             android:src="@mipmap/icon_cellphone" />
 
         <EditText
             android:id="@+id/register_teltnum_et"
-            android:layout_width="270dp"
+            android:layout_width="@dimen/two_hundred_seventy_dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="58dp"
-            android:hint="输入手机号"
-            android:paddingBottom="20dp" />
+            android:layout_marginLeft="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/fifty_eight_dp"
+            android:hint="@string/teleNum"
+            android:paddingBottom="@dimen/twenty_dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -47,35 +47,36 @@
 
             <EditText
                 android:id="@+id/register_password_et"
-                android:layout_width="270dp"
+                android:layout_width="@dimen/two_hundred_seventy_dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:hint="密码"
-                android:paddingBottom="20dp" />
+                android:layout_marginLeft="@dimen/seventy_dp"
+                android:hint="@string/password_"
+                android:password="true"
+                android:paddingBottom="@dimen/twenty_dp" />
 
             <ImageView
                 android:id="@+id/register_password_img"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="15dp"
+                android:layout_width="@dimen/twenty_dp"
+                android:layout_height="@dimen/twenty_dp"
+                android:layout_marginLeft="@dimen/forty_dp"
+                android:layout_marginTop="@dimen/fifteen_dp"
                 android:src="@mipmap/icon_password" />
 
             <ImageView
                 android:id="@+id/register_message_img"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="15dp"
+                android:layout_width="@dimen/twenty_dp"
+                android:layout_height="@dimen/twenty_dp"
+                android:layout_marginLeft="@dimen/forty_dp"
+                android:layout_marginTop="@dimen/fifteen_dp"
                 android:src="@mipmap/icon_login_message"
                 android:visibility="gone"/>
 
             <Button
                 android:id="@+id/register_getcode"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/forty_dp"
                 android:layout_alignRight="@id/register_password_et"
-                android:text="获取验证码"
+                android:text="@string/get_password"
                 android:textColor="@color/colorWhite"
                 android:visibility="gone" />
         </RelativeLayout>
@@ -84,25 +85,25 @@
 
     <TextView
         android:id="@+id/register_button"
-        android:layout_width="290dp"
-        android:layout_height="38dp"
+        android:layout_width="@dimen/two_hundred_ninty_dp"
+        android:layout_height="@dimen/thirty_eight_dp"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/forty_dp"
         android:background="@drawable/register"
         android:gravity="center"
-        android:text="登录"
+        android:text="@string/login"
         android:textColor="@color/colorWhite"
-        android:textSize="15sp" />
+        android:textSize="@dimen/fifteen_sp" />
 
     <CheckBox
         android:id="@+id/register_select_cb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginRight="@dimen/fifty_dp"
+        android:layout_marginTop="@dimen/twenty_dp"
         android:button="@null"
-        android:text="注册新用户"
+        android:text="@string/register_new"
         android:textColor="@color/colorRadioButtonDeepPink" />
 
     <LinearLayout
@@ -111,24 +112,24 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="90dp"
-            android:layout_height="1dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="110dp"
+            android:layout_width="@dimen/ninty_dp"
+            android:layout_height="@dimen/one_dp"
+            android:layout_marginLeft="@dimen/thirty_dp"
+            android:layout_marginTop="@dimen/one_hundred_ten_dp"
             android:background="@color/colcorRadioButtonDeepgrey" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="100dp"
-            android:text="使用社交账号登陆" />
+            android:layout_marginLeft="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/one_hundred_dp"
+            android:text="@string/regis_another" />
 
         <TextView
-            android:layout_width="90dp"
-            android:layout_height="1dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="110dp"
+            android:layout_width="@dimen/ninty_dp"
+            android:layout_height="@dimen/one_dp"
+            android:layout_marginLeft="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/one_hundred_ten_dp"
             android:background="@color/colcorRadioButtonDeepgrey"
             android:gravity="right" />
     </LinearLayout>
@@ -150,7 +151,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="50dp"
+            android:layout_marginRight="@dimen/fifty_dp"
             android:layout_toLeftOf="@id/register_wechat_img"
             android:src="@mipmap/icon_log_sina" />
 
@@ -159,7 +160,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="@dimen/fifty_dp"
             android:layout_toRightOf="@id/register_wechat_img"
             android:src="@mipmap/icon_log_qq" />
 

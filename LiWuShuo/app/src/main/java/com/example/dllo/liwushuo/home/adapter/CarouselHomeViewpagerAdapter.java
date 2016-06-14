@@ -4,34 +4,41 @@ package com.example.dllo.liwushuo.home.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
-import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.category.RaidersDetailsUpActivity;
 import com.example.dllo.liwushuo.home.bean.CarouselBean;
-import com.example.dllo.liwushuo.tool.App;
+import com.example.dllo.liwushuo.base.App;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 /**
  * Created by dllo on 16/5/21.
  */
-public class CarouselHomeViewpagerAdapter extends PagerAdapter {
+public class CarouselHomeViewpagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
 
     private Context context;
     private CarouselBean carouselBean;
-    private ImageView itemHomeCarouseImg;
-    private CheckBox itemHomeCarouseCb1, itemHomeCarouseCb2, itemHomeCarouseCb3, itemHomeCarouseCb4, itemHomeCarouseCb5, itemHomeCarouseCb6;
+    private ViewPager viewPager;
+    private LinearLayout linearLayout;
+
 
     public void setCarouselBean(CarouselBean carouselBean) {
         this.carouselBean = carouselBean;
+        notifyDataSetChanged();
+    }
+
+    public void setLinearLayout(LinearLayout linearLayout) {
+        this.linearLayout = linearLayout;
+        notifyDataSetChanged();
+    }
+
+    public void setViewPager(ViewPager viewPager) {
+        this.viewPager = viewPager;
         notifyDataSetChanged();
     }
 
@@ -52,47 +59,22 @@ public class CarouselHomeViewpagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_home_carouse, container, false);
-        itemHomeCarouseImg = (ImageView) view.findViewById(R.id.item_home_carouse_img);
-        itemHomeCarouseCb1 = (CheckBox) view.findViewById(R.id.item_home_carouse_cb1);
-        itemHomeCarouseCb2 = (CheckBox) view.findViewById(R.id.item_home_carouse_cb2);
-        itemHomeCarouseCb3 = (CheckBox) view.findViewById(R.id.item_home_carouse_cb3);
-        itemHomeCarouseCb4 = (CheckBox) view.findViewById(R.id.item_home_carouse_cb4);
-        itemHomeCarouseCb5 = (CheckBox) view.findViewById(R.id.item_home_carouse_cb5);
-        itemHomeCarouseCb6 = (CheckBox) view.findViewById(R.id.item_home_carouse_cb6);
-        switch (position % carouselBean.getData().getBanners().size()) {
-            case 0:
-                itemHomeCarouseCb6.setChecked(false);
-                itemHomeCarouseCb1.setChecked(true);
-                break;
-            case 1:
-                itemHomeCarouseCb1.setChecked(false);
-                itemHomeCarouseCb2.setChecked(true);
-                break;
-            case 2:
-                itemHomeCarouseCb2.setChecked(false);
-                itemHomeCarouseCb3.setChecked(true);
-                break;
-            case 3:
-                itemHomeCarouseCb3.setChecked(false);
-                itemHomeCarouseCb4.setChecked(true);
-                break;
-            case 4:
-                itemHomeCarouseCb4.setChecked(false);
-                itemHomeCarouseCb5.setChecked(true);
-                break;
-            default:
-                itemHomeCarouseCb5.setChecked(false);
-                itemHomeCarouseCb6.setChecked(true);
-                break;
 
-        }
+        ImageView imageView = new ImageView(context);
 
         Picasso.with(App.context).load(carouselBean.getData().getBanners().get(position % carouselBean.getData().getBanners().size()).getImage_url()).fit()
-                .into(itemHomeCarouseImg);
+                .into(imageView);
+
+        try {
+            container.addView(imageView);
+        } catch (IllegalStateException e) {
+            container.removeView(imageView);
+            container.addView(imageView);
+        }
+
 
         //给轮播图的imageView加监听事件跳转 到raiders上面圆角正方形的进入activity中  复用的
-        itemHomeCarouseImg.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -104,15 +86,39 @@ public class CarouselHomeViewpagerAdapter extends PagerAdapter {
             }
         });
 
+        viewPager.addOnPageChangeListener(this);
 
-        container.addView(view);
-        return view;
+        return imageView;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-
+        if (container.getChildAt(position % carouselBean.getData().getBanners().size()) == object) {
+            container.removeViewAt(position % carouselBean.getData().getBanners().size());
+        }
     }
 
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        int selectNum = position % carouselBean.getData().getBanners().size();
+        for (int i = 0; i < carouselBean.getData().getBanners().size(); i++) {
+            if (selectNum == i) {
+                ((CheckBox) linearLayout.getChildAt(i)).setChecked(true);
+            } else {
+                ((CheckBox) linearLayout.getChildAt(i)).setChecked(false);
+
+            }
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
 }

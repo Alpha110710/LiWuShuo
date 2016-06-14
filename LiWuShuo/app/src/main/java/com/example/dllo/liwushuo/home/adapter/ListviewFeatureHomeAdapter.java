@@ -2,7 +2,6 @@ package com.example.dllo.liwushuo.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.home.bean.ListviewBean;
 import com.example.dllo.liwushuo.register.BmobRaidersBean;
 import com.example.dllo.liwushuo.register.RegisterActivity;
-import com.example.dllo.liwushuo.tool.App;
+import com.example.dllo.liwushuo.base.App;
 import com.example.dllo.liwushuo.tool.CollectCheckBoxTool;
 import com.example.dllo.liwushuo.tool.NetTool;
 import com.example.dllo.liwushuo.tool.RoundRectTool;
@@ -46,6 +45,10 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
         checkBoxTool = new CollectCheckBoxTool(this.context);
         checkBoxTool.queryAllLike(this);
 
+    }
+
+    public void queryAllLike(){
+        checkBoxTool.queryAllLike(this);
     }
 
     public ListviewFeatureHomeAdapter() {
@@ -115,7 +118,7 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
 
 
         Picasso.with(App.context).load(listviewBean.getData().getItems().get(position).getCover_image_url()).placeholder(R.mipmap.ig_logo_text).skipMemoryCache().
-                transform(roundRectTool).fit().skipMemoryCache().into(myholder.itemHomeFeatureListviewImg);
+                transform(roundRectTool).fit().into(myholder.itemHomeFeatureListviewImg);
 
         //设置new图片
         if (listviewBean.getData().getItems().get(position).getStatus() != 1) {

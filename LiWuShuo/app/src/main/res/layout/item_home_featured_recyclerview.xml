@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="80dp"
-    android:layout_height="80dp"
+    android:layout_width="@dimen/eighty_dp"
+    android:layout_height="@dimen/eighty_dp"
     android:id="@+id/item_home_feature_recyclerview_llyout"
     android:orientation="vertical">
 
@@ -9,7 +9,7 @@
         android:id="@+id/item_home_feature_recyclerview_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/five_dp"
         />
 
 </LinearLayout>

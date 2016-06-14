@@ -8,16 +8,16 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/fifteen_dp"
         android:gravity="center"
-        android:text="分享到"
+        android:text="@string/share"
         android:textColor="@color/colorBlack"
-        android:textSize="20sp" />
+        android:textSize="@dimen/twenty_sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="@dimen/one_hundred_dp"
+        android:layout_marginTop="@dimen/five_dp"
         android:orientation="horizontal">
 
         <TextView
@@ -27,8 +27,8 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/selector_wechat_timeline"
             android:gravity="center"
-            android:paddingTop="10dp"
-            android:text="微信朋友圈"
+            android:paddingTop="@dimen/ten_dp"
+            android:text="@string/wechat_time"
             android:textColor="@color/colorBlack" />
 
         <TextView
@@ -38,8 +38,8 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/selector_wechat"
             android:gravity="center"
-            android:paddingTop="10dp"
-            android:text="微信好友"
+            android:paddingTop="@dimen/ten_dp"
+            android:text="@string/wechat"
             android:textColor="@color/colorBlack" />
 
         <TextView
@@ -49,8 +49,8 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/selector_qq_sina"
             android:gravity="center"
-            android:paddingTop="10dp"
-            android:text="新浪微博"
+            android:paddingTop="@dimen/ten_dp"
+            android:text="@string/sina"
             android:textColor="@color/colorBlack" />
 
 
@@ -58,7 +58,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/one_hundred_dp"
         android:orientation="horizontal">
 
         <TextView
@@ -68,8 +68,8 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/selector_qq_qzone"
             android:gravity="center"
-            android:paddingTop="10dp"
-            android:text="QQ空间"
+            android:paddingTop="@dimen/ten_dp"
+            android:text="@string/qzone"
             android:textColor="@color/colorBlack" />
 
         <TextView
@@ -79,8 +79,8 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/selector_qq_tencent"
             android:gravity="center"
-            android:paddingTop="10dp"
-            android:text="QQ好友"
+            android:paddingTop="@dimen/ten_dp"
+            android:text="@string/aa_tencent"
             android:textColor="@color/colorBlack" />
 
         <TextView
@@ -90,25 +90,25 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/selector_hyperlink"
             android:gravity="center"
-            android:paddingTop="10dp"
-            android:text="复制链接"
+            android:paddingTop="@dimen/ten_dp"
+            android:text="@string/hyperlink"
             android:textColor="@color/colorBlack" />
     </LinearLayout>
 
     <TextView
-        android:layout_width="360dp"
-        android:layout_height="1dp"
+        android:layout_width="@dimen/thirty_hundred_sixty_dp"
+        android:layout_height="@dimen/one_dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/ten_dp"
         android:background="@color/colcorRadioButtonLightgrey" />
 
     <TextView
         android:id="@+id/item_home_share_popup_cancel_tv"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="@dimen/forty_dp"
+        android:layout_marginBottom="@dimen/five_dp"
+        android:layout_marginTop="@dimen/five_dp"
         android:gravity="center"
-        android:text="取消"
-        android:textSize="25sp" />
+        android:text="@string/cancle"
+        android:textSize="@dimen/twenty_five_sp" />
 </LinearLayout>

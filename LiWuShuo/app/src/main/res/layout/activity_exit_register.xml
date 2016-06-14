@@ -6,15 +6,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/fifty_dp"
         android:background="@color/colorRadioButtonDeepPink">
 
         <ImageView
             android:id="@+id/exit_register_back_bar_img"
-            android:layout_width="22dp"
+            android:layout_width="@dimen/twenty_two_dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="@dimen/twelve_dp"
+            android:layout_marginTop="@dimen/eight_dp"
             android:src="@mipmap/ic_action_back" />
 
         <TextView
@@ -24,21 +24,21 @@
             android:layout_centerInParent="true"
             android:ellipsize="end"
             android:maxLines="1"
-            android:maxWidth="170dp"
+            android:maxWidth="@dimen/one_hundred_seventy_dp"
             android:text="我的资料"
             android:textColor="@color/colorWhite"
-            android:textSize="20sp" />
+            android:textSize="@dimen/twenty_dp" />
 
     </RelativeLayout>
     <TextView
         android:id="@+id/exit_register_exit_tv"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="@dimen/forty_five_dp"
+        android:layout_marginTop="@dimen/fifty_dp"
         android:background="@color/colorWhite"
         android:textColor="@color/colorRadioButtonDeepPink"
         android:text="退出登录"
         android:gravity="center"
-        android:textSize="15sp"
+        android:textSize="@dimen/fifteen_dp"
         />
 </LinearLayout>

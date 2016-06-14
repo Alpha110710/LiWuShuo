@@ -39,6 +39,8 @@ public class ExitRegisterActivity extends BaseActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.exit_register_exit_tv:
                 BmobUser.logOut(this);
+                Intent intent = new Intent("com.example.dllo.liwushuo.profile.checkBox");
+                sendBroadcast(intent);
                 finish();
 
                 break;

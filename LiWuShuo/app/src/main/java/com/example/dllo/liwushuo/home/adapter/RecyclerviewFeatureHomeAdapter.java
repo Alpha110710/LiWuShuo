@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.home.HomeRecyclerVIewOnClickListener;
 import com.example.dllo.liwushuo.home.bean.RecyclerviewBean;
-import com.example.dllo.liwushuo.tool.App;
+import com.example.dllo.liwushuo.base.App;
 import com.squareup.picasso.Picasso;
 
 /**

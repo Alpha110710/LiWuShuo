@@ -2,13 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <ListView
-        android:id="@+id/profile_raiders_listview"
+    android:orientation="vertical"
+    android:background="@mipmap/boy_and_girl">
+    <TextView
+        android:id="@+id/boy_and_girl_tv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        android:layout_marginTop="@dimen/two_dp"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

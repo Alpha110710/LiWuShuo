@@ -1,7 +1,11 @@
 package com.example.dllo.liwushuo.home;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -9,10 +13,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
@@ -21,11 +27,12 @@ import com.example.dllo.liwushuo.category.RaidersDetailsUpActivity;
 import com.example.dllo.liwushuo.home.adapter.CarouselHomeViewpagerAdapter;
 import com.example.dllo.liwushuo.home.adapter.ListviewFeatureHomeAdapter;
 import com.example.dllo.liwushuo.home.adapter.RecyclerviewFeatureHomeAdapter;
+import com.example.dllo.liwushuo.home.bean.CarouselBean;
 import com.example.dllo.liwushuo.home.bean.ListviewBean;
 import com.example.dllo.liwushuo.home.bean.RecyclerviewBean;
 import com.example.dllo.liwushuo.net.NetListener;
 import com.example.dllo.liwushuo.net.URLValues;
-import com.example.dllo.liwushuo.tool.App;
+import com.example.dllo.liwushuo.base.App;
 import com.example.dllo.liwushuo.tool.NetTool;
 import com.example.dllo.liwushuo.view.XListView;
 import com.google.gson.Gson;
@@ -50,6 +57,11 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
     private RecyclerviewBean recyclerviewBean;
     private ListviewBean listviewBean;
     private String nextUrl;
+    private CheckBoxBroadCastReceiver boxBroadCastReceiver;
+    private LinearLayout carouselHomeViewpagerLlayout;
+    private boolean threadAlive = true;
+    private boolean userTouch = false;
+    private int sleepTick;
 
 
     @Override
@@ -76,6 +88,8 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
         View view = LayoutInflater.from(context).inflate(R.layout.fragment_home_featured_listview_header, null);
         carouselHomeViewpager = (ViewPager) view.findViewById(R.id.carousel_home_viewpager);
         homeFeaturedRecyclerview = (RecyclerView) view.findViewById(R.id.home_featured_recyclerview);
+        carouselHomeViewpagerLlayout = (LinearLayout) view.findViewById(R.id.carousel_home_viewpager_llayout);
+
         //轮播模块
         carouselModule();
 
@@ -94,6 +108,21 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
         homeFeaturedListView.setPullLoadEnable(true);
         homeFeaturedListView.setPullRefreshEnable(true);
 
+        //注册广播
+        boxBroadCastReceiver = new CheckBoxBroadCastReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.example.dllo.liwushuo.profile.checkBox");
+        context.registerReceiver(boxBroadCastReceiver, intentFilter);
+
+
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        context.unregisterReceiver(boxBroadCastReceiver);
+        threadAlive = false;//让线程走完销毁
     }
 
 
@@ -159,33 +188,93 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
         adapter = new CarouselHomeViewpagerAdapter(context);
 
         //解析轮播图
-        netTool.anlysisCarousel(adapter);
-        //设置适配器
+//        netTool.anlysisCarousel(adapter);
+        netTool.getAnalysis(URLValues.CAROUSEL, new NetListener() {
+            @Override
+            public void onSuccessed(String response) {
+                Gson gson = new Gson();
+                CarouselBean carouselBean = gson.fromJson(response, CarouselBean.class);
+                adapter.setCarouselBean(carouselBean);
 
+                /**
+                 * 小圆点
+                 */
+                carouselHomeViewpagerLlayout.removeAllViews();
+                for (int i = 0; i < carouselBean.getData().getBanners().size(); i++) {
+                    CheckBox checkBox = new CheckBox(context);
+                    Drawable drawable = getResources().getDrawable(R.drawable.selector_carouse_point);
+                    checkBox.setBackground(drawable);
+//                    ImageView imageView = new ImageView(context);
+//                    imageView.setImageResource(R.mipmap.btn_check_normal);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(18, 18);
+                    params.setMargins(8, 0, 8, 0);
+                    params.weight = 1;
+                    carouselHomeViewpagerLlayout.addView(checkBox, params);
+                }
+                ((CheckBox) carouselHomeViewpagerLlayout.getChildAt(0)).setChecked(true);
+
+            }
+
+            @Override
+            public void onFailed(VolleyError error) {
+
+            }
+        });
+
+        //设置适配器
         carouselHomeViewpager.setAdapter(adapter);
+        adapter.setViewPager(carouselHomeViewpager);
+        adapter.setLinearLayout(carouselHomeViewpagerLlayout);
         //设置轮播图
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
-                carouselHomeViewpager.setCurrentItem(msg.what);
+                //先获取当前的位置,再讲ViewPager刷新到下一页
+                int current = carouselHomeViewpager.getCurrentItem();
+                carouselHomeViewpager.setCurrentItem(current + 1);
                 return false;
             }
         });
 
+        //开启线程去执行轮播
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int i = 0;
-                while (true) {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+
+                while (threadAlive) {
+                    //每隔3s刷新一次ViewPager的数据
+                    for (sleepTick = 0; sleepTick < 3; sleepTick++)
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    if (!userTouch) {
+                        handler.sendEmptyMessage(0);
                     }
-                    handler.sendEmptyMessage(i++);
                 }
             }
         }).start();
+
+        //当用户点击的时候就不会再触发发轮播图了
+        //轮播图就会暂停轮播
+        carouselHomeViewpager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        //当用户触摸了轮播图的时候
+                        userTouch = true;
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        //当用户手指离开轮播图的时候
+                        userTouch = false;
+                        sleepTick = 0;//每次当用户抬起手指,都会重新开始计时
+                        break;
+                }
+                return false;
+            }
+        });
 
 
     }
@@ -270,6 +359,18 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
 
             }
         });
+    }
+
+    //内部类接受广播设置checkBox标记为喜欢
+    class CheckBoxBroadCastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            listviewFeatureHomeAdapter = new ListviewFeatureHomeAdapter(context);
+            listviewFeatureHomeAdapter.setListviewBean(listviewBean);
+            homeFeaturedListView.setAdapter(listviewFeatureHomeAdapter);
+
+        }
     }
 
 

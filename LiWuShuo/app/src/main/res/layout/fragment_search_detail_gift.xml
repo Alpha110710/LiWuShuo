@@ -13,10 +13,10 @@
             android:id="@+id/search_detail_gift_gridview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:columnWidth="90dp"
-            android:horizontalSpacing="6dp"
+            android:layout_marginLeft="@dimen/six_dp"
+            android:layout_marginRight="@dimen/six_dp"
+            android:columnWidth="@dimen/ninty_dp"
+            android:horizontalSpacing="@dimen/six_dp"
             android:numColumns="2"
             android:scrollbars="none"
             android:stretchMode="columnWidth" />
@@ -26,8 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="没有找到相关礼物"
-            android:textSize="15sp"
+            android:text="@string/none_gift"
+            android:textSize="@dimen/fifteen_sp"
             android:visibility="gone" />
     </RelativeLayout>
 

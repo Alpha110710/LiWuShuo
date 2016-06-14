@@ -1,43 +1,21 @@
 package com.example.dllo.liwushuo.search;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.transition.Transition;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
-import com.example.dllo.liwushuo.SearchBean;
 import com.example.dllo.liwushuo.base.BaseActivity;
-import com.example.dllo.liwushuo.category.GiftConditionSelectActivity;
-import com.example.dllo.liwushuo.net.NetListener;
-import com.example.dllo.liwushuo.net.URLValues;
-import com.example.dllo.liwushuo.search.SearchDetailFragment;
-import com.example.dllo.liwushuo.search.SearchDetailGiftFragment;
-import com.example.dllo.liwushuo.search.SearchFragment;
-import com.example.dllo.liwushuo.tool.NetTool;
-import com.google.gson.Gson;
-
-import org.greenrobot.eventbus.EventBus;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by dllo on 16/6/4.

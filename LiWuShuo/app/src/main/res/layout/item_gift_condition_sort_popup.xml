@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="150dp"
+    android:layout_width="@dimen/one_hundred_fifty_dp"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_dropdown"
     android:orientation="vertical">
@@ -13,10 +13,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="默认排序"
+            android:layout_margin="@dimen/ten_dp"
+            android:text="@string/default_"
             android:textColor="@color/colorWhite"
-            android:textSize="15sp" />
+            android:textSize="@dimen/fifteen_sp" />
 
         <ImageView
             android:id="@+id/sort_default_img"
@@ -29,7 +29,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="@dimen/zero_point_five_dp"
         android:background="@color/colorWhite" />
 
     <RelativeLayout
@@ -40,10 +40,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="按热度排序"
+            android:layout_margin="@dimen/ten_dp"
+            android:text="@string/hot_"
             android:textColor="@color/colorWhite"
-            android:textSize="15sp" />
+            android:textSize="@dimen/fifteen_sp" />
 
         <ImageView
             android:id="@+id/sort_hot_img"
@@ -57,7 +57,7 @@
     <TextView
         android:id="@+id/sort_hot_line_tv"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="@dimen/zero_point_five_dp"
         android:background="@color/colorWhite" />
 
     <RelativeLayout
@@ -68,10 +68,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="价格由低到高"
+            android:layout_margin="@dimen/ten_dp"
+            android:text="@string/price_low_to_high"
             android:textColor="@color/colorWhite"
-            android:textSize="15sp" />
+            android:textSize="@dimen/fifteen_sp" />
 
         <ImageView
             android:id="@+id/sort_price_high_to_low_img"
@@ -85,7 +85,7 @@
     <TextView
         android:id="@+id/sort_price_low_to_high_line_tv"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="@dimen/zero_point_five_dp"
         android:background="@color/colorWhite" />
 
     <RelativeLayout
@@ -96,12 +96,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="10dp"
-            android:text="价格由高到低"
+            android:layout_marginBottom="@dimen/five_dp"
+            android:layout_marginLeft="@dimen/eight_dp"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="@string/price_high_to_low"
             android:textColor="@color/colorWhite"
-            android:textSize="15sp" />
+            android:textSize="@dimen/fifteen_sp" />
 
         <ImageView
             android:id="@+id/sort_price_low_to_high_img"

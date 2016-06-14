@@ -8,15 +8,14 @@
     <TextView
         android:id="@+id/item_home_popup_gridview_tv"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/forty_dp"
         android:gravity="center"
-        android:text="111"
         android:textColor="@color/colorBlack" />
 
     <TextView
         android:id="@+id/item_home_popup_select_tv"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/two_dp"
         android:layout_alignBottom="@id/item_home_popup_gridview_tv"
         android:background="@color/colorRadioButtonDeepPink" />
 

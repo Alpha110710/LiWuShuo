@@ -130,7 +130,6 @@ public class CollectCheckBoxTool {
     }
 
     List<String> ids = new ArrayList<>();
-
     public void queryAllLike(final BaseAdapter baseAdapter){
 
         if (user != null) {
@@ -149,6 +148,9 @@ public class CollectCheckBoxTool {
                     Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
                 }
             });
+        } else {
+            ids = new ArrayList<>();
+            baseAdapter.notifyDataSetChanged();
         }
     }
 

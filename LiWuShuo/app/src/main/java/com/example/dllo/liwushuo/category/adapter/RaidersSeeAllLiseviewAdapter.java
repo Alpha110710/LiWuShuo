@@ -56,7 +56,7 @@ public class RaidersSeeAllLiseviewAdapter extends BaseAdapter {
         }
         holder.itemRaidersListviewSeeAllTitleTv.setText(raidersTopicBean.getData().getCollections().get(position).getTitle());
         holder.itemRaidersListviewSeeAllTitleDetailTv.setText(raidersTopicBean.getData().getCollections().get(position).getSubtitle());
-        Picasso.with(context).load(raidersTopicBean.getData().getCollections().get(position).getCover_webp_url()).fit().placeholder(R.mipmap.ic_about).transform(new RoundRectTool(20))
+        Picasso.with(context).load(raidersTopicBean.getData().getCollections().get(position).getCover_webp_url()).fit().transform(new RoundRectTool(20))
                 .into(holder.itemRaidersListviewSeeAllImg);
         return convertView;
     }

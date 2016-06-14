@@ -11,8 +11,8 @@
 
         <ImageView
             android:id="@+id/profile_holder_favourite"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/eighty_dp"
+            android:layout_height="@dimen/eighty_dp"
             android:layout_centerInParent="true"
             android:src="@mipmap/ic_holder_favourite" />
 
@@ -22,8 +22,8 @@
             android:layout_below="@id/profile_holder_favourite"
             android:layout_marginTop="25dp"
             android:gravity="center"
-            android:text="喜欢的礼物摆在这里哦"
-            android:textSize="18sp" />
+            android:text="@string/like_gift_here"
+            android:textSize="@dimen/eighteen_sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -34,10 +34,10 @@
             android:id="@+id/profile_gift_gridview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:columnWidth="90dp"
-            android:horizontalSpacing="6dp"
+            android:layout_marginLeft="@dimen/six_dp"
+            android:layout_marginRight="@dimen/six_dp"
+            android:columnWidth="@dimen/ninty_dp"
+            android:horizontalSpacing="@dimen/six_dp"
             android:numColumns="2"
             android:scrollbars="none"
             android:stretchMode="columnWidth" />

@@ -10,10 +10,10 @@
     <TextView
         android:id="@+id/item_gift_left_pink_cb"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/forty_five_dp"
         android:background="@drawable/select_gift_cb"
-        android:text="热门分类"
-        android:textSize="15sp"
+        android:text="@string/hot_category"
+        android:textSize="@dimen/fifteen_sp"
         android:gravity="center"
         android:textColor="@color/color_cb_black_pink"
         android:button="@null" />

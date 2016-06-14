@@ -2,8 +2,6 @@ package com.example.dllo.liwushuo.category;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,29 +11,23 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.base.BaseActivity;
-import com.example.dllo.liwushuo.category.adapter.CreateSimpleAdapter;
 import com.example.dllo.liwushuo.category.adapter.GiftConditionSelectPopupGridviewAdapter;
 import com.example.dllo.liwushuo.category.adapter.GiftDetailsGridviewAdapter;
 import com.example.dllo.liwushuo.category.bean.GiftConditionPopupBean;
 import com.example.dllo.liwushuo.category.bean.GiftDetailBean;
-import com.example.dllo.liwushuo.category.bean.GiftSelectWebBean;
 import com.example.dllo.liwushuo.net.NetListener;
 import com.example.dllo.liwushuo.net.URLValues;
 import com.example.dllo.liwushuo.select.SelectDetailActivity;
-import com.example.dllo.liwushuo.tool.App;
 import com.example.dllo.liwushuo.tool.NetTool;
 import com.example.dllo.liwushuo.tool.PopTool;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by dllo on 16/5/31.
@@ -265,7 +257,7 @@ public class GiftConditionSelectActivity extends BaseActivity implements Adapter
             giftConditionSelectPopupGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(GiftConditionSelectActivity.this, "pos" + radioPos + "position:" + position, Toast.LENGTH_SHORT).show();
+
                     giftConditionSelectPopupGridviewAdapter.setPos(position);
                     giftConditionSelectPopupGridviewAdapter.notifyDataSetChanged();
 

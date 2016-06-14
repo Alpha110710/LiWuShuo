@@ -2,13 +2,11 @@ package com.example.dllo.liwushuo.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,8 +15,6 @@ import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.home.bean.NormalListviewBean;
 import com.example.dllo.liwushuo.register.BmobRaidersBean;
 import com.example.dllo.liwushuo.register.RegisterActivity;
-import com.example.dllo.liwushuo.select.SelectBean;
-import com.example.dllo.liwushuo.tool.App;
 import com.example.dllo.liwushuo.tool.CollectCheckBoxTool;
 import com.example.dllo.liwushuo.tool.RoundRectTool;
 import com.squareup.picasso.Picasso;
@@ -83,7 +79,7 @@ public class ListviewNormalHomeAdapter extends BaseAdapter {
         myViewholder.setPos(position);
 
         Picasso.with(context).load(normalListviewBean.getData().getItems().get(position).getCover_image_url()).centerCrop()
-                .transform(new RoundRectTool(20)).fit().skipMemoryCache().into(myViewholder.itemHomeNormalListviewImg);
+                .transform(new RoundRectTool(20)).fit().into(myViewholder.itemHomeNormalListviewImg);
         myViewholder.itemHomeNormalListviewLikeCb.setText(String.valueOf(normalListviewBean.getData().getItems().get(position).getLikes_count()));
         myViewholder.itemHomeNormalListviewTitleTv.setText(normalListviewBean.getData().getItems().get(position).getTitle());
 //        myViewholder.itemHomeNormalListviewLikeCb.setChecked(normalListviewBean.getData().getItems().get(position).isLiked());

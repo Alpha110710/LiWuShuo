@@ -6,15 +6,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/fifty_dp"
         android:background="@color/colorRadioButtonDeepPink">
 
         <ImageView
             android:id="@+id/select_conment_back_img"
-            android:layout_width="22dp"
+            android:layout_width="@dimen/twenty_two_dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="@dimen/twelve_dp"
+            android:layout_marginTop="@dimen/eight_dp"
             android:src="@mipmap/ic_action_back" />
 
         <TextView
@@ -24,10 +24,10 @@
             android:layout_centerInParent="true"
             android:ellipsize="end"
             android:maxLines="1"
-            android:maxWidth="170dp"
-            android:text="评论"
+            android:maxWidth="@dimen/one_hundred_seventy_dp"
+            android:text="@string/conment"
             android:textColor="@color/colorWhite"
-            android:textSize="20sp" />
+            android:textSize="@dimen/twenty_sp" />
 
     </RelativeLayout>
 
@@ -40,35 +40,35 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="@dimen/zero_point_five_dp"
         android:background="@color/colcorRadioButtonDeepgrey" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/forty_dp"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/select_conment_write_conment_et"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="@dimen/thirty_dp"
+            android:layout_marginLeft="@dimen/ten_dp"
             android:layout_weight="1"
             android:background="@drawable/round_white_deepgrey"
             android:gravity="center_vertical"
-            android:paddingLeft="5dp"
-            android:hint="我也说几句" />
+            android:paddingLeft="@dimen/five_dp"
+            android:hint="@string/i_talk_too" />
 
         <TextView
             android:id="@+id/select_conment_send_conment_tv"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/forty_dp"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="@dimen/fifteen_dp"
+            android:layout_marginRight="@dimen/fifteen_dp"
             android:gravity="center_vertical"
-            android:text="发送"
-            android:textSize="18sp" />
+            android:text="@string/send"
+            android:textSize="@dimen/eighteen_sp" />
 
     </LinearLayout>
 </LinearLayout>

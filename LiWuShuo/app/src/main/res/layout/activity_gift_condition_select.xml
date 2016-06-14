@@ -6,15 +6,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/fifty_dp"
         android:background="@color/colorRadioButtonDeepPink">
 
         <ImageView
             android:id="@+id/gift_condition_select_back_img"
-            android:layout_width="22dp"
+            android:layout_width="@dimen/twenty_two_dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="@dimen/twelve_dp"
+            android:layout_marginTop="@dimen/eight_dp"
             android:src="@mipmap/ic_action_back" />
 
         <TextView
@@ -24,10 +24,10 @@
             android:layout_centerInParent="true"
             android:ellipsize="end"
             android:maxLines="1"
-            android:maxWidth="170dp"
+            android:maxWidth="@dimen/one_hundred_seventy_dp"
             android:text="挑选礼物"
             android:textColor="@color/colorWhite"
-            android:textSize="20sp" />
+            android:textSize="@dimen/twenty_sp" />
 
 
         <ImageView
@@ -35,94 +35,94 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginRight="@dimen/fifteen_dp"
+            android:layout_marginTop="@dimen/fourteen_dp"
             android:src="@mipmap/ic_menu_sort" />
     </RelativeLayout>
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="@dimen/thirty_five_dp"
         android:background="@color/colorWhite"
         android:weightSum="4"
         android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/gift_condition_select_obj_rb"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
             android:drawableRight="@drawable/selector_home_tablayout"
-            android:layout_marginRight="13dp"
-            android:drawablePadding="-13dp"
+            android:layout_marginRight="@dimen/thirteen_dp"
+            android:drawablePadding="@dimen/negative_thirteen_dp"
             android:text="对象"
             android:gravity="center"
-            android:textSize="14sp" />
+            android:textSize="@dimen/fourteen_sp" />
 
         <TextView
-            android:layout_width="1dp"
-            android:layout_height="18dp"
+            android:layout_width="@dimen/one_dp"
+            android:layout_height="@dimen/eighteen_dp"
             android:background="@color/colcorRadioButtonLightgrey" />
 
         <RadioButton
             android:id="@+id/gift_condition_select_occasion_rb"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
             android:drawableRight="@drawable/selector_home_tablayout"
-            android:layout_marginRight="13dp"
-            android:drawablePadding="-13dp"
+            android:layout_marginRight="@dimen/thirteen_dp"
+            android:drawablePadding="@dimen/negative_thirteen_dp"
             android:text="场合"
             android:gravity="center"
-            android:textSize="14sp" />
+            android:textSize="@dimen/fourteen_sp" />
 
         <TextView
-            android:layout_width="1dp"
-            android:layout_height="18dp"
+            android:layout_width="@dimen/one_dp"
+            android:layout_height="@dimen/eighteen_dp"
             android:background="@color/colcorRadioButtonLightgrey" />
 
         <RadioButton
             android:id="@+id/gift_condition_select_habit_rb"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
             android:drawableRight="@drawable/selector_home_tablayout"
-            android:layout_marginRight="13dp"
-            android:drawablePadding="-13dp"
+            android:layout_marginRight="@dimen/thirteen_dp"
+            android:drawablePadding="@dimen/negative_thirteen_dp"
             android:text="个性"
             android:gravity="center"
-            android:textSize="14sp" />
+            android:textSize="@dimen/fourteen_sp" />
 
         <TextView
-            android:layout_width="1dp"
-            android:layout_height="18dp"
+            android:layout_width="@dimen/one_dp"
+            android:layout_height="@dimen/eighteen_dp"
             android:background="@color/colcorRadioButtonLightgrey" />
 
         <RadioButton
             android:id="@+id/gift_condition_select_price_rb"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
             android:drawableRight="@drawable/selector_home_tablayout"
-            android:layout_marginRight="13dp"
-            android:drawablePadding="-13dp"
+            android:layout_marginRight="@dimen/thirteen_dp"
+            android:drawablePadding="@dimen/negative_thirteen_dp"
             android:text="价格"
             android:gravity="center"
-            android:textSize="14sp" />
+            android:textSize="@dimen/fourteen_sp" />
     </RadioGroup>
 
     <GridView
         android:id="@+id/gift_condition_select_gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
-        android:columnWidth="90dp"
-        android:horizontalSpacing="6dp"
+        android:layout_marginLeft="@dimen/six_dp"
+        android:layout_marginRight="@dimen/six_dp"
+        android:columnWidth="@dimen/ninty_dp"
+        android:horizontalSpacing="@dimen/six_dp"
         android:numColumns="2"
         android:scrollbars="none"
         android:stretchMode="columnWidth" />

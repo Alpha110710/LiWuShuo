@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class SearchDetailViewpagerAdapter extends FragmentPagerAdapter {
     private Context context;
     private ArrayList<Fragment> fragments;
-    private String[] titles = {"礼物", "攻略"};
+    private String[] titles = {"礼物"};
 
     public void setFragments(ArrayList<Fragment> fragments) {
         this.fragments = fragments;

@@ -11,38 +11,37 @@
         android:id="@+id/item_home_feature_data_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/five_dp"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="2dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/two_dp"
+            android:layout_height="@dimen/twenty_dp"
             android:background="@color/colorRadioButtonDeepPink" />
 
         <TextView
             android:id="@+id/item_home_feature_data_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="111"
+            android:layout_marginLeft="@dimen/eight_dp"
             android:textColor="@color/colorBlack"
-            android:textSize="12sp" />
+            android:textSize="@dimen/twelve_sp" />
     </LinearLayout>
 
 
     <RelativeLayout
         android:id="@+id/item_home_feature_listview_rlayout"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp">
+        android:layout_height="@dimen/one_hundred_fifty_dp"
+        android:layout_marginTop="@dimen/five_dp"
+        android:paddingLeft="@dimen/eight_dp"
+        android:paddingRight="@dimen/eight_dp">
 
 
         <ImageView
             android:id="@+id/item_home_feature_listview_img"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/two_hundred_dp"
             android:background="@drawable/item_gridview_round" />
 
         <ImageView
@@ -55,14 +54,13 @@
                 android:id="@+id/item_home_feature_listview_like_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="13dp"
+                android:layout_marginLeft="@dimen/fifteen_dp"
+                android:layout_marginTop="@dimen/thirteen_dp"
                 android:background="@drawable/article_like_count_bg"
                 android:drawableLeft="@drawable/selector_home_like"
                 android:layout_alignParentRight="true"
-                android:drawablePadding="5dp"
-                android:text="111"
-                android:textSize="10sp"
+                android:drawablePadding="@dimen/five_dp"
+                android:textSize="@dimen/ten_sp"
                 android:textColor="@color/colorBlack"
                 android:gravity="center"
                 android:button="@null" />
@@ -73,8 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="7dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="@dimen/seven_dp"
+            android:layout_marginLeft="@dimen/fifteen_dp"
             android:textColor="@color/colorWhite" />
     </RelativeLayout>
 

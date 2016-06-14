@@ -1,6 +1,9 @@
 package com.example.dllo.liwushuo.home;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,6 +16,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.dllo.liwushuo.R;
 import com.example.dllo.liwushuo.base.BaseFragment;
+import com.example.dllo.liwushuo.home.adapter.ListviewFeatureHomeAdapter;
 import com.example.dllo.liwushuo.home.adapter.ListviewNormalHomeAdapter;
 import com.example.dllo.liwushuo.home.bean.ListviewBean;
 import com.example.dllo.liwushuo.home.bean.NormalListviewBean;
@@ -35,6 +39,7 @@ public class NormalHomeFragment extends BaseFragment implements AdapterView.OnIt
     private ArrayList<String> urlIds;
     private NormalListviewBean normalListviewBean;
     private String url, nextUrl;
+    private CheckBoxBroadCastReceiver checkBoxBroadCastReceiver;
 
     public static Fragment createFragment(String url) {
         Fragment fragment = new NormalHomeFragment();
@@ -86,8 +91,19 @@ public class NormalHomeFragment extends BaseFragment implements AdapterView.OnIt
         normalHomeListview.setPullLoadEnable(true);
         normalHomeListview.setPullRefreshEnable(true);
 
+        //注册广播
+        checkBoxBroadCastReceiver = new CheckBoxBroadCastReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.example.dllo.liwushuo.profile.checkBox");
+        context.registerReceiver(checkBoxBroadCastReceiver, intentFilter);
+
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        context.unregisterReceiver(checkBoxBroadCastReceiver);
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -153,4 +169,17 @@ public class NormalHomeFragment extends BaseFragment implements AdapterView.OnIt
             }
         });
     }
+
+    //内部类接受广播设置checkBox标记为喜欢
+    class CheckBoxBroadCastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            adapter = new ListviewNormalHomeAdapter(context);
+            adapter.setNormalListviewBean(normalListviewBean);
+            normalHomeListview.setAdapter(adapter);
+
+        }
+    }
+
 }

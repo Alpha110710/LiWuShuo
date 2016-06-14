@@ -1,6 +1,7 @@
 package com.example.dllo.liwushuo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,6 +20,7 @@ import com.example.dllo.liwushuo.home.HomeFragment;
 import com.example.dllo.liwushuo.profile.ProfileFragment;
 import com.example.dllo.liwushuo.search.SearchActivity;
 import com.example.dllo.liwushuo.select.SelectFragment;
+import com.example.dllo.liwushuo.welcome.BoyAndGirlActivity;
 
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -37,6 +39,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void initActivity() {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("welcome", MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("isFirst", true)){
+            Intent intent = new Intent(this, BoyAndGirlActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+
         setContentView(R.layout.activity_main);
         homeToolBar = findView(R.id.home_toolbar);
         menologyToolbarImg = findView(R.id.menology_toolbar_img);

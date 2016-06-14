@@ -8,13 +8,13 @@
 
     <TextView
         android:id="@+id/countdown_tv"
-        android:layout_width="55dp"
-        android:layout_height="20dp"
+        android:layout_width="@dimen/fifty_five_dp"
+        android:layout_height="@dimen/twenty_dp"
         android:layout_gravity="right|top"
-        android:layout_marginRight="13dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginRight="@dimen/thirty_dp"
+        android:layout_marginTop="@dimen/twenty_six_dp"
         android:background="@drawable/countdown_round"
         android:gravity="center"
-        android:textColor="#FFFFFF"
-        android:text="2s跳转" />
+        android:textColor="@color/colorWhite"
+        android:text="@string/two_minis_jump" />
 </LinearLayout>

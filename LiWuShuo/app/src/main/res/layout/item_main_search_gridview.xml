@@ -6,14 +6,13 @@
 <TextView
     android:id="@+id/item_main_search_gridview_tv"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="@dimen/forty_dp"
     android:background="@drawable/item_white_round"
-    android:text="手机壳"
     android:gravity="center"
-    android:paddingTop="7dp"
-    android:paddingBottom="7dp"
-    android:layout_marginTop="12dp"
+    android:paddingTop="@dimen/seven_dp"
+    android:paddingBottom="@dimen/seven_dp"
+    android:layout_marginTop="@dimen/twelve_dp"
     android:textColor="@color/colorBlack"
-    android:textSize="15sp"
+    android:textSize="@dimen/fifteen_sp"
     />
 </LinearLayout>

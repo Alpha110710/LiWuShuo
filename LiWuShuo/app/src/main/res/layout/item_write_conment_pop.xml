@@ -13,43 +13,42 @@
             android:id="@+id/write_conment_pop_cancel_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="12dp"
-            android:text="取消"
+            android:layout_marginLeft="@dimen/fifteen_dp"
+            android:layout_marginTop="@dimen/twelve_dp"
+            android:text="@string/cancle"
             android:textColor="@color/colorBlack" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
-            android:text="写评论"
+            android:layout_marginTop="@dimen/twelve_dp"
+            android:text="@string/write_conment"
             android:textColor="@color/colorBlack"
-            android:textSize="15sp" />
+            android:textSize="@dimen/fifteen_sp" />
 
         <TextView
             android:id="@+id/write_conment_pop_send_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="12dp"
-            android:text="发送"
+            android:layout_marginRight="@dimen/fifteen_dp"
+            android:layout_marginTop="@dimen/twelve_dp"
+            android:text="@string/send"
             android:textColor="@color/lightPink" />
     </RelativeLayout>
 
     <EditText
         android:id="@+id/write_conment_pop_et"
-        android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/thirty_hundred_fifty_dp"
+        android:layout_height="@dimen/one_hundred_dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="@dimen/ten_dp"
+        android:layout_marginTop="@dimen/ten_dp"
         android:background="@drawable/round_white_deepgrey"
         android:gravity="top"
-        android:hint="和大家分享你的看法吧~"
-        android:paddingLeft="5dp"
-        android:paddingTop="10dp"
+        android:paddingLeft="@dimen/five_dp"
+        android:paddingTop="@dimen/ten_dp"
         android:textColor="@color/colorBlack"
-        android:textSize="14sp" />
+        android:textSize="@dimen/fourteen_sp" />
 </LinearLayout>

@@ -10,18 +10,17 @@
         android:id="@+id/item_category_down_listview_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="18dp"
-        android:text="品类"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:layout_marginLeft="@dimen/eighteen_dp"
         android:textColor="@color/colorBlack"
-        android:textSize="17sp"/>
+        android:textSize="@dimen/seventeen_sp"/>
 
     <com.example.dllo.liwushuo.view.NoScorllGridview
         android:id="@+id/item_category_down_listview_gridview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/ten_dp"
         android:numColumns="4"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="@dimen/ten_dp"/>
 
 </LinearLayout>

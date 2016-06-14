@@ -38,7 +38,6 @@ public class NetTool {
             @Override
             public void onResponse(String response) {
 
-
                 listener.onSuccessed(response);
 
             }
@@ -51,24 +50,6 @@ public class NetTool {
         requestQueue.add(request);
     }
 
-    //解析homeFeature轮播图
-    public void anlysisCarousel(final CarouselHomeViewpagerAdapter adapter) {
-
-        getAnalysis(URLValues.CAROUSEL, new NetListener() {
-            @Override
-            public void onSuccessed(String response) {
-
-                CarouselBean carouselBean = gson.fromJson(response, CarouselBean.class);
-                adapter.setCarouselBean(carouselBean);
-
-            }
-
-            @Override
-            public void onFailed(VolleyError error) {
-
-            }
-        });
-    }
 
     //解析homeFeature的recyclerview
     public void anlysisRecyclerview(final RecyclerviewFeatureHomeAdapter adapter){

@@ -7,36 +7,36 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="18dp"
-        android:text="大家都在搜"
-        android:textSize="15sp" />
+        android:layout_marginLeft="@dimen/ten_dp"
+        android:layout_marginTop="@dimen/eighteen_dp"
+        android:text="@string/all_people_search"
+        android:textSize="@dimen/fifteen_sp" />
 
 
     <GridView
         android:id="@+id/fragment_search_gridview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="@dimen/ten_dp"
+        android:layout_marginTop="@dimen/five_dp"
         android:background="@color/colorWhite"
-        android:horizontalSpacing="8dp"
+        android:horizontalSpacing="@dimen/eight_dp"
         android:numColumns="4"
-        android:paddingBottom="10dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp" />
+        android:paddingBottom="@dimen/ten_dp"
+        android:paddingLeft="@dimen/eight_dp"
+        android:paddingRight="@dimen/eight_dp" />
 
     <TextView
         android:id="@+id/fragment_search_fast_tv"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/forty_five_dp"
         android:background="@color/colorWhite"
         android:drawableLeft="@mipmap/gift_category_guide"
-        android:drawablePadding="7dp"
+        android:drawablePadding="@dimen/seven_dp"
         android:drawableRight="@mipmap/ic_chevron_dark"
-        android:padding="13dp"
-        android:paddingEnd="20dp"
-        android:text="使用选礼神器快速挑选礼物"
+        android:padding="@dimen/thirteen_dp"
+        android:paddingEnd="@dimen/twenty_dp"
+        android:text="@string/use_guide"
         android:textColor="@color/colorBlack"
-        android:textSize="13sp" />
+        android:textSize="@dimen/thirteen_sp" />
 </LinearLayout>

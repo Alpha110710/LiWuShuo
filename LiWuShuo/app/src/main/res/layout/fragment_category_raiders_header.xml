@@ -13,11 +13,11 @@
             android:id="@+id/category_raiders_topic_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:text="专题"
+            android:layout_marginLeft="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/fifteen_dp"
+            android:text="@string/topic"
             android:textColor="@color/colorBlack"
-            android:textSize="20sp" />
+            android:textSize="@dimen/twenty_sp" />
 
         <TextView
             android:id="@+id/category_raiders_lookall_tv"
@@ -25,15 +25,15 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/category_raiders_topic_tv"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:text="查看全部"
-            android:textSize="15sp" />
+            android:layout_marginRight="@dimen/twenty_dp"
+            android:text="@string/look_all"
+            android:textSize="@dimen/fifteen_sp" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/category_raiders_topic_recyclerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp" />
+        android:layout_marginBottom="@dimen/fifty_dp" />
 
 </LinearLayout>

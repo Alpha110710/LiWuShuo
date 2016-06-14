@@ -16,31 +16,31 @@
         android:id="@+id/conment_more_llayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="@dimen/ten_dp"
+        android:layout_marginTop="@dimen/ten_dp"
         android:weightSum="17"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="@dimen/one_dp"
+            android:layout_marginTop="@dimen/eight_dp"
             android:layout_weight="6"
             android:background="@color/colcorRadioButtonLightgrey" />
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/ten_dp"
             android:layout_weight="5"
             android:text="更多热门评论>>"
             android:textColor="@color/colorRadioButtonDeepPink"/>
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="@dimen/one_dp"
             android:layout_weight="6"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/eight_dp"
             android:background="@color/colcorRadioButtonLightgrey"
             android:gravity="right" />
     </LinearLayout>

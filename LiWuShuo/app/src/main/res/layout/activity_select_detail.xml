@@ -6,15 +6,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/fifty_dp"
         android:background="@color/colorRadioButtonDeepPink">
 
         <ImageView
             android:id="@+id/select_detail_back_img"
-            android:layout_width="22dp"
+            android:layout_width="@dimen/twenty_two_dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="@dimen/twelve_dp"
+            android:layout_marginTop="@dimen/eight_dp"
             android:src="@mipmap/ic_action_back" />
 
         <TextView
@@ -22,12 +22,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="宝贝详情"
+            android:text="@string/baby_detail"
             android:textColor="@color/colorWhite"
-            android:maxWidth="170dp"
+            android:maxWidth="@dimen/one_hundred_seventy_dp"
             android:maxLines="1"
             android:ellipsize="end"
-            android:textSize="20sp" />
+            android:textSize="@dimen/twenty_sp" />
 
 
         <ImageView
@@ -35,16 +35,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginRight="@dimen/ten_dp"
+            android:layout_marginTop="@dimen/twelve_dp"
             android:src="@mipmap/baichuan_btn_share" />
 
         <ImageView
             android:id="@+id/select_detail_comments_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginRight="@dimen/fifteen_dp"
+            android:layout_marginTop="@dimen/thirteen_dp"
             android:layout_toLeftOf="@id/select_detail_share_img"
             android:src="@mipmap/baichuan_btn_comments" />
 
@@ -52,8 +52,8 @@
             android:id="@+id/select_detail_favorites_cb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="18dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginRight="@dimen/eighteen_dp"
+            android:layout_marginTop="@dimen/thirteen_dp"
             android:layout_toLeftOf="@id/select_detail_comments_img"
             android:background="@drawable/selector_select_detail_like"
             android:button="@null" />

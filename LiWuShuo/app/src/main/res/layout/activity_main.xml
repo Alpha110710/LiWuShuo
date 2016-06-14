@@ -18,8 +18,8 @@
 
             <ImageView
                 android:id="@+id/menology_toolbar_img"
-                android:layout_width="40dp"
-                android:layout_height="28dp"
+                android:layout_width="@dimen/forty_dp"
+                android:layout_height="@dimen/twenty_eight_dp"
                 android:layout_alignParentLeft="true"
                 android:src="@mipmap/btn_signin" />
 
@@ -30,22 +30,22 @@
                 android:layout_centerInParent="true"
                 android:src="@mipmap/logo_title"
                 android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
+                android:textSize="@dimen/twenty_sp" />
 
             <TextView
                 android:id="@+id/hot_toolbar_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="热门"
+                android:text="@string/hot"
                 android:textColor="@color/colorWhite"
-                android:textSize="20sp"
+                android:textSize="@dimen/twenty_sp"
                 android:visibility="gone"/>
 
             <LinearLayout
                 android:id="@+id/raiders_gift_toolbar_layout"
-                android:layout_width="110dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/one_hundred_ten_dp"
+                android:layout_height="@dimen/thirty_dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/raiders_gift_round"
                 android:orientation="horizontal"
@@ -55,7 +55,7 @@
                     android:id="@+id/raiders_gift_toolbar_cb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
+                    android:layout_margin="@dimen/one_dp"
                     android:button="@null"
                     android:background="@drawable/selector_raiders_gift" />
             </LinearLayout>
@@ -63,11 +63,11 @@
 
             <ImageView
                 android:id="@+id/search_toolbar_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/twenty_five_dp"
+                android:layout_height="@dimen/twenty_five_dp"
                 android:layout_alignParentRight="true"
-                android:paddingEnd="15dp"
-                android:src="@mipmap/abc_ic_search" />
+                android:layout_marginRight="@dimen/fifteen_dp"
+                android:src="@mipmap/btn_search" />
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
@@ -80,9 +80,9 @@
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/forty_five_dp"
         android:background="@color/colorWhite"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="@dimen/one_dp"
         android:orientation="horizontal">
 
         <RadioButton
@@ -94,10 +94,10 @@
             android:checked="true"
             android:drawableTop="@drawable/selector_home"
             android:gravity="center"
-            android:paddingTop="5dp"
-            android:text="指南"
+            android:paddingTop="@dimen/five_dp"
+            android:text="@string/home"
             android:textColor="@color/color_text_radiobutton"
-            android:textSize="11sp" />
+            android:textSize="@dimen/eleven_sp" />
 
         <RadioButton
             android:id="@+id/select_radiobutton"
@@ -107,10 +107,10 @@
             android:button="@null"
             android:drawableTop="@drawable/selector_select"
             android:gravity="center"
-            android:paddingTop="5dp"
-            android:text="热门"
+            android:paddingTop="@dimen/five_dp"
+            android:text="@string/select"
             android:textColor="@color/color_text_radiobutton"
-            android:textSize="11sp" />
+            android:textSize="@dimen/eleven_sp" />
 
         <RadioButton
             android:id="@+id/category_radiobutton"
@@ -120,10 +120,10 @@
             android:button="@null"
             android:drawableTop="@drawable/selector_category"
             android:gravity="center"
-            android:paddingTop="5dp"
-            android:text="分类"
+            android:paddingTop="@dimen/five_dp"
+            android:text="@string/category"
             android:textColor="@color/color_text_radiobutton"
-            android:textSize="11sp" />
+            android:textSize="@dimen/eleven_sp" />
 
         <RadioButton
             android:id="@+id/profile_radiobutton"
@@ -133,10 +133,10 @@
             android:button="@null"
             android:drawableTop="@drawable/selector_profile"
             android:gravity="center"
-            android:paddingTop="5dp"
-            android:text="我的"
+            android:paddingTop="@dimen/five_dp"
+            android:text="@string/profile"
             android:textColor="@color/color_text_radiobutton"
-            android:textSize="11sp" />
+            android:textSize="@dimen/eleven_sp" />
     </RadioGroup>
 
 </LinearLayout>
