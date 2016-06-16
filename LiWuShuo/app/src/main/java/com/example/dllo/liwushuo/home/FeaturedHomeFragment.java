@@ -204,8 +204,7 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
                     CheckBox checkBox = new CheckBox(context);
                     Drawable drawable = getResources().getDrawable(R.drawable.selector_carouse_point);
                     checkBox.setBackground(drawable);
-//                    ImageView imageView = new ImageView(context);
-//                    imageView.setImageResource(R.mipmap.btn_check_normal);
+
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(18, 18);
                     params.setMargins(8, 0, 8, 0);
                     params.weight = 1;
