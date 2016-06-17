@@ -3,6 +3,7 @@ package com.example.dllo.liwushuo.home;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CheckBox;
@@ -88,8 +89,14 @@ public class HomeDetailActivity extends BaseActivity implements View.OnClickList
                 checkBoxTool.queryIsLikeRaiders(String.valueOf(homeDetailBean.getData().getId()), homeDetailLike);
 
 
-                        //加载webview
+                //加载webview
+                //webView优先使用缓存
+                homeDetailWebview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+                //网页中有js数据时
+                homeDetailWebview.getSettings().setJavaScriptEnabled(true);
+
                 homeDetailWebview.loadUrl(homeDetailBean.getData().getUrl());
+//                Log.d("HomeDetailActivity", homeDetailBean.getData().getUrl());
                 homeDetailWebview.setWebViewClient(new WebViewClient() {
                     @Override
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {

@@ -280,7 +280,7 @@ public class FeaturedHomeFragment extends BaseFragment implements AdapterView.On
 
     //initData的recyclerview模块
     private void recyclerModule() {
-        recyclerviewFeatureHomeAdapter = new RecyclerviewFeatureHomeAdapter();
+        recyclerviewFeatureHomeAdapter = new RecyclerviewFeatureHomeAdapter(context);
         LinearLayoutManager manager = new LinearLayoutManager(App.context);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         homeFeaturedRecyclerview.setLayoutManager(manager);

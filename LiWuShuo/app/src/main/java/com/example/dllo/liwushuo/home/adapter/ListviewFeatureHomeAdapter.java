@@ -84,7 +84,7 @@ public class ListviewFeatureHomeAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         Myholder myholder = null;
         if (convertView == null) {
-            convertView = LayoutInflater.from(App.context).inflate(R.layout.item_home_featured_listview, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_home_featured_listview, parent, false);
             myholder = new Myholder(convertView);
             convertView.setTag(myholder);
         } else {

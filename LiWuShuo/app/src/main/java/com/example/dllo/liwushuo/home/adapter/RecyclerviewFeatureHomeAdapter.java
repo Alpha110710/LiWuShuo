@@ -1,5 +1,6 @@
 package com.example.dllo.liwushuo.home.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,11 @@ import com.squareup.picasso.Picasso;
 public class RecyclerviewFeatureHomeAdapter extends RecyclerView.Adapter<RecyclerviewFeatureHomeAdapter.MyViewholder> {
     private RecyclerviewBean recyclerviewBean;
     private HomeRecyclerVIewOnClickListener homeRecyclerVIewOnClickListener;
+    private Context context;
+
+    public RecyclerviewFeatureHomeAdapter(Context context) {
+        this.context = context;
+    }
 
     public void setHomeRecyclerVIewOnClickListener(HomeRecyclerVIewOnClickListener homeRecyclerVIewOnClickListener) {
         this.homeRecyclerVIewOnClickListener = homeRecyclerVIewOnClickListener;
@@ -35,7 +41,7 @@ public class RecyclerviewFeatureHomeAdapter extends RecyclerView.Adapter<Recycle
 
     @Override
     public MyViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(App.context).inflate(R.layout.item_home_featured_recyclerview, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_home_featured_recyclerview, parent, false);
         MyViewholder myViewholder = new MyViewholder(view);
         return myViewholder;
     }
@@ -43,7 +49,7 @@ public class RecyclerviewFeatureHomeAdapter extends RecyclerView.Adapter<Recycle
     @Override
     public void onBindViewHolder(MyViewholder holder, final int position) {
         if (recyclerviewBean != null){
-            Picasso.with(App.context).load(recyclerviewBean.getData().getSecondary_banners().get(position)
+            Picasso.with(context).load(recyclerviewBean.getData().getSecondary_banners().get(position)
                 .getImage_url()).placeholder(R.mipmap.ig_logo_text).into(holder.itemHomeFeatureRecyclerviewImg);
 
         }else {

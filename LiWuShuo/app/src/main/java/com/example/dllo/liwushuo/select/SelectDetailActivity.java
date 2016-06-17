@@ -3,6 +3,7 @@ package com.example.dllo.liwushuo.select;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CheckBox;
@@ -81,7 +82,6 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
         checkBoxTool.queryIsLike(this.intent.getStringExtra("id"), selectDetailFavoritesCb);
 
 
-
     }
 
 
@@ -134,6 +134,7 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
                             public void onSuccess() {
                                 Toast.makeText(SelectDetailActivity.this, "喜欢成功", Toast.LENGTH_SHORT).show();
                             }
+
                             @Override
                             public void onFailure(int i, String s) {
                                 Toast.makeText(SelectDetailActivity.this, "喜欢失败" + s, Toast.LENGTH_SHORT).show();
@@ -164,7 +165,12 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
                     selectDetailBarTv.setText(giftSelectWebBean.getData().getName());
                     idConment = String.valueOf(giftSelectWebBean.getData().getId());
 
-                    selectDetailWebview.loadUrl(giftSelectWebBean.getData().getPurchase_url());
+                    //webView优先使用缓存
+                    selectDetailWebview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+                    //网页中有js数据时
+                    selectDetailWebview.getSettings().setJavaScriptEnabled(true);
+
+                    selectDetailWebview.loadUrl(giftSelectWebBean.getData().getUrl());
                     selectDetailWebview.setWebViewClient(new WebViewClient() {
                         @Override
                         public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -186,8 +192,12 @@ public class SelectDetailActivity extends BaseActivity implements View.OnClickLi
         } else {
             final Intent intent1 = getIntent();
             url = intent1.getStringExtra("url");
-            selectDetailWebview.loadUrl(intent1.getStringExtra(url));
+            //webView优先使用缓存
+            selectDetailWebview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            //网页中有js数据时
+            selectDetailWebview.getSettings().setJavaScriptEnabled(true);
 
+            selectDetailWebview.loadUrl(url);
             selectDetailWebview.setWebViewClient(new WebViewClient() {
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {

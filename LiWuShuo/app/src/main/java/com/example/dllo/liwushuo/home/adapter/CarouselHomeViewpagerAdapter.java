@@ -62,7 +62,7 @@ public class CarouselHomeViewpagerAdapter extends PagerAdapter implements ViewPa
 
         ImageView imageView = new ImageView(context);
 
-        Picasso.with(App.context).load(carouselBean.getData().getBanners().get(position % carouselBean.getData().getBanners().size()).getImage_url()).fit()
+        Picasso.with(context).load(carouselBean.getData().getBanners().get(position % carouselBean.getData().getBanners().size()).getImage_url()).fit()
                 .into(imageView);
 
         try {
